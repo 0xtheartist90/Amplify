@@ -12,25 +12,25 @@ export default function AboutPage() {
     {
       name: "Ben J",
       role: "Social Media Manager",
-      imageSrc: "/images/Teampfp_ben%20j.png",
+      imageSrc: "/images/Teampfp_ben%20j.webp",
       bgColor: "bg-yellow",
     },
     {
       name: "Roy N",
       role: "Web Developer",
-      imageSrc: "/images/Teampfp_roy%20n.png",
+      imageSrc: "/images/Teampfp_roy%20n.webp",
       bgColor: "bg-blue",
     },
     {
       name: "Kris K",
       role: "Copywriter",
-      imageSrc: "/images/Teampfp_kris%20k.png",
+      imageSrc: "/images/Teampfp_kris%20k.webp",
       bgColor: "bg-purple",
     },
     {
       name: "Wilson D",
       role: "Analyst",
-      imageSrc: "/images/Teampfp_wilson%20d.png",
+      imageSrc: "/images/Teampfp_wilson%20d.webp",
       bgColor: "bg-pink",
     },
   ]
@@ -41,7 +41,7 @@ export default function AboutPage() {
         {/* Hero Section - EXACTLY matching other pages */}
         <section className="relative">
           <div className="hero-background-container">
-            <img src="/images/about-hero-new.png" alt="About Us Background" className="hero-background-image" />
+            <img src="/images/about-hero-new.webp" alt="About Us Background" className="hero-background-image" />
           </div>
         </section>
 
@@ -103,7 +103,7 @@ export default function AboutPage() {
                 <div className="bg-white text-black rounded-[32px] overflow-hidden shadow-lg border-2 border-black leadership-card">
                   <div className="bg-yellow w-full aspect-square flex items-center justify-center">
                     <Image
-                      src="/images/Teampfp_Aura.png"
+                      src="/images/Teampfp_Aura.webp"
                       alt="Aura R"
                       width={250}
                       height={250}
@@ -126,7 +126,7 @@ export default function AboutPage() {
                 <div className="bg-white text-black rounded-[32px] overflow-hidden shadow-lg border-2 border-black leadership-card">
                   <div className="bg-pink w-full aspect-square flex items-center justify-center">
                     <Image
-                      src="/images/Teampfp_rich%20p.png"
+                      src="/images/Teampfp_rich%20p.webp"
                       alt="Rich P"
                       width={250}
                       height={250}
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 <div className="bg-white text-black rounded-[32px] overflow-hidden shadow-lg border-2 border-black leadership-card">
                   <div className="bg-blue w-full aspect-square flex items-center justify-center">
                     <Image
-                      src="/images/Teampfp_ace%20b.png"
+                      src="/images/Teampfp_ace%20b.webp"
                       alt="Ace B"
                       width={250}
                       height={250}
@@ -221,7 +221,7 @@ export default function AboutPage() {
                 <div className="bg-white/10 backdrop-blur-sm rounded-[32px] p-6 border-2 border-black h-full">
                   <div className="flex items-center mb-4">
                     <Image
-                      src="/images/custom-solution.png"
+                      src="/images/custom-solution.webp"
                       alt="Innovation Icon"
                       width={50}
                       height={50}
@@ -241,7 +241,7 @@ export default function AboutPage() {
                 <div className="bg-white/10 backdrop-blur-sm rounded-[32px] p-6 border-2 border-black h-full">
                   <div className="flex items-center mb-4">
                     <Image
-                      src="/images/onboarding.png"
+                      src="/images/onboarding.webp"
                       alt="Authenticity Icon"
                       width={50}
                       height={50}
@@ -261,7 +261,7 @@ export default function AboutPage() {
                 <div className="bg-white/10 backdrop-blur-sm rounded-[32px] p-6 border-2 border-black h-full">
                   <div className="flex items-center mb-4">
                     <Image
-                      src="/images/retention.png"
+                      src="/images/retention.webp"
                       alt="Results Icon"
                       width={50}
                       height={50}

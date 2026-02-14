@@ -22,28 +22,28 @@ const SERVICE_CARDS: ServiceCard[] = [
     id: "socials",
     title: "Socials",
     description: "Strategic management of your social media presence to build engagement and drive conversions.",
-    icon: "/images/socials.png",
+    icon: "/images/socials.webp",
     link: "/services/socials",
   },
   {
     id: "ads",
     title: "Ads",
     description: "Targeted campaigns that maximize ROI and put your brand in front of the right audience.",
-    icon: "/images/ads.png",
+    icon: "/images/ads.webp",
     link: "/services/ads",
   },
   {
     id: "branding",
     title: "Branding",
     description: "Distinctive brand identity systems that resonate across every touchpoint.",
-    icon: "/images/branding.png",
+    icon: "/images/branding.webp",
     link: "/services/branding",
   },
   {
     id: "website",
     title: "Website",
     description: "Custom web experiences built to convert visitors into loyal customers.",
-    icon: "/images/website.png",
+    icon: "/images/website.webp",
     link: "/services/website",
   },
 ]
@@ -79,7 +79,7 @@ export default function DesktopHome() {
                     <h1 className="mb-4">
                       <span
                         className="text-6xl md:text-8xl lg:text-[10rem] leading-tight block mb-8"
-                        style={{ fontFamily: '"Knewave", cursive', color: "#000000" }}
+                        style={{ fontFamily: "var(--font-knewave)", color: "#000000" }}
                       >
                         Amplify
                       </span>
@@ -112,7 +112,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4}>
                     <div className="character-container xl:scale-90 transform-gpu origin-center">
                       <Image
-                        src="/images/aurahero.png"
+                        src="/images/aurahero.webp"
                         alt="Amplify Mascot"
                         width={288}
                         height={288}
@@ -139,7 +139,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhat.png"
+                        src="/images/aurawhat.webp"
                         alt="Amplify Mascot"
                         width={220}
                         height={220}
@@ -218,7 +218,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container xl:scale-95 transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhat.png"
+                        src="/images/aurawhat.webp"
                         alt="Amplify Mascot"
                         width={320}
                         height={320}
@@ -307,7 +307,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhy.png"
+                        src="/images/aurawhy.webp"
                         alt="Amplify Mascot"
                         width={220}
                         height={220}
@@ -354,7 +354,7 @@ export default function DesktopHome() {
                       >
                         <div className="flex items-center mb-4">
                           <Image
-                            src="/images/custom-solution.png"
+                            src="/images/custom-solution.webp"
                             alt="Innovation Icon"
                             width={100}
                             height={100}
@@ -381,7 +381,7 @@ export default function DesktopHome() {
                       >
                         <div className="flex items-center mb-4">
                           <Image
-                            src="/images/onboarding.png"
+                            src="/images/onboarding.webp"
                             alt="Authenticity Icon"
                             width={100}
                             height={100}
@@ -405,7 +405,7 @@ export default function DesktopHome() {
                       >
                         <div className="flex items-center mb-4">
                           <Image
-                            src="/images/retention.png"
+                            src="/images/retention.webp"
                             alt="Results Icon"
                             width={100}
                             height={100}
@@ -428,7 +428,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container xl:scale-95 transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhy.png"
+                        src="/images/aurawhy.webp"
                         alt="Amplify Mascot"
                         width={320}
                         height={320}
@@ -453,7 +453,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4}>
                     <div className="character-container xl:scale-95 transform-gpu origin-center">
                       <Image
-                        src="/images/auraready.png"
+                        src="/images/auraready.webp"
                         alt="Amplify Mascot"
                         width={320}
                         height={320}
@@ -472,6 +472,7 @@ export default function DesktopHome() {
                     secondaryButtonText="VIEW OUR WORK"
                     secondaryButtonLink="/portfolio"
                     videoSrc="/videos/amplify-background.mp4"
+                    showOverlay={false}
                   />
                 </ScrollAnimation>
               </div>

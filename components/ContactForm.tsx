@@ -2,12 +2,14 @@
 
 import type React from "react"
 import { useState } from "react"
+import { cn } from "@/lib/utils"
 
 interface ContactFormProps {
   subtext?: string
+  className?: string
 }
 
-export default function ContactForm({ subtext }: ContactFormProps) {
+export default function ContactForm({ subtext, className }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -50,7 +52,7 @@ export default function ContactForm({ subtext }: ContactFormProps) {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg mb-8">
+    <div className={cn("w-full max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg mb-8", className)}>
       <h2 className="text-3xl font-bold mb-2 text-center">Get in Touch</h2>
 
       {subtext && <p className="text-center text-gray-600 mb-6">{subtext}</p>}
@@ -139,7 +141,7 @@ export default function ContactForm({ subtext }: ContactFormProps) {
               disabled={isSubmitting}
               className="relative px-8 py-3 text-white font-bold transition-transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <img src="/images/button-black.png" alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
+              <img src="/images/button-black.webp" alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
               <span className="relative z-10">{isSubmitting ? "Sending..." : "Send Message"}</span>
             </button>
           </div>

@@ -23,7 +23,7 @@ export default function DesktopPortfolioPage() {
       description: "Vibrant brand identity, website and ordering system for a Caribbean food delivery service.",
       bgColor: "bg-yellow",
       textColor: "text-white",
-      image: "/images/fawaka-main.png",
+      image: "/images/fawaka-main.webp",
     },
     {
       id: 3,
@@ -52,7 +52,7 @@ export default function DesktopPortfolioPage() {
         {/* Hero Section with Full Background Image */}
         <section className="relative">
           <div className="hero-background-container">
-            <img src="/images/portfolio-hero-new.png" alt="Portfolio Background" className="hero-background-image" />
+            <img src="/images/portfolio-hero-new.webp" alt="Portfolio Background" className="hero-background-image" />
           </div>
         </section>
 

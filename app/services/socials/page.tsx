@@ -15,7 +15,7 @@ export default function SocialsServicePage() {
         <section className="relative">
           <div className="hero-background-container">
             <img
-              src="/images/ServicesSocials-HERO.png"
+              src="/images/ServicesSocials-HERO.webp"
               alt="Social Media Services Background"
               className="hero-background-image"
             />
@@ -35,7 +35,7 @@ export default function SocialsServicePage() {
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-pink rounded-full shadow-lg">
                       <Image
-                        src="/images/socials.png"
+                        src="/images/socials.webp"
                         alt="Social Media Icon"
                         width={50}
                         height={50}
@@ -88,7 +88,7 @@ export default function SocialsServicePage() {
                   <div className="flex items-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-pink rounded-full shadow-lg">
                       <Image
-                        src="/images/socials.png"
+                        src="/images/socials.webp"
                         alt="Social Media Icon"
                         width={50}
                         height={50}

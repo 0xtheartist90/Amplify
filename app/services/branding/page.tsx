@@ -15,7 +15,7 @@ export default function BrandingServicePage() {
         <section className="relative">
           <div className="hero-background-container">
             <img
-              src="/images/ServicesBranding-HERO.png"
+              src="/images/ServicesBranding-HERO.webp"
               alt="Branding Services Background"
               className="hero-background-image"
             />
@@ -35,7 +35,7 @@ export default function BrandingServicePage() {
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-blue rounded-full shadow-lg">
                       <Image
-                        src="/images/branding.png"
+                        src="/images/branding.webp"
                         alt="Branding Icon"
                         width={50}
                         height={50}
@@ -87,7 +87,7 @@ export default function BrandingServicePage() {
                   <div className="flex items-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-blue rounded-full shadow-lg">
                       <Image
-                        src="/images/branding.png"
+                        src="/images/branding.webp"
                         alt="Branding Icon"
                         width={50}
                         height={50}

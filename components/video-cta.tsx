@@ -12,6 +12,7 @@ interface VideoCTAProps {
   secondaryButtonLink?: string
   videoSrc: string
   isMobile?: boolean
+  showOverlay?: boolean
 }
 
 const VideoCTA = memo(function VideoCTA({
@@ -23,6 +24,7 @@ const VideoCTA = memo(function VideoCTA({
   secondaryButtonLink,
   videoSrc,
   isMobile = false,
+  showOverlay = true,
 }: VideoCTAProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -58,7 +60,7 @@ const VideoCTA = memo(function VideoCTA({
     <section id="video-cta-section" className="relative overflow-hidden py-16" aria-labelledby="cta-title">
       {/* Video Background with Overlay */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <div className="video-overlay bg-black/40 bg-gradient-to-b from-black/20 to-black/60"></div>
+        {showOverlay && <div className="video-overlay bg-black/40 bg-gradient-to-b from-black/20 to-black/60"></div>}
         {isLoaded && isVisible && (
           <video
             autoPlay

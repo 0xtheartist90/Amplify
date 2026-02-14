@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { AR_One_Sans } from "next/font/google"
+import { AR_One_Sans, Knewave } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -17,6 +17,13 @@ const arOneSans = AR_One_Sans({
   weight: ["400", "500", "700"],
   variable: "--font-ar-one-sans",
   display: "swap", // Improve font loading performance
+})
+
+const knewave = Knewave({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-knewave",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -42,9 +49,6 @@ export default function RootLayout({
         {/* Load ULTRA font for headings */}
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/ultra" />
 
-        {/* Load Knewave font for hero title */}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" />
-
         {/* Preload critical assets */}
         <link
           rel="preload"
@@ -58,7 +62,7 @@ export default function RootLayout({
           as="image"
           fetchPriority="high"
         />
-        <link rel="preload" href="/images/HomeSection2.png" as="image" />
+        <link rel="preload" href="/images/HomeSection2.webp" as="image" />
         <link
           rel="preload"
           href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HomeSection3-qQZUNIFQDUN9v7V2GlfOylCo6U7bAb.png"
@@ -97,10 +101,10 @@ export default function RootLayout({
           fetchPriority="high"
         />
         {/* Add preload for the services hero character */}
-        <link rel="preload" href="/images/services-hero-character.png" as="image" />
+        <link rel="preload" href="/images/services-hero-character.webp" as="image" />
 
         {/* Add preload links for the new background images */}
-        <link rel="preload" href="/images/Homesection2BackgroundMobile.png" as="image" type="image/png" />
+        <link rel="preload" href="/images/Homesection2BackgroundMobile.webp" as="image" type="image/png" />
         <link
           rel="preload"
           href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Homesection2BackgroundMobile-1-lOaNofO9vYDfLCGnEWkoB2zkCcfi7N.png"
@@ -108,9 +112,9 @@ export default function RootLayout({
           type="image/png"
         />
 
-        <link rel="preload" href="/images/herohomecharacter.png" as="image" />
-        <link rel="preload" href="/images/homecharacter2ndsection.png" as="image" />
-        <link rel="preload" href="/images/homecharacter3rdsection.png" as="image" />
+        <link rel="preload" href="/images/herohomecharacter.webp" as="image" />
+        <link rel="preload" href="/images/homecharacter2ndsection.webp" as="image" />
+        <link rel="preload" href="/images/homecharacter3rdsection.webp" as="image" />
 
         {/* DNS prefetch for external resources */}
         <link rel="preconnect" href="https://unpkg.com" />
@@ -118,7 +122,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.cdnfonts.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
       </head>
-      <body className={`${arOneSans.variable} font-sans overflow-x-hidden w-full`}>
+      <body className={`${arOneSans.variable} ${knewave.variable} font-sans overflow-x-hidden w-full`}>
         <Script id="force-scroll-top" strategy="afterInteractive">
           {`
             // Force scroll to top on page load

@@ -24,19 +24,19 @@ export default function CoreValuesCarousel() {
       title: "Innovation",
       description:
         "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients. In the fast-paced world of digital marketing, standing still means falling behind.",
-      icon: "/images/custom-solution.png",
+      icon: "/images/custom-solution.webp",
     },
     {
       title: "Authenticity",
       description:
         "We believe in creating genuine connections between brands and their audiences. In a world of increasing skepticism, authenticity is the foundation of trust and loyalty.",
-      icon: "/images/onboarding.png",
+      icon: "/images/onboarding.webp",
     },
     {
       title: "Results",
       description:
         "We're committed to delivering measurable outcomes that grow your business. Beautiful creative work is important, but we never lose sight of the bottom line: driving real business results.",
-      icon: "/images/retention.png",
+      icon: "/images/retention.webp",
     },
   ]
 

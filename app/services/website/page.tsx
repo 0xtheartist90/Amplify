@@ -15,7 +15,7 @@ export default function WebsiteServicePage() {
         <section className="relative">
           <div className="hero-background-container">
             <img
-              src="/images/ServicesWebsite-HERO.png"
+              src="/images/ServicesWebsite-HERO.webp"
               alt="Website Services Background"
               className="hero-background-image"
             />
@@ -35,7 +35,7 @@ export default function WebsiteServicePage() {
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-purple rounded-full shadow-lg">
                       <Image
-                        src="/images/website.png"
+                        src="/images/website.webp"
                         alt="Website Icon"
                         width={50}
                         height={50}
@@ -53,7 +53,7 @@ export default function WebsiteServicePage() {
               </ScrollAnimation>
 
               <ScrollAnimation variant="fadeInUp" delay={0.2}>
-                <div className="bg-purple rounded-[32px] p-6 text-white mb-8">
+                <div className="bg-purple rounded-lg p-6 text-white mb-8">
                   <h3 className="text-xl font-ultra mb-4 text-center">Why Your Website Matters</h3>
                   <p className="mb-4 text-sm">
                     In today's digital world, your website is your most important marketing asset. It's the hub of your
@@ -74,7 +74,7 @@ export default function WebsiteServicePage() {
                   <div className="flex items-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-purple rounded-full shadow-lg">
                       <Image
-                        src="/images/website.png"
+                        src="/images/website.webp"
                         alt="Website Icon"
                         width={50}
                         height={50}

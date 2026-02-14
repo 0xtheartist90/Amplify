@@ -15,7 +15,7 @@ export default function AdsServicePage() {
         <section className="relative">
           <div className="hero-background-container">
             <img
-              src="/images/ServicesAds-HERO.png"
+              src="/images/ServicesAds-HERO.webp"
               alt="Advertising Services Background"
               className="hero-background-image"
             />
@@ -35,7 +35,7 @@ export default function AdsServicePage() {
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-yellow rounded-full shadow-lg">
                       <Image
-                        src="/images/ads.png"
+                        src="/images/ads.webp"
                         alt="Advertising Icon"
                         width={50}
                         height={50}
@@ -85,7 +85,7 @@ export default function AdsServicePage() {
                   <div className="flex items-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-yellow rounded-full shadow-lg">
                       <Image
-                        src="/images/ads.png"
+                        src="/images/ads.webp"
                         alt="Advertising Icon"
                         width={50}
                         height={50}

@@ -128,19 +128,19 @@ div {
 
 /* Specific background images */
 .hero-bg {
-  background-image: url("/images/home-hero-bg.png");
+  background-image: url("/images/home-hero-bg.webp");
 }
 
 .services-bg {
-  background-image: url("/images/section-bg-pink.png");
+  background-image: url("/images/section-bg-pink.webp");
 }
 
 .values-bg {
-  background-image: url("/images/section-bg-blue.png");
+  background-image: url("/images/section-bg-blue.webp");
 }
 
 .cta-bg {
-  background-image: url("/images/section-bg-purple.png");
+  background-image: url("/images/section-bg-purple.webp");
 }
 
 .what-title {
@@ -252,19 +252,19 @@ div {
   }
 
   .hero-bg {
-    background-image: url("/images/HomeHeroBackgroundtablet.png");
+    background-image: url("/images/HomeHeroBackgroundtablet.webp");
   }
 
   .services-bg {
-    background-image: url("/images/BGWhatSectionTablet.png");
+    background-image: url("/images/BGWhatSectionTablet.webp");
   }
 
   .values-bg {
-    background-image: url("/images/BGWhySectionTablet.png");
+    background-image: url("/images/BGWhySectionTablet.webp");
   }
 
   .cta-bg {
-    background-image: url("/images/BGReadySectionTablet.png");
+    background-image: url("/images/BGReadySectionTablet.webp");
   }
 }
 
@@ -281,19 +281,19 @@ div {
 
   /* Mobile-specific background images */
   .hero-bg {
-    background-image: url("/images/HomeHeroBackgroundMobile.png");
+    background-image: url("/images/HomeHeroBackgroundMobile.webp");
   }
 
   .services-bg {
-    background-image: url("/images/BGWhatSectionMobile.png");
+    background-image: url("/images/BGWhatSectionMobile.webp");
   }
 
   .values-bg {
-    background-image: url("/images/BGWhySectionMobile.png");
+    background-image: url("/images/BGWhySectionMobile.webp");
   }
 
   .cta-bg {
-    background-image: url("/images/BGReadySectionMobile.png");
+    background-image: url("/images/BGReadySectionMobile.webp");
   }
 }
 

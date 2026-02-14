@@ -5,7 +5,7 @@ export default function DesktopContactPage() {
     <div className="min-h-screen flex flex-col bg-black">
       {/* Hero Section - adjusted height to match Portfolio page */}
       <div className="relative hero-background-container">
-        <img src="/images/contact-hero-new.png" alt="Contact Us Background" className="hero-background-image" />
+        <img src="/images/contact-hero-new.webp" alt="Contact Us Background" className="hero-background-image" />
       </div>
 
       {/* Contact Form Section with Video Background */}
@@ -22,8 +22,20 @@ export default function DesktopContactPage() {
         </div>
 
         <div className="relative z-10 container mx-auto px-4">
-          <div className="contact-form-container mb-20">
-            <ContactForm subtext="We'd love to hear from you! Fill out the form below and we'll get back to you as soon as possible." />
+          <div className="grid gap-6 md:grid-cols-2 items-stretch">
+            <ContactForm
+              className="h-full max-w-none mx-0"
+              subtext="We'd love to hear from you! Fill out the form below and we'll get back to you as soon as possible."
+            />
+
+            <div className="h-full w-full">
+              <iframe
+                src="https://calendar.notion.so/meet/aurareingoud/virtual-coffee"
+                title="Aura Notion Calendar"
+                className="w-full h-full min-h-[32rem] rounded-xl border-2 border-black bg-white/90 backdrop-blur-sm shadow-xl"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       </div>

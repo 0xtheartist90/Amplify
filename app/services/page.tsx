@@ -56,7 +56,7 @@ export default function DesktopServicesPage() {
             }`}
           >
             <img
-              src="/images/services-hero-new.png"
+              src="/images/services-hero-new.webp"
               alt="Services Background"
               className="hero-background-image"
               style={{ willChange: "transform" }}
@@ -84,7 +84,7 @@ export default function DesktopServicesPage() {
                   <div className="flex flex-col items-center mb-4">
                     <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-2 md:mb-3 bg-white bg-opacity-20 rounded-full shadow-lg">
                       <Image
-                        src="/images/socials.png"
+                        src="/images/socials.webp"
                         alt="Socials Icon"
                         width={40}
                         height={40}
@@ -121,7 +121,7 @@ export default function DesktopServicesPage() {
                   <div className="flex flex-col items-center mb-4">
                     <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-2 md:mb-3 bg-white bg-opacity-20 rounded-full shadow-lg">
                       <Image
-                        src="/images/ads.png"
+                        src="/images/ads.webp"
                         alt="Ads Icon"
                         width={40}
                         height={40}
@@ -158,7 +158,7 @@ export default function DesktopServicesPage() {
                   <div className="flex flex-col items-center mb-4">
                     <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-2 md:mb-3 bg-white bg-opacity-20 rounded-full shadow-lg">
                       <Image
-                        src="/images/branding.png"
+                        src="/images/branding.webp"
                         alt="Branding Icon"
                         width={40}
                         height={40}
@@ -196,7 +196,7 @@ export default function DesktopServicesPage() {
                   <div className="flex flex-col items-center mb-4">
                     <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-2 md:mb-3 bg-white bg-opacity-20 rounded-full shadow-lg">
                       <Image
-                        src="/images/website.png"
+                        src="/images/website.webp"
                         alt="Website Icon"
                         width={40}
                         height={40}

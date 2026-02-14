@@ -51,7 +51,7 @@ const portfolioItems = [
     ],
     bgColor: "bg-yellow-400",
     textColor: "text-black",
-    image: "/images/fawaka-main.png",
+    image: "/images/fawaka-main.webp",
     website: "https://www.fawaka.com",
   },
   {
@@ -187,41 +187,41 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
     } else if (portfolio.id === "2") {
       return [
         {
-          src: "/images/fawaka-burgers.png",
+          src: "/images/fawaka-burgers.webp",
           alt: "Fawaka Food",
         },
         {
-          src: "/images/fawaka-delivery.png",
+          src: "/images/fawaka-delivery.webp",
           alt: "Fawaka Delivery",
         },
         {
-          src: "/images/fawaka-scooter.png",
+          src: "/images/fawaka-scooter.webp",
           alt: "Fawaka Scooter",
         },
       ]
     } else if (portfolio.id === "3") {
       return [
         {
-          src: "/images/prysmic-homepage.png",
+          src: "/images/prysmic-homepage.webp",
           alt: "Prysmic Homepage",
         },
         {
-          src: "/images/prysmic-trusted.png",
+          src: "/images/prysmic-trusted.webp",
           alt: "Prysmic Trusted by Industry Leaders",
         },
         {
-          src: "/images/prysmic-usecases.png",
+          src: "/images/prysmic-usecases.webp",
           alt: "Prysmic Use Cases",
         },
       ]
     } else if (portfolio.id === "4") {
       return [
         {
-          src: "/images/rise-and-connect-illustration.png",
+          src: "/images/rise-and-connect-illustration.webp",
           alt: "Rise & Connect Community Members",
         },
         {
-          src: "/images/rise-and-connect-community.png",
+          src: "/images/rise-and-connect-community.webp",
           alt: "Rise & Connect Community Event",
         },
         {

@@ -25,7 +25,7 @@ export default function LeadershipCarousel() {
     {
       name: "Aura R",
       role: "Founder & CEO",
-      imageSrc: "/images/leader-aura.png",
+      imageSrc: "/images/leader-aura.webp",
       bgColor: "bg-yellow",
       description:
         "With over 5 years of experience in digital marketing, Aura founded Amplify with a vision to help brands find their authentic voice in the digital landscape.",
@@ -33,7 +33,7 @@ export default function LeadershipCarousel() {
     {
       name: "Rich P",
       role: "Creative Director",
-      imageSrc: "/images/leader-richie.png",
+      imageSrc: "/images/leader-richie.webp",
       bgColor: "bg-pink",
       description:
         "Rich brings his extensive background in design and branding to lead our creative team in developing visually stunning and strategically sound brand identities.",
@@ -41,7 +41,7 @@ export default function LeadershipCarousel() {
     {
       name: "Ace B",
       role: "Director of Strategy",
-      imageSrc: "/images/leader-ace.png",
+      imageSrc: "/images/leader-ace.webp",
       bgColor: "bg-blue",
       description:
         "Ace leverages his analytical mindset and marketing expertise to develop data-driven strategies that deliver measurable results for our clients.",

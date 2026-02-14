@@ -13,24 +13,38 @@ type CustomButtonProps = {
   disabled?: boolean
   size?: "default" | "large"
   ariaLabel?: string
+  target?: string
+  rel?: string
 }
 
 // Update the component to handle href
-export function CustomButton({ children, color = "black", className = "", onClick, href, type, disabled, size, ariaLabel }: CustomButtonProps) {
-  const buttonImage =
+export function CustomButton({
+  children,
+  color = "black",
+  className = "",
+  onClick,
+  href,
+  type,
+  disabled,
+  size,
+  ariaLabel,
+  target,
+  rel,
+}: CustomButtonProps) {
+  const buttonImageSrc =
     color === "yellow"
-      ? "/images/button-yellow.png"
+      ? "/images/button-yellow.webp"
       : color === "pink"
-        ? "/images/button-pink.png"
+        ? "/images/button-pink.webp"
         : color === "orange"
-          ? "/images/Button-orange.png"
+          ? "/images/Button-orange.webp"
           : color === "black"
-            ? "/images/button-black.png"
+            ? "/images/button-black.webp"
             : color === "blue"
-              ? "/images/button-yellow.png" // Using yellow button shape for blue
+              ? "/images/button-yellow.webp" // Using yellow button shape for blue
               : color === "purple"
-                ? "/images/button-pink.png" // Using pink button shape for purple
-                : "/images/button-black.png"
+                ? "/images/button-pink.webp" // Using pink button shape for purple
+                : "/images/button-black.webp"
 
   const ButtonTag = href ? "a" : "button"
 
@@ -61,18 +75,20 @@ export function CustomButton({ children, color = "black", className = "", onClic
       type={!href ? type : undefined}
       disabled={disabled}
       aria-label={ariaLabel}
-      className={`relative inline-flex items-center justify-center font-medium text-white ${size === "large" ? "px-8 py-4 text-lg" : "px-6 py-3"} text-center ${className}`}
+      target={href ? target : undefined}
+      rel={href ? rel : undefined}
+      className={`relative inline-flex items-center justify-center font-medium text-white ${size === "large" ? "px-8 py-4 text-lg" : "px-6 py-3"} text-center overflow-hidden ${className}`}
       onClick={onClick}
-      style={{
-        backgroundImage: `url(${buttonImage})`,
-        backgroundSize: "100% 100%",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        filter: filterValue,
-        ...serviceButtonStyle,
-      }}
+      style={serviceButtonStyle}
     >
-      {children}
+      <img
+        src={buttonImageSrc}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+        style={{ filter: filterValue }}
+      />
+      <span className="relative z-10">{children}</span>
     </ButtonTag>
   )
 }

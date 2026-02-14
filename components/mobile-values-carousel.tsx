@@ -17,17 +17,17 @@ export default function MobileValuesCarousel() {
     {
       title: "Innovation",
       description: "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients.",
-      icon: "/images/custom-solution.png",
+      icon: "/images/custom-solution.webp",
     },
     {
       title: "Authenticity",
       description: "We believe in creating genuine connections between brands and their audiences.",
-      icon: "/images/onboarding.png",
+      icon: "/images/onboarding.webp",
     },
     {
       title: "Results",
       description: "We're committed to delivering measurable outcomes that grow your business.",
-      icon: "/images/retention.png",
+      icon: "/images/retention.webp",
     },
   ]
 
