@@ -85,7 +85,11 @@ export default function AboutPage() {
         </section>
 
         {/* Leadership Section */}
-        <section id="leadership" className="py-16 bg-pink text-white">
+        <section
+          id="leadership"
+          className="pt-16 pb-6 md:py-16 text-white"
+          style={{ backgroundColor: "#FB97B2" }}
+        >
           <div className="container">
             <ScrollAnimation variant="fadeInUp">
               <h2 className="text-3xl md:text-5xl font-ultra mb-12 text-center reveal-text">Our Leadership</h2>
@@ -203,7 +207,7 @@ export default function AboutPage() {
         </section>
 
         {/* Values Section - Updated to match homepage values */}
-        <section id="values" className="py-16 bg-purple text-white">
+        <section id="values" className="pt-16 pb-6 md:py-16 bg-purple text-white">
           <div className="container">
             <ScrollAnimation variant="fadeInUp">
               <h2 className="text-3xl md:text-5xl font-ultra mb-8 text-center">Our Core Values</h2>
@@ -286,7 +290,7 @@ export default function AboutPage() {
             description="Let's discuss how our team can help amplify your brand's voice."
             primaryButtonText="GET IN TOUCH"
             primaryButtonLink="/contact"
-            secondaryButtonText="VIEW OUR WORK"
+            secondaryButtonText="VIEW WORK"
             secondaryButtonLink="/portfolio"
             videoSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/16093225-uhd_3840_2160_30fps-TP3o0gLhjykIct1n8214qPiot2hmha.mp4"
           />

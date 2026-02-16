@@ -156,7 +156,8 @@ div {
 
 @media (max-width: 768px) {
   .what-title {
-    font-size: 70px;
+    font-size: clamp(4rem, 18vw, 5.5rem);
+    line-height: 0.9;
   }
 }
 
@@ -196,6 +197,11 @@ div {
   height: 160px;
   flex: 0 0 auto;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 @media (max-width: 1024px) {
@@ -426,8 +432,13 @@ div {
     font-size: 2.5rem !important;
   }
 
-  h2 {
+  h2:not(.what-title) {
     font-size: 2rem !important;
+  }
+
+  .what-title {
+    font-size: 90px !important;
+    line-height: 0.9;
   }
 }
 
@@ -552,12 +563,6 @@ img[alt="Watering Can"] {
     margin: 0 auto 1rem;
   }
 
-  /* Fix header layout on mobile */
-  header .container {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1152,14 +1157,6 @@ header .md\:hidden.absolute {
   /* Force flex-direction: row for service navigation */
   .service-navigation .flex {
     flex-direction: row !important;
-  }
-
-  /* Ensure header elements are vertically centered */
-  header,
-  header .container,
-  header .flex {
-    display: flex !important;
-    align-items: center !important;
   }
 
   header .container {

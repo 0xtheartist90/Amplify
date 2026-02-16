@@ -383,16 +383,176 @@ export default function AdsServicePage() {
         </section>
 
         {/* CTA Section */}
-        <VideoCTA
-          title="Ready to Amplify Your Advertising?"
-          description="Let's discuss how we can help your business reach its target audience and drive conversions."
-          primaryButtonText="GET STARTED"
-          primaryButtonLink="/contact"
-          secondaryButtonText="VIEW OUR WORK"
-          secondaryButtonLink="/portfolio"
-          videoSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5084528-uhd_3840_2160_30fps-cHscNuYVDQZ28cDNqYATgpvB7hmXeD.mp4"
-        />
       </div>
-    </PageWrapper>
-  )
-}
+      <h3 className="text-xl font-ultra">Social Media Advertising</h3>
+    </div>
+    <p className="text-sm mb-4">
+      We develop targeted campaigns on platforms like Facebook, Instagram, LinkedIn, and TikTok to reach
+      your ideal audience where they spend their time online.
+    </p>
+    <ul className="text-sm space-y-2">
+      <li className="flex items-start">
+        <span className="font-bold mr-2">•</span>
+        <span>Audience targeting and segmentation</span>
+      </li>
+      <li className="flex items-start">
+        <span className="font-bold mr-2">•</span>
+        <span>Creative development and testing</span>
+      </li>
+      <li className="flex items-start">
+        <span className="font-bold mr-2">•</span>
+        <span>Campaign optimization and scaling</span>
+      </li>
+    </ul>
+  </div>
+</ScrollAnimation>
+
+{/* Service 3 */}
+<ScrollAnimation variant="fadeInUp" delay={0.3}>
+  <div className="bg-white rounded-[32px] p-6 shadow-lg border-2 border-black h-full">
+    <div className="flex items-center mb-4">
+      <div className="w-12 h-12 flex items-center justify-center mr-3 bg-yellow rounded-full flex-shrink-0">
+        <ServiceIcon name="targeting" size={30} color="#fff" />
+      </div>
+      <h3 className="text-xl font-ultra">Display & Video Advertising</h3>
+    </div>
+    <p className="text-sm mb-4">
+      We create visual and video ads across the web that build brand awareness, engage your audience, and
+      drive conversions through compelling storytelling.
+    </p>
+    <ul className="text-sm space-y-2">
+      <li className="flex items-start">
+        <span className="font-bold mr-2">•</span>
+        <span>Banner and video ad design</span>
+      </li>
+      <li className="flex items-start">
+        <span className="font-bold mr-2">•</span>
+        <span>Programmatic advertising</span>
+      </li>
+      <li className="flex items-start">
+        <span className="font-bold mr-2">•</span>
+        <span>YouTube and streaming platform campaigns</span>
+      </li>
+    </ul>
+  </div>
+</ScrollAnimation>
+</div>
+</div>
+</section>
+
+{/* Process Section */}
+<section className="py-16">
+  <div className="container">
+    <ScrollAnimation variant="fadeInUp">
+      <h2 className="text-3xl md:text-4xl font-ultra mb-8 text-center">Our Advertising Process</h2>
+    </ScrollAnimation>
+
+    {/* Mobile Process Carousel */}
+    <div className="md:hidden">
+      <MobileProcessCarousel
+        steps={[
+          {
+            number: 1,
+            title: "Research & Planning",
+            description:
+              "We analyze your audience, competitors, and market to develop a strategic advertising plan aligned with your goals.",
+            bgColor: "bg-yellow",
+          },
+          {
+            number: 2,
+            title: "Campaign Creation",
+            description:
+              "We develop compelling ad creative, set up targeting parameters, and launch your campaigns across relevant platforms.",
+            bgColor: "bg-yellow",
+          },
+          {
+            number: 3,
+            title: "Optimization",
+            description:
+              "We continuously monitor and optimize your campaigns to improve performance and maximize ROI.",
+            bgColor: "bg-yellow",
+          },
+          {
+            number: 4,
+            title: "Reporting & Analysis",
+            description:
+              "We provide detailed reports and insights to help you understand campaign performance and inform future strategies.",
+            bgColor: "bg-yellow",
+          },
+        ]}
+      />
+    </div>
+
+    {/* Desktop Process Grid */}
+    <div className="hidden md:grid md:grid-cols-4 gap-6">
+      {/* Step 1 */}
+      <ScrollAnimation variant="fadeInUp" delay={0.1}>
+        <div className="text-center">
+          <div className="w-20 h-20 bg-yellow rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
+            1
+          </div>
+          <h3 className="text-xl font-ultra mb-2">Research & Planning</h3>
+          <p className="text-sm">
+            We analyze your audience, competitors, and market to develop a strategic advertising plan aligned
+            with your goals.
+          </p>
+        </div>
+      </ScrollAnimation>
+
+      {/* Step 2 */}
+      <ScrollAnimation variant="fadeInUp" delay={0.2}>
+        <div className="text-center">
+          <div className="w-20 h-20 bg-yellow rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
+            2
+          </div>
+          <h3 className="text-xl font-ultra mb-2">Campaign Creation</h3>
+          <p className="text-sm">
+            We develop compelling ad creative, set up targeting parameters, and launch your campaigns across
+            relevant platforms.
+          </p>
+        </div>
+      </ScrollAnimation>
+
+      {/* Step 3 */}
+      <ScrollAnimation variant="fadeInUp" delay={0.3}>
+        <div className="text-center">
+          <div className="w-20 h-20 bg-yellow rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
+            3
+          </div>
+          <h3 className="text-xl font-ultra mb-2">Optimization</h3>
+          <p className="text-sm">
+            We continuously monitor and optimize your campaigns to improve performance and maximize ROI.
+          </p>
+        </div>
+      </ScrollAnimation>
+
+      {/* Step 4 */}
+      <ScrollAnimation variant="fadeInUp" delay={0.4}>
+        <div className="text-center">
+          <div className="w-20 h-20 bg-yellow rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
+            4
+          </div>
+          <h3 className="text-xl font-ultra mb-2">Reporting & Analysis</h3>
+          <p className="text-sm">
+            We provide detailed reports and insights to help you understand campaign performance and inform
+            future strategies.
+          </p>
+        </div>
+      </ScrollAnimation>
+    </div>
+  </div>
+</section>
+
+{/* CTA Section */}
+<VideoCTA
+  title="Ready to Amplify Your Advertising?"
+  description="Let's discuss how we can help your business reach its target audience and drive conversions."
+  primaryButtonText="GET STARTED"
+  primaryButtonLink="/contact"
+  secondaryButtonText="VIEW WORK"
+  secondaryButtonLink="/portfolio"
+  videoSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5084528-uhd_3840_2160_30fps-cHscNuYVDQZ28cDNqYATgpvB7hmXeD.mp4"
+/>
+</div>
+</PageWrapper>
+)

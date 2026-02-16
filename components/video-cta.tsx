@@ -13,6 +13,7 @@ interface VideoCTAProps {
   videoSrc: string
   isMobile?: boolean
   showOverlay?: boolean
+  compact?: boolean
 }
 
 const VideoCTA = memo(function VideoCTA({
@@ -25,6 +26,7 @@ const VideoCTA = memo(function VideoCTA({
   videoSrc,
   isMobile = false,
   showOverlay = true,
+  compact = false,
 }: VideoCTAProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -56,8 +58,23 @@ const VideoCTA = memo(function VideoCTA({
     }
   }, [])
 
+  const sectionPadding = compact ? "py-0 md:py-16" : "py-16"
+  const titleMargin = compact ? "mb-0" : "mb-6"
+  const descriptionMargin = compact ? "mb-0" : "mb-8"
+  const buttonGap = compact ? "gap-1" : "gap-4"
+  const contentPadding = compact ? "p-0" : "pt-4 pb-0"
+  const contentOffset = compact ? "-mt-10" : ""
+  const buttonOffset = compact ? "mt-6" : "mt-4"
+  const mobileButtonLayout = compact || isMobile
+  const buttonWidthClass = mobileButtonLayout ? "w-[210px] md:w-auto" : "min-w-[180px]"
+  const buttonTextClass = mobileButtonLayout ? "uppercase tracking-wide" : ""
+
   return (
-    <section id="video-cta-section" className="relative overflow-hidden py-16" aria-labelledby="cta-title">
+    <section
+      id="video-cta-section"
+      className={`relative overflow-hidden ${sectionPadding}`}
+      aria-labelledby="cta-title"
+    >
       {/* Video Background with Overlay */}
       <div className="absolute inset-0 w-full h-full z-0">
         {showOverlay && <div className="video-overlay bg-black/40 bg-gradient-to-b from-black/20 to-black/60"></div>}
@@ -78,21 +95,22 @@ const VideoCTA = memo(function VideoCTA({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container">
+      <div className={`relative z-10 container ${contentPadding} ${contentOffset}`}>
         <div className="max-w-3xl mx-auto text-center text-white">
           <h2
             id="cta-title"
-            className={`${isMobile ? "text-3xl" : "text-4xl md:text-5xl"} font-ultra mb-6 text-shadow`}
+            className={`${isMobile ? "text-3xl" : "text-4xl md:text-5xl"} font-ultra ${titleMargin} text-shadow`}
           >
             {title}
           </h2>
-          <p className={`${isMobile ? "text-base" : "text-xl"} mb-8 text-shadow`}>{description}</p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <p className={`${isMobile ? "text-base" : "text-xl"} ${descriptionMargin} text-shadow`}>{description}</p>
+          <div className={`flex justify-center ${buttonGap} flex-wrap ${buttonOffset}`}>
             <CustomButton
               href={primaryButtonLink}
               color="yellow"
               size={isMobile ? "default" : "large"}
               ariaLabel={primaryButtonText}
+              className={`${buttonWidthClass} whitespace-nowrap ${buttonTextClass}`}
             >
               {primaryButtonText}
             </CustomButton>
@@ -102,6 +120,7 @@ const VideoCTA = memo(function VideoCTA({
                 color="black"
                 size={isMobile ? "default" : "large"}
                 ariaLabel={secondaryButtonText}
+                className={`${buttonWidthClass} whitespace-nowrap ${buttonTextClass}`}
               >
                 {secondaryButtonText}
               </CustomButton>
@@ -111,6 +130,7 @@ const VideoCTA = memo(function VideoCTA({
                 color="black"
                 size={isMobile ? "default" : "large"}
                 ariaLabel="EXPLORE SERVICES"
+                className={`${buttonWidthClass} whitespace-nowrap ${buttonTextClass}`}
               >
                 EXPLORE SERVICES
               </CustomButton>

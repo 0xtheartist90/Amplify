@@ -73,9 +73,9 @@ export default function CoreValuesCarousel() {
     const isLeftSwipe = distance > 30
     const isRightSwipe = distance < -30
 
-    if (isLeftSwipe) {
+    if (isRightSwipe) {
       goToNext()
-    } else if (isRightSwipe) {
+    } else if (isLeftSwipe) {
       goToPrev()
     }
 
@@ -96,7 +96,7 @@ export default function CoreValuesCarousel() {
   }, [isSwiping])
 
   return (
-    <div className="relative px-4 pb-10">
+    <div className="relative px-4 pb-4">
       {/* Carousel Container */}
       <div
         className="relative overflow-hidden rounded-lg touch-pan-x"
@@ -115,16 +115,18 @@ export default function CoreValuesCarousel() {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = Math.abs(offset.x) * velocity.x
-              if (swipe < -50) {
+            onDragEnd={(e, { offset }) => {
+              if (offset.x > 50) {
                 goToNext()
-              } else if (swipe > 50) {
+              } else if (offset.x < -50) {
                 goToPrev()
               }
             }}
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border-2 border-black h-full">
+            <div
+              className="rounded-[32px] p-6 shadow-lg text-white border-2 border-black h-full"
+              style={{ backgroundColor: "#C084FC" }}
+            >
               <div className="flex items-center mb-4">
                 <Image
                   src={values[currentIndex].icon || "/placeholder.svg"}
@@ -133,7 +135,9 @@ export default function CoreValuesCarousel() {
                   height={50}
                   className="mr-3 icon-pulse"
                 />
-                <h3 className="text-xl font-ultra">{values[currentIndex].title}</h3>
+                <h3 className="text-xl font-ultra" style={{ color: "#000" }}>
+                  {values[currentIndex].title}
+                </h3>
               </div>
               <p className="text-sm">{values[currentIndex].description}</p>
             </div>

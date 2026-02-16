@@ -71,20 +71,20 @@ export default function DesktopHome() {
             </video>
           </div>
           <div className="section-content">
-            <div className="container pt-0 pb-0 md:pt-2 md:pb-4 -mt-10 md:-mt-20">
+            <div className="container pt-0 pb-0 md:pt-2 md:pb-4 -mt-16 md:-mt-28">
               <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
                 {/* Update the Hero Section content */}
-                <div className="max-w-2xl">
+                <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
                   <ScrollAnimation variant="fadeInUp" delay={0.2}>
-                    <h1 className="mb-4">
+                    <h1 className="mb-4 text-center md:text-left">
                       <span
-                        className="text-6xl md:text-8xl lg:text-[10rem] leading-tight block mb-8"
+                        className="text-[5.5rem] md:text-8xl lg:text-[10rem] leading-tight block mb-4 md:mb-8"
                         style={{ fontFamily: "var(--font-knewave)", color: "#000000" }}
                       >
                         Amplify
                       </span>
                       <span
-                        className="text-3xl md:text-4xl lg:text-5xl font-ultra block"
+                        className="text-3xl md:text-4xl lg:text-5xl font-ultra block -mt-2 md:mt-0"
                         style={{ color: "#F44976" }}
                       >
                         Your Reach
@@ -92,7 +92,7 @@ export default function DesktopHome() {
                     </h1>
                   </ScrollAnimation>
                   <ScrollAnimation variant="fadeInUp" delay={0.4}>
-                    <p className="text-lg md:text-xl mb-8 max-w-lg text-white">
+                    <p className="text-lg md:text-xl mb-8 max-w-lg text-white mx-auto md:mx-0 text-center md:text-left">
                       We help businesses stand out in the digital landscape with strategic marketing solutions that
                       drive results.
                     </p>
@@ -110,7 +110,7 @@ export default function DesktopHome() {
                 </div>
                 <div className="flex justify-center md:justify-end relative z-20">
                   <FloatingAnimation amplitude={15} duration={4}>
-                    <div className="character-container xl:scale-90 transform-gpu origin-center">
+                    <div className="character-container xl:scale-90 transform-gpu origin-center mt-8">
                       <Image
                         src="/images/aurahero.webp"
                         alt="Amplify Mascot"
@@ -135,7 +135,7 @@ export default function DesktopHome() {
               {/* Mobile-specific layout */}
               <div className="md:hidden flex flex-col">
                 {/* Character on top for mobile */}
-                <div className="flex justify-center items-center mb-8 relative z-20">
+                <div className="flex justify-center items-center -translate-y-6 relative z-20">
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container transform-gpu origin-center">
                       <Image
@@ -152,28 +152,33 @@ export default function DesktopHome() {
 
                 {/* Title for mobile */}
                 <ScrollAnimation variant="fadeInUp">
-                  <div className="text-center mt-6" style={{ marginBottom: "-20px" }}>
-                    <h2 className="what-title font-ultra text-white">
-                      WHAT?
-                    </h2>
+                  <div className="text-center -mt-8 mb-0">
+                    <h2 className="what-title font-ultra text-white md:text-[8rem] text-[4rem] leading-[0.9]">WHAT?</h2>
                   </div>
                 </ScrollAnimation>
 
                 <div className="flex flex-col gap-6">
                   <ScrollAnimation variant="fadeInUp" delay={0.1}>
                     <div className="what-feature-card rounded-3xl border-2 border-black bg-[#F44976] p-6 text-white shadow-xl">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black">
-                          <Image src={activeService.icon} alt={`${activeService.title} icon`} width={48} height={48} />
+                      <div className="flex flex-col items-center gap-3 mb-4 text-center">
+                        <div className="w-[100px] h-[100px] flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black">
+                          <Image
+                            src={activeService.icon}
+                            alt={`${activeService.title} icon`}
+                            width={36}
+                            height={36}
+                            className="w-full h-full object-contain block icon-pulse"
+                            style={{ margin: 0 }}
+                          />
                         </div>
                         <div>
-                          <p className="text-sm uppercase tracking-widest">Service</p>
-                          <h3 className="text-3xl font-ultra" style={{ color: "var(--yellow)" }}>
+                          <p className="text-sm uppercase tracking-widest text-center">Service</p>
+                          <h3 className="text-3xl font-ultra text-center" style={{ color: "var(--yellow)" }}>
                             {activeService.title}
                           </h3>
                         </div>
                       </div>
-                      <p className="what-card-description mb-6 text-base flex-1">{activeService.description}</p>
+                      <p className="what-card-description mb-6 text-base flex-1 text-center">{activeService.description}</p>
                       <CustomButton href={activeService.link} color="black" className="min-w-[150px] mt-auto">
                         EXPLORE
                       </CustomButton>
@@ -181,29 +186,36 @@ export default function DesktopHome() {
                   </ScrollAnimation>
 
                   <ScrollAnimation variant="fadeInUp" delay={0.2}>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-3">
                       {SERVICE_CARDS.filter((service) => service.id !== activeService.id).map((service) => (
                         <button
                           key={service.id}
                           type="button"
                           onClick={() => setActiveService(service)}
                           aria-pressed={false}
-                          className="what-option-card rounded-2xl border-2 border-black p-4 text-left shadow-lg transition-transform duration-200 focus:outline-none focus:ring-4 focus:ring-black/30 hover:-translate-y-1"
+                          className="what-option-card rounded-2xl border-2 border-black p-4 shadow-lg transition-transform duration-200 focus:outline-none focus:ring-4 focus:ring-black/30 hover:-translate-y-1 flex flex-col items-center justify-between text-center gap-2"
                           style={{
                             backgroundColor: "#FFC1DA",
                             color: "#1b1b1b",
                           }}
                         >
-                          <div className="flex flex-col items-center gap-2 mb-2 text-center">
+                          <div className="flex flex-col items-center w-full">
                             <div
-                              className="w-14 h-14 flex items-center justify-center rounded-2xl border-2 border-black"
+                              className="w-14 h-14 flex items-center justify-center rounded-2xl border-2 border-black mx-auto"
                               style={{ backgroundColor: "#F44976" }}
                             >
-                              <Image src={service.icon} alt={`${service.title} icon`} width={32} height={32} />
+                              <Image
+                                src={service.icon}
+                                alt={`${service.title} icon`}
+                                width={32}
+                                height={32}
+                                className="w-full h-full object-contain block"
+                                style={{ margin: 0 }}
+                              />
                             </div>
-                            <h4 className="text-xl font-ultra leading-tight">{service.title}</h4>
+                            <h4 className="text-sm font-ultra leading-tight w-full mt-2">{service.title}</h4>
                           </div>
-                          <p className="text-xs opacity-80 text-center tracking-wide">Tap to view details</p>
+                          <p className="text-xs opacity-80 tracking-wide mt-1">Tap to view details</p>
                         </button>
                       ))}
                     </div>
@@ -242,18 +254,25 @@ export default function DesktopHome() {
                   <div className="flex flex-col lg:flex-row gap-6 items-stretch">
                     <ScrollAnimation variant="fadeInUp" delay={0.1} className="flex-1">
                       <div className="what-feature-card rounded-[32px] border-2 border-black bg-[#F44976] p-8 text-white shadow-2xl">
-                        <div className="flex items-center gap-5 mb-6">
-                          <div className="w-20 h-20 flex items-center justify-center rounded-3xl bg-white/20 border-2 border-black">
-                            <Image src={activeService.icon} alt={`${activeService.title} icon`} width={64} height={64} />
+                        <div className="flex flex-col items-center gap-4 mb-6 text-center">
+                          <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black">
+                            <Image
+                              src={activeService.icon}
+                              alt={`${activeService.title} icon`}
+                              width={40}
+                              height={40}
+                              className="w-full h-full object-contain block icon-pulse"
+                              style={{ margin: 0 }}
+                            />
                           </div>
                           <div>
-                            <p className="text-sm uppercase tracking-[0.35em]">Service</p>
-                            <h3 className="text-4xl font-ultra" style={{ color: "var(--yellow)" }}>
+                            <p className="text-sm uppercase tracking-[0.35em] text-center">Service</p>
+                            <h3 className="text-4xl font-ultra text-center" style={{ color: "var(--yellow)" }}>
                               {activeService.title}
                             </h3>
                           </div>
                         </div>
-                        <p className="what-card-description text-lg mb-8 flex-1">{activeService.description}</p>
+                        <p className="what-card-description text-lg mb-8 flex-1 text-center">{activeService.description}</p>
                         <CustomButton href={activeService.link} color="black" className="min-w-[150px]">
                           EXPLORE
                         </CustomButton>
@@ -268,22 +287,29 @@ export default function DesktopHome() {
                             type="button"
                             onClick={() => setActiveService(service)}
                             aria-pressed={false}
-                            className="what-option-card rounded-2xl border-2 border-black p-5 text-left shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-black/30 hover:-translate-y-1"
+                            className="what-option-card rounded-2xl border-2 border-black p-5 shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-black/30 hover:-translate-y-1 flex flex-col items-center text-center gap-3"
                             style={{
                               backgroundColor: "#FFC1DA",
                               color: "#1b1b1b",
                             }}
                           >
-                            <div className="flex flex-col items-center gap-2 mb-2 text-center">
+                            <div className="flex flex-col items-center w-full">
                               <div
                                 className="w-16 h-16 flex items-center justify-center rounded-2xl border-2 border-black"
                                 style={{ backgroundColor: "#F44976" }}
                               >
-                                <Image src={service.icon} alt={`${service.title} icon`} width={40} height={40} />
+                                <Image
+                                  src={service.icon}
+                                  alt={`${service.title} icon`}
+                                  width={40}
+                                  height={40}
+                                  className="w-full h-full object-contain block"
+                                  style={{ margin: 0 }}
+                                />
                               </div>
-                              <h4 className="text-2xl font-ultra leading-tight">{service.title}</h4>
+                              <h4 className="text-2xl font-ultra leading-tight w-full mt-3">{service.title}</h4>
                             </div>
-                            <p className="text-sm opacity-80 text-center tracking-wide">Click to view details</p>
+                            <p className="text-sm opacity-80 tracking-wide mt-1">Click to view details</p>
                           </button>
                         ))}
                       </div>
@@ -296,14 +322,17 @@ export default function DesktopHome() {
         </div>
 
         {/* Values Section */}
-        <div className="section-wrapper min-h-screen flex items-center">
+        <div
+          className="section-wrapper flex items-center md:min-h-screen"
+          style={{ minHeight: "auto", paddingTop: "0.5rem", paddingBottom: 0 }}
+        >
           <div className="section-background values-bg"></div>
           <div className="section-content">
-            <div className="container pt-8 pb-2 md:pt-10 md:pb-4">
+            <div className="container pt-4 pb-0 md:pt-10 md:pb-4">
               {/* Mobile-specific layout with carousel */}
               <div className="md:hidden flex flex-col">
                 {/* Character on top for mobile */}
-                <div className="flex justify-center items-center mb-8 relative z-20">
+                <div className="flex justify-center items-center mb-1 relative z-20">
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container transform-gpu origin-center">
                       <Image
@@ -320,11 +349,8 @@ export default function DesktopHome() {
 
                 {/* Title for mobile */}
                 <ScrollAnimation variant="fadeInUp">
-                  <div
-                    className="text-center"
-                    style={{ marginBottom: "-20px", transform: "translateY(-10px)" }}
-                  >
-                    <h2 className="what-title font-ultra text-white">WHY?</h2>
+                  <div className="text-center -mt-7 mb-0">
+                    <h2 className="what-title font-ultra text-white text-5xl md:text-4xl">WHY?</h2>
                   </div>
                 </ScrollAnimation>
 
@@ -350,7 +376,7 @@ export default function DesktopHome() {
                     <ScrollAnimation variant="fadeInLeft" delay={0.1}>
                       <div
                         className="rounded-[32px] p-6 shadow-lg text-white border-2 border-black"
-                        style={{ backgroundColor: "#FF8C28" }}
+                        style={{ backgroundColor: "#C084FC" }}
                       >
                         <div className="flex items-center mb-4">
                           <Image
@@ -358,7 +384,8 @@ export default function DesktopHome() {
                             alt="Innovation Icon"
                             width={100}
                             height={100}
-                            className="mr-4 icon-pulse"
+                            className="icon-pulse"
+                            style={{ margin: 0, padding: 0 }}
                           />
                           <div>
                             <h3 className="text-2xl font-ultra mb-2" style={{ color: "#000" }}>
@@ -377,7 +404,7 @@ export default function DesktopHome() {
                     <ScrollAnimation variant="fadeInLeft" delay={0.2}>
                       <div
                         className="rounded-[32px] p-6 shadow-lg text-white border-2 border-black"
-                        style={{ backgroundColor: "#FF8C28" }}
+                        style={{ backgroundColor: "#C084FC" }}
                       >
                         <div className="flex items-center mb-4">
                           <Image
@@ -385,7 +412,8 @@ export default function DesktopHome() {
                             alt="Authenticity Icon"
                             width={100}
                             height={100}
-                            className="mr-4 icon-pulse"
+                            className="icon-pulse"
+                            style={{ margin: 0, padding: 0 }}
                           />
                           <div>
                             <h3 className="text-2xl font-ultra mb-2" style={{ color: "#000" }}>
@@ -401,7 +429,7 @@ export default function DesktopHome() {
                     <ScrollAnimation variant="fadeInLeft" delay={0.3}>
                       <div
                         className="rounded-[32px] p-6 shadow-lg text-white border-2 border-black"
-                        style={{ backgroundColor: "#FF8C28" }}
+                        style={{ backgroundColor: "#C084FC" }}
                       >
                         <div className="flex items-center mb-4">
                           <Image
@@ -409,7 +437,8 @@ export default function DesktopHome() {
                             alt="Results Icon"
                             width={100}
                             height={100}
-                            className="mr-4 icon-pulse"
+                            className="icon-pulse"
+                            style={{ margin: 0, padding: 0 }}
                           />
                           <div>
                             <h3 className="text-2xl font-ultra mb-2" style={{ color: "#000" }}>
@@ -444,12 +473,12 @@ export default function DesktopHome() {
         </div>
 
         {/* CTA Section with Video */}
-        <div className="section-wrapper min-h-screen flex items-center">
+        <div className="section-wrapper flex items-center md:min-h-screen">
           <div className="section-background cta-bg"></div>
           <div className="section-content">
-            <div className="container py-20">
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-                <div className="flex justify-center items-center relative z-20">
+            <div className="container pt-0 pb-1 md:py-20">
+              <div className="flex flex-col md:grid md:grid-cols-2 items-center gap-0 md:gap-12">
+                <div className="flex justify-center items-center relative z-20 -mt-4 md:mt-0 mb-[24px] md:mb-0">
                   <FloatingAnimation amplitude={15} duration={4}>
                     <div className="character-container xl:scale-95 transform-gpu origin-center">
                       <Image
@@ -463,18 +492,21 @@ export default function DesktopHome() {
                     </div>
                   </FloatingAnimation>
                 </div>
-                <ScrollAnimation variant="fadeInLeft">
-                  <VideoCTA
-                    title="Ready to Amplify Your Brand?"
-                    description="Let's work together to create a marketing strategy that helps your business thrive in today's competitive landscape."
-                    primaryButtonText="GET STARTED"
-                    primaryButtonLink="/contact"
-                    secondaryButtonText="VIEW OUR WORK"
-                    secondaryButtonLink="/portfolio"
-                    videoSrc="/videos/amplify-background.mp4"
-                    showOverlay={false}
-                  />
-                </ScrollAnimation>
+                <div className="w-full -mt-6 md:mt-0">
+                  <ScrollAnimation variant="fadeInLeft">
+                    <VideoCTA
+                      title="Ready to Amplify Your Brand?"
+                      description="Let's work together to create a marketing strategy that helps your business thrive in today's competitive landscape."
+                      primaryButtonText="GET STARTED"
+                      primaryButtonLink="/contact"
+                      secondaryButtonText="VIEW WORK"
+                      secondaryButtonLink="/portfolio"
+                      videoSrc="/videos/amplify-background.mp4"
+                      showOverlay={false}
+                      compact
+                    />
+                  </ScrollAnimation>
+                </div>
               </div>
             </div>
           </div>

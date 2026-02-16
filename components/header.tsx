@@ -92,23 +92,28 @@ export default function Header() {
   return (
     <header className="bg-white sticky top-0 z-[9999] shadow-sm h-[54px] md:h-[72px]">
       <div className="container h-full">
-        <div className="flex flex-row justify-between items-center h-full">
-          {/* Logo - left aligned */}
-          <div className="flex items-center h-full">
-            <ScrollTopLink href="/" className="flex items-center" aria-label="Amplify Home">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20black%20Amplify-kTsLQ4RAwj0NiiWS8ZonpCci5I9q4c.png"
-                alt="Amplify Logo"
-                width={150}
-                height={50}
-                style={{ height: "40px", width: "auto" }}
-                priority
-              />
-            </ScrollTopLink>
-          </div>
+        <div className="relative flex items-center justify-between h-full">
+          {/* Spacer to keep layout stable on desktop */}
+          <div className="hidden md:block w-12" aria-hidden="true"></div>
+
+          {/* Logo, absolutely centered on mobile */}
+          <ScrollTopLink
+            href="/"
+            className="flex items-center absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0"
+            aria-label="Amplify Home"
+          >
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20black%20Amplify-kTsLQ4RAwj0NiiWS8ZonpCci5I9q4c.png"
+              alt="Amplify Logo"
+              width={150}
+              height={50}
+              style={{ height: "40px", width: "auto" }}
+              priority
+            />
+          </ScrollTopLink>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8 items-center" aria-label="Main Navigation">
+          <nav className="hidden md:flex space-x-8 items-center ml-auto" aria-label="Main Navigation">
             <ScrollTopLink
               href="/"
               className={`font-medium transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
@@ -169,8 +174,8 @@ export default function Header() {
             </CustomButton>
           </nav>
 
-          {/* Mobile Menu Button - explicitly on the right */}
-          <div className="md:hidden flex items-center h-full">
+          {/* Mobile hamburger */}
+          <div className="md:hidden absolute right-4 top-1/2 -translate-y-1/2">
             <button
               className="text-black flex items-center justify-center p-2"
               onClick={toggleMenu}

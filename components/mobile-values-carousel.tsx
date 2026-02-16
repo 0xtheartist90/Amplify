@@ -61,13 +61,9 @@ export default function MobileValuesCarousel() {
     if (!touchStart || !touchEnd) return
 
     const distance = touchStart - touchEnd
-    // Make it more sensitive - reduce threshold from 50 to 30
-    const isLeftSwipe = distance > 30
-    const isRightSwipe = distance < -30
-
-    if (isLeftSwipe) {
+    if (distance < -30) {
       goToNext()
-    } else if (isRightSwipe) {
+    } else if (distance > 30) {
       goToPrev()
     }
 
@@ -88,7 +84,7 @@ export default function MobileValuesCarousel() {
   }, [isSwiping])
 
   return (
-    <div className="relative px-4 pb-10">
+    <div className="relative px-4 pb-4">
       {/* Carousel Container */}
       <div
         className="relative overflow-hidden rounded-lg touch-pan-x min-h-[150px]"
@@ -107,30 +103,31 @@ export default function MobileValuesCarousel() {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = Math.abs(offset.x) * velocity.x
-              if (swipe < -50) {
+            onDragEnd={(e, { offset }) => {
+              if (offset.x > 50) {
                 goToNext()
-              } else if (swipe > 50) {
+              } else if (offset.x < -50) {
                 goToPrev()
               }
             }}
           >
             <div
-              className="rounded-lg p-4 shadow-lg text-white border-2 border-black h-full"
-              style={{ backgroundColor: "#FF8C28" }}
+              className="rounded-[32px] p-6 shadow-lg text-white border-2 border-black h-full text-center"
+              style={{ backgroundColor: "#C084FC" }}
             >
-              <div className="flex items-center mb-4">
+              <div className="flex flex-col items-center gap-4">
                 <Image
                   src={values[currentIndex].icon || "/placeholder.svg"}
                   alt={`${values[currentIndex].title} Icon`}
                   width={70}
                   height={70}
-                  className="mr-4 icon-pulse"
+                  className="icon-pulse"
                 />
                 <div>
-                  <h3 className="text-xl font-ultra mb-2">{values[currentIndex].title}</h3>
-                  <p className="text-sm">{values[currentIndex].description}</p>
+                  <h3 className="text-xl font-ultra mb-2" style={{ color: "#000" }}>
+                    {values[currentIndex].title}
+                  </h3>
+                  <p className="text-sm leading-relaxed">{values[currentIndex].description}</p>
                 </div>
               </div>
             </div>

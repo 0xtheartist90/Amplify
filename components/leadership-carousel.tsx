@@ -25,7 +25,7 @@ export default function LeadershipCarousel() {
     {
       name: "Aura R",
       role: "Founder & CEO",
-      imageSrc: "/images/leader-aura.webp",
+      imageSrc: "/images/Teampfp_Aura.webp",
       bgColor: "bg-yellow",
       description:
         "With over 5 years of experience in digital marketing, Aura founded Amplify with a vision to help brands find their authentic voice in the digital landscape.",
@@ -33,7 +33,7 @@ export default function LeadershipCarousel() {
     {
       name: "Rich P",
       role: "Creative Director",
-      imageSrc: "/images/leader-richie.webp",
+      imageSrc: "/images/Teampfp_rich%20p.webp",
       bgColor: "bg-pink",
       description:
         "Rich brings his extensive background in design and branding to lead our creative team in developing visually stunning and strategically sound brand identities.",
@@ -41,7 +41,7 @@ export default function LeadershipCarousel() {
     {
       name: "Ace B",
       role: "Director of Strategy",
-      imageSrc: "/images/leader-ace.webp",
+      imageSrc: "/images/Teampfp_ace%20b.webp",
       bgColor: "bg-blue",
       description:
         "Ace leverages his analytical mindset and marketing expertise to develop data-driven strategies that deliver measurable results for our clients.",
@@ -78,12 +78,9 @@ export default function LeadershipCarousel() {
     if (!touchStart || !touchEnd) return
 
     const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 30
-    const isRightSwipe = distance < -30
-
-    if (isLeftSwipe) {
+    if (distance < -30) {
       goToNext()
-    } else if (isRightSwipe) {
+    } else if (distance > 30) {
       goToPrev()
     }
 
@@ -123,29 +120,36 @@ export default function LeadershipCarousel() {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = Math.abs(offset.x) * velocity.x
-              if (swipe < -50) {
+            onDragEnd={(e, { offset }) => {
+              if (offset.x > 50) {
                 goToNext()
-              } else if (swipe > 50) {
+              } else if (offset.x < -50) {
                 goToPrev()
               }
             }}
           >
-            <div className="bg-white text-black rounded-lg overflow-hidden shadow-lg border-2 border-black">
-              <div className={`h-48 ${leaders[currentIndex].bgColor} flex items-center justify-center p-4`}>
-                <Image
-                  src={leaders[currentIndex].imageSrc || "/placeholder.svg"}
-                  alt={leaders[currentIndex].name}
-                  width={180}
-                  height={180}
-                  className="object-contain w-full h-full max-h-[160px]"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-ultra mb-2">{leaders[currentIndex].name}</h3>
-                <p className="text-pink font-bold mb-4">{leaders[currentIndex].role}</p>
-                <p className="mb-4">{leaders[currentIndex].description}</p>
+            <div className="max-w-sm mx-auto">
+              <div className="rounded-[36px] bg-[#FB97B2] p-0">
+                <div className="rounded-[28px] border-2 border-black bg-white overflow-hidden flex flex-col">
+                  <div
+                    className={`${leaders[currentIndex].bgColor} flex items-center justify-center w-full aspect-square p-0 m-0`}
+                    style={{ margin: 0 }}
+                  >
+                    <Image
+                      src={leaders[currentIndex].imageSrc || "/placeholder.svg"}
+                      alt={leaders[currentIndex].name}
+                      width={256}
+                      height={256}
+                      className="object-cover w-full h-full block"
+                      style={{ margin: 0 }}
+                    />
+                  </div>
+                  <div className="p-6 text-black">
+                    <h3 className="text-3xl font-ultra mb-1">{leaders[currentIndex].name}</h3>
+                    <p className="text-[#F44976] font-bold text-lg mb-4">{leaders[currentIndex].role}</p>
+                    <p className="text-base leading-relaxed">{leaders[currentIndex].description}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
