@@ -1,14 +1,27 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { CustomButton } from "./custom-button"
 import { ScrollTopLink } from "./scroll-top-link"
 
+const SERVICE_LINKS = [
+  { href: "/services/socials", label: "Social Media" },
+  { href: "/services/ads", label: "Advertising" },
+  { href: "/services/branding", label: "Branding" },
+  { href: "/services/website", label: "Website" },
+]
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const pathname = usePathname()
+
+  const isActive = (href: string) => pathname === href
+  const isServicesActive = pathname?.startsWith("/services")
 
   // Debounced resize handler
   const debouncedCheckMobile = useCallback(() => {
@@ -96,16 +109,59 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8 items-center" aria-label="Main Navigation">
-            <ScrollTopLink href="/" className="font-medium hover:text-pink transition-colors">
+            <ScrollTopLink
+              href="/"
+              className={`font-medium transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
+            >
               Home
             </ScrollTopLink>
-            <ScrollTopLink href="/about" className="font-medium hover:text-pink transition-colors">
+            <ScrollTopLink
+              href="/about"
+              className={`font-medium transition-colors ${isActive("/about") ? "text-pink" : "hover:text-pink"}`}
+            >
               About
             </ScrollTopLink>
-            <ScrollTopLink href="/services" className="font-medium hover:text-pink transition-colors">
-              Services
-            </ScrollTopLink>
-            <ScrollTopLink href="/portfolio" className="font-medium hover:text-pink transition-colors">
+            <div
+              className="relative"
+              onMouseEnter={() => setIsServicesDropdownOpen(true)}
+              onMouseLeave={() => setIsServicesDropdownOpen(false)}
+            >
+              <ScrollTopLink
+                href="/services/socials"
+                className={`font-medium transition-colors flex items-center gap-1 ${
+                  isServicesActive ? "text-pink" : "hover:text-pink"
+                }`}
+                aria-haspopup="true"
+                aria-expanded={isServicesDropdownOpen}
+              >
+                Services
+                <span className={`transition-transform duration-200 ${isServicesDropdownOpen ? "rotate-180" : "rotate-0"}`}>
+                  ▾
+                </span>
+              </ScrollTopLink>
+              {isServicesDropdownOpen && (
+                <div className="absolute left-0 top-full pt-3">
+                  <div className="w-52 rounded-2xl border-2 border-black bg-white shadow-xl p-3 flex flex-col gap-1">
+                    {SERVICE_LINKS.map((link) => (
+                      <ScrollTopLink
+                        key={link.href}
+                        href={link.href}
+                        className={`px-3 py-2 rounded-xl transition-colors ${
+                          isActive(link.href) ? "bg-pink-100 text-pink" : "hover:bg-pink-100"
+                        }`}
+                        onClick={() => setIsServicesDropdownOpen(false)}
+                      >
+                        {link.label}
+                      </ScrollTopLink>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            <ScrollTopLink
+              href="/portfolio"
+              className={`font-medium transition-colors ${isActive("/portfolio") ? "text-pink" : "hover:text-pink"}`}
+            >
               Portfolio
             </ScrollTopLink>
             <CustomButton href="/contact" color="orange">
@@ -139,28 +195,42 @@ export default function Header() {
           <div className="container py-4 flex flex-col space-y-4">
             <ScrollTopLink
               href="/"
-              className="font-medium hover:text-pink transition-colors"
+              className={`font-medium transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </ScrollTopLink>
             <ScrollTopLink
               href="/about"
-              className="font-medium hover:text-pink transition-colors"
+              className={`font-medium transition-colors ${isActive("/about") ? "text-pink" : "hover:text-pink"}`}
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </ScrollTopLink>
-            <ScrollTopLink
-              href="/services"
-              className="font-medium hover:text-pink transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Services
-            </ScrollTopLink>
+            <div className="space-y-2">
+              <ScrollTopLink
+                href="/services/socials"
+                className={`font-medium transition-colors ${isServicesActive ? "text-pink" : "hover:text-pink"}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </ScrollTopLink>
+              <div className="pl-4 flex flex-col space-y-1 text-sm text-gray-700">
+                {SERVICE_LINKS.map((link) => (
+                  <ScrollTopLink
+                    key={link.href}
+                    href={link.href}
+                    className={`transition-colors ${isActive(link.href) ? "text-pink" : "hover:text-pink"}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </ScrollTopLink>
+                ))}
+              </div>
+            </div>
             <ScrollTopLink
               href="/portfolio"
-              className="font-medium hover:text-pink transition-colors"
+              className={`font-medium transition-colors ${isActive("/portfolio") ? "text-pink" : "hover:text-pink"}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Portfolio

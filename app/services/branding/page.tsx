@@ -166,12 +166,12 @@ export default function BrandingServicePage() {
                     features: ["Logo design", "Color palette development", "Typography selection"],
                   },
                   {
-                    title: "Brand Voice",
-                    icon: "voice",
+                    title: "Employer Branding",
+                    icon: "employer",
                     iconBg: "bg-blue",
                     description:
-                      "We help you develop a consistent brand voice that communicates your brand's personality and values.",
-                    features: ["Messaging strategy", "Tone of voice guidelines", "Brand storytelling"],
+                      "We position your company as the place top talent wants to work through a compelling employer narrative.",
+                    features: ["Employee value proposition", "Career site messaging", "Talent storytelling"],
                   },
                 ]}
               />
@@ -244,26 +244,25 @@ export default function BrandingServicePage() {
                 <div className="bg-white rounded-[32px] p-6 shadow-lg border-2 border-black h-full">
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 flex items-center justify-center mr-3 bg-blue rounded-full flex-shrink-0">
-                      <ServiceIcon name="voice" size={30} color="#fff" />
+                      <ServiceIcon name="employer" size={30} color="#fff" />
                     </div>
-                    <h3 className="text-xl font-ultra">Brand Voice</h3>
+                    <h3 className="text-xl font-ultra">Employer Branding</h3>
                   </div>
                   <p className="text-sm mb-4">
-                    We help you develop a consistent brand voice that communicates your brand's personality and values
-                    across all channels and touchpoints.
+                    We craft your employer value proposition and recruitment messaging so candidates instantly understand why they should join your team.
                   </p>
                   <ul className="text-sm space-y-2">
                     <li className="flex items-start">
                       <span className="font-bold mr-2">•</span>
-                      <span>Messaging strategy</span>
+                      <span>Employee value proposition</span>
                     </li>
                     <li className="flex items-start">
                       <span className="font-bold mr-2">•</span>
-                      <span>Tone of voice guidelines</span>
+                      <span>Culture & career messaging</span>
                     </li>
                     <li className="flex items-start">
                       <span className="font-bold mr-2">•</span>
-                      <span>Brand storytelling</span>
+                      <span>Talent storytelling campaigns</span>
                     </li>
                   </ul>
                 </div>

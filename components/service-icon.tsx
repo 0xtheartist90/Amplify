@@ -68,6 +68,7 @@ export default function ServiceIcon({ name, size = 24, className = "", color = "
     branding: <Palette size={size} color={color} />,
     identity: <PenTool size={size} color={color} />,
     voice: <MessageCircle size={size} color={color} />,
+    employer: <Users size={size} color={color} />,
 
     // Default fallback
     default: <BarChart size={size} color={color} />,

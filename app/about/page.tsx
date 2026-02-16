@@ -28,8 +28,8 @@ export default function AboutPage() {
       bgColor: "bg-purple",
     },
     {
-      name: "Wilson D",
-      role: "Analyst",
+      name: "Xavier D",
+      role: "Brand Specialist",
       imageSrc: "/images/Teampfp_wilson%20d.webp",
       bgColor: "bg-pink",
     },
