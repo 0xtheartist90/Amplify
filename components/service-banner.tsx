@@ -13,11 +13,11 @@ export default function ServiceBanner({ currentService }: ServiceBannerProps) {
 
   const services = [
     {
-      name: "Social Media",
+      name: "Socials",
       path: "/services/socials",
-      color: "bg-pink",
-      hoverColor: "hover:bg-pink",
-      textColor: "text-pink",
+      color: "bg-[#f44976]",
+      hoverColor: "hover:bg-[#f44976]",
+      textColor: "text-[#f44976]",
       active: currentService === "socials",
       width: "w-[140px]",
     },
@@ -53,7 +53,7 @@ export default function ServiceBanner({ currentService }: ServiceBannerProps) {
   return (
     <section className="py-4 md:py-6 bg-white border-b border-gray-200 sticky top-0 z-20 shadow-md">
       <div className="container px-2 md:px-4 mx-auto">
-        <div className="flex justify-center gap-2 md:gap-6 overflow-x-auto pb-1 whitespace-nowrap">
+        <div className="flex justify-center gap-2 md:gap-6 overflow-x-auto pb-1 whitespace-nowrap text-center">
           {services.map((service) => (
             <Link
               key={service.path}

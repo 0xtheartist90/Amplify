@@ -89,7 +89,7 @@ export default function MobileProcessCarousel({ steps }: MobileProcessCarouselPr
   }, [currentIndex])
 
   return (
-    <div className="relative px-4 pb-10">
+    <div className="relative px-4 pb-2">
       {/* Carousel Container */}
       <div
         className="relative overflow-hidden rounded-lg touch-pan-x"
@@ -97,7 +97,7 @@ export default function MobileProcessCarousel({ steps }: MobileProcessCarouselPr
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative h-[280px]">
+        <div className="relative min-h-[420px]">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
@@ -122,14 +122,20 @@ export default function MobileProcessCarousel({ steps }: MobileProcessCarouselPr
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="absolute w-full"
             >
-              <div className="bg-white text-black rounded-lg p-6 shadow-lg border-2 border-black h-full flex flex-col items-center text-center">
-                <div
-                  className={`w-16 h-16 ${steps[currentIndex].bgColor} rounded-full flex items-center justify-center mb-4 text-white text-2xl font-ultra`}
-                >
-                  {steps[currentIndex].number}
+              <div className="rounded-[28px] border-2 border-black bg-white overflow-hidden flex flex-col min-h-[420px]">
+                <div className="bg-[#F44976] text-white p-6 flex flex-col flex-1">
+                  <div className="flex justify-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-white/15 border-2 border-white/30 flex items-center justify-center text-2xl font-ultra">
+                      {steps[currentIndex].number}
+                    </div>
+                  </div>
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-ultra" style={{ color: "#FFE45E" }}>
+                      {steps[currentIndex].title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-white/85 leading-relaxed whitespace-pre-line flex-1">{steps[currentIndex].description}</p>
                 </div>
-                <h3 className="text-xl font-ultra mb-2">{steps[currentIndex].title}</h3>
-                <p className="text-sm">{steps[currentIndex].description}</p>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -148,7 +154,9 @@ export default function MobileProcessCarousel({ steps }: MobileProcessCarouselPr
               goToSlide(idx)
             }}
             className={`w-4 h-4 rounded-full transition-all ${
-              currentIndex === idx ? "bg-black scale-110" : "bg-gray-300"
+              currentIndex === idx
+                ? "bg-[#F44976] scale-125 border-2 border-black"
+                : "bg-[#F44976]/40"
             }`}
             aria-label={`Go to slide ${idx + 1}`}
           />

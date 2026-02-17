@@ -6,6 +6,7 @@ import ServiceBanner from "@/components/service-banner"
 import ServiceIcon from "@/components/service-icon"
 import MobileServicesCarousel from "@/components/mobile-services-carousel"
 import MobileProcessCarousel from "@/components/mobile-process-carousel"
+import SocialPackagesCarousel from "@/components/social-packages-carousel"
 
 const SOCIAL_PACKAGES = [
   {
@@ -65,6 +66,7 @@ const SOCIAL_PACKAGES = [
       "15h Community Management",
     ],
     accent: "text-white",
+    starColor: "text-white",
     isCustom: true,
   },
 ]
@@ -241,7 +243,7 @@ export default function SocialsServicePage() {
                 </div>
               </ScrollAnimation>
               <ScrollAnimation variant="fadeInLeft">
-                <div className="bg-pink rounded-[32px] p-8">
+                <div className="rounded-[32px] p-8 text-white" style={{ backgroundColor: "#f44976" }}>
                   <h3 className="text-2xl font-ultra mb-4">Why Social Media Matters</h3>
                   <p className="mb-4">
                     In today's digital world, social media is an essential part of your marketing strategy. It helps
@@ -272,10 +274,15 @@ export default function SocialsServicePage() {
         </section>
 
         {/* Services List */}
-        <section className="py-16" style={{ backgroundColor: "#F44976" }}>
+        <section className="py-16" style={{ backgroundColor: "#f44976" }}>
           <div className="container">
             <ScrollAnimation variant="fadeInUp">
-              <h2 className="text-3xl md:text-4xl font-ultra mb-8 text-center text-white">Our Social Media Services</h2>
+              <h2
+                className="text-3xl md:text-4xl font-ultra mb-8 text-center"
+                style={{ color: "#FFE45E" }}
+              >
+                Our Social Media Services
+              </h2>
             </ScrollAnimation>
 
             {/* Mobile Services Carousel */}
@@ -426,7 +433,15 @@ export default function SocialsServicePage() {
               </div>
             </ScrollAnimation>
 
-            <div className="grid gap-8 lg:grid-cols-3">
+            {/* Mobile Slider */}
+            <div className="lg:hidden">
+              <ScrollAnimation variant="fadeInUp">
+                <SocialPackagesCarousel packages={SOCIAL_PACKAGES.filter((pkg) => !pkg.isCustom)} />
+              </ScrollAnimation>
+            </div>
+
+            {/* Desktop Grid */}
+            <div className="hidden lg:grid gap-8 lg:grid-cols-3">
               {SOCIAL_PACKAGES.filter((pkg) => !pkg.isCustom).map((pkg, index) => (
                 <ScrollAnimation key={pkg.name} variant="fadeInUp" delay={0.1 * index}>
                   <div className="bg-[#F44976] rounded-[32px] shadow-xl p-6 text-white flex flex-col h-full border-2 border-black">
@@ -491,31 +506,49 @@ export default function SocialsServicePage() {
         </section>
 
         {/* Extra Services */}
-        <section className="py-12" style={{ backgroundColor: "#F44976" }}>
+        <section className="py-12" style={{ backgroundColor: "#f44976" }}>
           <div className="container">
             <ScrollAnimation variant="fadeInUp">
-              <div className="text-center max-w-2xl mx-auto mb-6 text-white">
+              <div className="text-center max-w-2xl mx-auto mb-6 text-white md:w-2/3 md:ml-auto md:mr-0 md:pr-12">
                 <p className="text-xs tracking-[0.4em] font-semibold mb-2 opacity-80">EXTRA SERVICES</p>
-                <h2 className="text-3xl font-ultra mb-2">Boost Your Package</h2>
+                <h2 className="text-3xl font-ultra mb-2" style={{ color: "#FFE45E" }}>
+                  Boost Your Package
+                </h2>
                 <p className="text-sm text-white/80">Quick add-ons for production, campaigns, or extra hands when you need them.</p>
               </div>
             </ScrollAnimation>
 
-            <div className="overflow-hidden rounded-[24px] border-2 border-black shadow-xl bg-white">
-              <div className="hidden md:grid grid-cols-2 bg-pink-100 border-b-2 border-black text-center font-semibold uppercase tracking-wide text-sm">
-                <div className="py-3">Service</div>
-                <div className="py-3">Price</div>
+            <div className="md:grid md:grid-cols-[1.1fr_2fr] md:gap-0 gap-6 items-stretch">
+              <div className="hidden md:flex items-stretch md:-mr-20">
+                <div className="relative w-full h-full min-h-[480px] overflow-visible">
+                  <Image
+                    src="/images/extraservices-aura.webp"
+                    alt="Extra services illustration"
+                    fill
+                    className="object-contain object-right scale-[1.5] origin-right"
+                    priority
+                  />
+                </div>
               </div>
-              <div>
-                {EXTRA_SERVICES.map((item, idx) => (
-                  <div
-                    key={item.service}
-                    className={`grid md:grid-cols-2 gap-3 px-4 py-3 text-sm ${idx % 2 === 0 ? "bg-white" : "bg-pink-50"}`}
-                  >
-                    <div className="font-semibold">{item.service}</div>
-                    <div className="md:text-right">{item.price}</div>
-                  </div>
-                ))}
+
+              <div className="overflow-hidden rounded-[32px] md:rounded-l-[32px] border-2 border-black shadow-xl bg-white px-3 py-4 md:px-0 md:py-0 md:ml-10">
+                <div className="hidden md:grid grid-cols-[2fr_1fr] bg-pink-100 border-b-2 border-black font-semibold uppercase tracking-wide text-sm">
+                  <div className="py-3 pl-8 text-left">Service</div>
+                  <div className="py-3 pr-6 text-right">Price</div>
+                </div>
+                <div>
+                  {EXTRA_SERVICES.map((item, idx) => (
+                    <div
+                      key={item.service}
+                      className={`flex flex-col md:grid md:grid-cols-[2fr_1fr] gap-1 md:gap-3 px-3 py-2 md:px-8 md:py-3 text-xs md:text-sm ${
+                        idx % 2 === 0 ? "bg-white" : "bg-pink-50"
+                      }`}
+                    >
+                      <div className="font-semibold text-left md:pl-8">{item.service}</div>
+                      <div className="md:text-right text-gray-600 md:text-inherit md:pr-4">{item.price}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -545,12 +578,16 @@ export default function SocialsServicePage() {
             <div className="hidden md:grid md:grid-cols-3 gap-6">
               {SOCIAL_PROCESS_STEPS.map((step, index) => (
                 <ScrollAnimation key={step.number} variant="fadeInUp" delay={0.1 * (index + 1)}>
-                  <div className="bg-pink rounded-[32px] border-2 border-black p-6 h-full shadow-lg flex flex-col text-white">
-                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-black text-3xl font-ultra mb-4 mx-auto">
-                      {step.number}
+                  <div className="bg-[#F44976] rounded-[32px] border-2 border-black p-6 h-full shadow-lg flex flex-col text-white">
+                    <div className="flex justify-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-white/15 border-2 border-white/30 flex items-center justify-center text-3xl font-ultra">
+                        {step.number}
+                      </div>
                     </div>
-                    <h3 className="text-xl font-ultra mb-3 text-center">{step.title}</h3>
-                    <p className="text-sm text-center mb-4 text-white/90">{step.summary}</p>
+                    <h3 className="text-2xl font-ultra mb-3 text-center" style={{ color: "#FFE45E" }}>
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-center mb-4 text-white/85 leading-relaxed whitespace-pre-line">{step.summary}</p>
                     {step.bullets.length > 0 && (
                       <ul className="text-sm space-y-1 text-white/90">
                         {step.bullets.map((bullet) => (

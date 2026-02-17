@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import VideoCTA from "@/components/video-cta"
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react"
-import React, { useState, useEffect, useCallback, useRef } from "react"
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import ImageLightbox from "@/components/image-lightbox"
 
@@ -107,6 +107,9 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
   const [isPaused, setIsPaused] = useState(false)
   const [lightboxImage, setLightboxImage] = useState<string | null>(null)
   const [lightboxAlt, setLightboxAlt] = useState<string>("")
+  const [activeProjectImage, setActiveProjectImage] = useState<string | null>(null)
+  const [activeProjectImageAlt, setActiveProjectImageAlt] = useState<string>("")
+  const [projectThumbnails, setProjectThumbnails] = useState<{ src: string; alt: string }[]>([])
 
   // Add this after the existing state declarations
   const touchStartX = useRef<number | null>(null)
@@ -128,20 +131,20 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
     {
       title: "The Challenge",
       content: portfolio?.challenge || "",
-      bgColor: portfolio?.bgColor || "bg-black",
-      textColor: portfolio?.textColor || "text-white",
+      className: "text-black",
+      style: { backgroundColor: "#FFE45E" },
     },
     {
       title: "Our Solution",
       content: portfolio?.solution || "",
-      bgColor: "bg-yellow",
-      textColor: "text-black",
+      className: "text-white",
+      style: { backgroundColor: "#A855F7" },
     },
     {
       title: "The Results",
       content: portfolio?.results || "",
-      bgColor: "bg-purple",
-      textColor: "text-white",
+      className: "text-white",
+      style: { backgroundColor: "#0FAE9B" },
     },
   ]
 
@@ -233,7 +236,62 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
     return []
   }
 
-  const thumbnailImages = getThumbnailImages()
+  const baseThumbnailImages = useMemo(() => getThumbnailImages(), [portfolio?.id])
+
+  const uniqueGalleryImages = useMemo(() => {
+    const images: { src: string; alt: string }[] = []
+    const seen = new Set<string>()
+
+    const addImage = (image?: { src?: string; alt?: string }) => {
+      if (!image?.src || seen.has(image.src)) return
+      seen.add(image.src)
+      images.push({ src: image.src, alt: image.alt || portfolio?.title || "Project image" })
+    }
+
+    addImage(portfolio?.image ? { src: portfolio.image, alt: portfolio?.title || "Project image" } : undefined)
+    baseThumbnailImages.forEach(addImage)
+
+    return images
+  }, [portfolio?.image, portfolio?.title, baseThumbnailImages])
+
+  useEffect(() => {
+    if (uniqueGalleryImages.length > 0) {
+      setActiveProjectImage(uniqueGalleryImages[0].src)
+      setActiveProjectImageAlt(uniqueGalleryImages[0].alt)
+      setProjectThumbnails(uniqueGalleryImages.slice(1))
+    } else {
+      setActiveProjectImage(null)
+      setActiveProjectImageAlt("")
+      setProjectThumbnails([])
+    }
+  }, [uniqueGalleryImages])
+
+  const handleThumbnailClick = useCallback(
+    (index: number) => {
+      setProjectThumbnails((prev) => {
+        if (!activeProjectImage || index < 0 || index >= prev.length) {
+          return prev
+        }
+
+        const clickedImage = prev[index]
+        if (!clickedImage) {
+          return prev
+        }
+
+        const next = [...prev]
+        next[index] = {
+          src: activeProjectImage,
+          alt: activeProjectImageAlt,
+        }
+
+        setActiveProjectImage(clickedImage.src)
+        setActiveProjectImageAlt(clickedImage.alt)
+
+        return next
+      })
+    },
+    [activeProjectImage, activeProjectImageAlt]
+  )
 
   return (
     <>
@@ -315,36 +373,36 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
             <div className="md:col-span-2">
-              {portfolio.image ? (
-                <div
-                  className="h-64 md:h-96 rounded-lg mb-4 md:mb-8 relative overflow-hidden cursor-pointer"
-                  onClick={() => openLightbox(portfolio.image, portfolio.title)}
-                >
+              {activeProjectImage ? (
+                <div className="relative w-full aspect-[16/9] rounded-lg mb-4 md:mb-8 overflow-hidden">
                   <Image
-                    src={portfolio.image || "/placeholder.svg"}
-                    alt={portfolio.title}
+                    src={activeProjectImage || "/placeholder.svg"}
+                    alt={activeProjectImageAlt || portfolio.title}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    className="object-cover transition-transform duration-300"
                     priority
                   />
                 </div>
               ) : (
-                <div className="h-64 md:h-96 bg-gray-200 rounded-lg mb-4 md:mb-8"></div>
+                <div className="relative w-full aspect-[16/9] bg-gray-200 rounded-lg mb-4 md:mb-8"></div>
               )}
               <div className="grid grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
-                {thumbnailImages.map((image, index) => (
-                  <div
+                {projectThumbnails.map((image, index) => (
+                  <button
                     key={index}
-                    className="h-20 md:h-32 relative rounded-lg overflow-hidden cursor-pointer"
-                    onClick={() => openLightbox(image.src, image.alt)}
+                    type="button"
+                    className="relative w-full aspect-[16/9] rounded-lg overflow-hidden border-2 border-transparent transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-black/30 hover:border-black hover:scale-[1.01]"
+                    onClick={() => handleThumbnailClick(index)}
+                    aria-pressed="false"
+                    aria-label={`View ${image.alt}`}
                   >
                     <Image
                       src={image.src || "/placeholder.svg"}
                       alt={image.alt}
                       fill
-                      className="object-cover hover:scale-110 transition-transform duration-300"
+                      className="object-cover transition-transform duration-300"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -419,8 +477,12 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
                       animate="center"
                       exit="exit"
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      className={`absolute w-full p-6 rounded-lg ${cards[activeSlide].bgColor} ${cards[activeSlide].textColor}`}
-                      style={{ height: "auto", minHeight: "400px" }}
+                      className={`absolute w-full p-6 rounded-[32px] border-2 border-black shadow-lg ${cards[activeSlide].className}`}
+                      style={{
+                        ...(cards[activeSlide].style || {}),
+                        height: "auto",
+                        minHeight: "400px",
+                      }}
                       drag="x"
                       dragConstraints={{ left: 0, right: 0 }}
                       dragElastic={1}
@@ -467,20 +529,16 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
 
             {/* Desktop Grid */}
             <div className="hidden md:grid grid-cols-3 gap-8">
-              <div className={`${portfolio.bgColor} ${portfolio.textColor} rounded-lg p-8`}>
-                <h3 className="text-2xl font-ultra mb-4">The Challenge</h3>
-                <p>{portfolio.challenge}</p>
-              </div>
-
-              <div className="bg-yellow rounded-lg p-8">
-                <h3 className="text-2xl font-ultra mb-4">Our Solution</h3>
-                <p>{portfolio.solution}</p>
-              </div>
-
-              <div className="bg-purple text-white rounded-lg p-8">
-                <h3 className="text-2xl font-ultra mb-4">The Results</h3>
-                <p>{portfolio.results}</p>
-              </div>
+              {cards.map((card) => (
+                <div
+                  key={card.title}
+                  className={`rounded-[32px] border-2 border-black shadow-lg p-8 ${card.className}`}
+                  style={card.style}
+                >
+                  <h3 className="text-2xl font-ultra mb-4">{card.title}</h3>
+                  <p>{card.content}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

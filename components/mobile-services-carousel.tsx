@@ -91,7 +91,7 @@ export default function MobileServicesCarousel({ services }: MobileServicesCarou
   }, [currentIndex])
 
   return (
-    <div className="relative px-4 pb-10">
+    <div className="relative px-4 pb-2">
       {/* Carousel Container */}
       <div
         className="relative overflow-hidden rounded-lg touch-pan-x"
@@ -99,7 +99,7 @@ export default function MobileServicesCarousel({ services }: MobileServicesCarou
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative h-[420px]">
+        <div className="relative h-[360px]">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentIndex}
@@ -124,7 +124,7 @@ export default function MobileServicesCarousel({ services }: MobileServicesCarou
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="absolute w-full"
             >
-              <div className="bg-white text-black rounded-lg p-5 shadow-lg border-2 border-black h-full flex flex-col">
+              <div className="bg-white text-black rounded-[32px] p-6 shadow-lg border-2 border-black h-full flex flex-col">
                 <div className="flex items-center mb-3">
                   <div
                     className={`w-10 h-10 flex items-center justify-center mr-3 ${
@@ -151,7 +151,7 @@ export default function MobileServicesCarousel({ services }: MobileServicesCarou
       </div>
 
       {/* Pagination dots */}
-      <div className="flex justify-center mt-5 space-x-3">
+      <div className="flex justify-center mt-2 space-x-3">
         {services.map((_, idx) => (
           <button
             key={idx}

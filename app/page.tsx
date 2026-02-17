@@ -139,7 +139,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhat.webp"
+                        src="/images/richiewhat.webp"
                         alt="Amplify Mascot"
                         width={220}
                         height={220}
@@ -230,7 +230,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container xl:scale-95 transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhat.webp"
+                        src="/images/richiewhat.webp"
                         alt="Amplify Mascot"
                         width={320}
                         height={320}
@@ -336,7 +336,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhy.webp"
+                        src="/images/acewhy.webp"
                         alt="Amplify Mascot"
                         width={220}
                         height={220}
@@ -457,7 +457,7 @@ export default function DesktopHome() {
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
                     <div className="character-container xl:scale-95 transform-gpu origin-center">
                       <Image
-                        src="/images/aurawhy.webp"
+                        src="/images/acewhy.webp"
                         alt="Amplify Mascot"
                         width={320}
                         height={320}
