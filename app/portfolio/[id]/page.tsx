@@ -51,7 +51,7 @@ const portfolioItems = [
     ],
     bgColor: "bg-yellow-400",
     textColor: "text-black",
-    image: "/images/fawaka-main.webp",
+    image: "/images/Portfolio/Portfolio%20Fawaka/fawaka-main.webp",
     website: "https://www.fawaka.com",
   },
   {
@@ -96,6 +96,33 @@ const portfolioItems = [
     textColor: "text-white",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/riseconnectmain-Yx9mKGZDUKqLP13SKx8YE46pCailOe.png",
     website: "https://www.riseandconnect.nl/",
+  },
+  {
+    id: "5",
+    title: "SHE",
+    client: "SHE – Stichting Human Empowerment",
+    category: "Website Development & Brand Identity",
+    description: "A safe online platform focused on recovery, protection, and empowerment.",
+    challenge:
+      "Stichting Human Empowerment needed a renewed visual identity and website that clearly reflects their mission: offering a safe place for recovery and growth. The platform had to communicate trust and accessibility while supporting women, men, and youth affected by domestic violence and child abuse.",
+    solution:
+      "We redesigned the logo to create a stronger, more recognizable identity. The website was built with a calm, structured design and clear navigation, ensuring visitors can easily find information and support. The result is a professional and welcoming platform aligned with their 24/7 mission.",
+    results:
+      "The new brand identity and website strengthened their digital presence and clarity as an organization. The final result exceeded expectations and gave them a platform that truly represents their work and values.",
+    services: [
+      "Logo Redesign",
+      "Website Design",
+      "UI/UX Design",
+      "Flyer Design",
+      "Brand Identity",
+    ],
+    bgColor: "bg-[#0f141f]",
+    textColor: "text-white",
+    image: "/images/Portfolio/Portfolio%20SHE/portfolio-she-hero.webp",
+    website: "https://she-is.vercel.app/",
+    websiteLabel: "she-is.com",
+    testimonialQuote: "We got way more than we expected. We didn’t really know what we wanted from our website, but it came out great.",
+    testimonialAuthor: "– Stichting Human Empowerment Team",
   },
   // Add more portfolio items as needed
 ]
@@ -190,46 +217,65 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
     } else if (portfolio.id === "2") {
       return [
         {
-          src: "/images/fawaka-burgers.webp",
+          src: "/images/Portfolio/Portfolio%20Fawaka/fawaka-burgers.webp",
           alt: "Fawaka Food",
         },
         {
-          src: "/images/fawaka-delivery.webp",
+          src: "/images/Portfolio/Portfolio%20Fawaka/fawaka-delivery.webp",
           alt: "Fawaka Delivery",
         },
         {
-          src: "/images/fawaka-scooter.webp",
+          src: "/images/Portfolio/Portfolio%20Fawaka/fawaka-scooter.webp",
           alt: "Fawaka Scooter",
         },
       ]
     } else if (portfolio.id === "3") {
       return [
         {
-          src: "/images/prysmic-homepage.webp",
+          src: "/images/Portfolio/Portfolio%20Prysmic/prysmic-homepage.webp",
           alt: "Prysmic Homepage",
         },
         {
-          src: "/images/prysmic-trusted.webp",
+          src: "/images/Portfolio/Portfolio%20Prysmic/prysmic-trusted.webp",
           alt: "Prysmic Trusted by Industry Leaders",
         },
         {
-          src: "/images/prysmic-usecases.webp",
+          src: "/images/Portfolio/Portfolio%20Prysmic/prysmic-usecases.webp",
           alt: "Prysmic Use Cases",
         },
       ]
     } else if (portfolio.id === "4") {
       return [
         {
-          src: "/images/rise-and-connect-illustration.webp",
+          src: "/images/Portfolio/Portfolio%20Rise%20and%20Connect/rise-and-connect-illustration.webp",
           alt: "Rise & Connect Community Members",
         },
         {
-          src: "/images/rise-and-connect-community.webp",
+          src: "/images/Portfolio/Portfolio%20Rise%20and%20Connect/rise-and-connect-community.webp",
           alt: "Rise & Connect Community Event",
         },
         {
-          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5807655478187118404_y.jpg-DExkp6CElUYI0SOS8qc2um5sWX3sMy.jpeg",
+          src: "/images/Portfolio/Portfolio%20Rise%20and%20Connect/rise-and-connect-logo.webp",
           alt: "Rise & Connect Mentorship",
+        },
+      ]
+    } else if (portfolio.id === "5") {
+      return [
+        {
+          src: "/images/Portfolio/Portfolio%20SHE/portfolio-she-detail-1.webp",
+          alt: "SHE Website redesign overview",
+        },
+        {
+          src: "/images/Portfolio/Portfolio%20SHE/portfolio-she-detail-2.webp",
+          alt: "SHE Platform navigation",
+        },
+        {
+          src: "/images/Portfolio/Portfolio%20SHE/portfolio-she-detail-3.webp",
+          alt: "SHE Support resources",
+        },
+        {
+          src: "/images/Portfolio/Portfolio%20SHE/portfolio-she-detail-4.webp",
+          alt: "SHE Brand collateral",
         },
       ]
     }
@@ -248,7 +294,9 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
       images.push({ src: image.src, alt: image.alt || portfolio?.title || "Project image" })
     }
 
-    addImage(portfolio?.image ? { src: portfolio.image, alt: portfolio?.title || "Project image" } : undefined)
+    if (portfolio?.id !== "5") {
+      addImage(portfolio?.image ? { src: portfolio.image, alt: portfolio?.title || "Project image" } : undefined)
+    }
     baseThumbnailImages.forEach(addImage)
 
     return images
@@ -434,7 +482,7 @@ export default function PortfolioDetailPage({ params }: { params: Promise<{ id: 
                     rel="noopener noreferrer"
                     className="text-sm md:text-base text-blue-600 hover:underline inline-flex items-center gap-1"
                   >
-                    {portfolio.website.replace("https://", "")}
+                    {portfolio.websiteLabel || portfolio.website.replace("https://", "")}
                     <ExternalLink size={14} />
                   </a>
                 </div>

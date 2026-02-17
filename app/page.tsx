@@ -232,8 +232,8 @@ export default function DesktopHome() {
                       <Image
                         src="/images/richiewhat.webp"
                         alt="Amplify Mascot"
-                        width={320}
-                        height={320}
+                        width={384}
+                        height={384}
                         className="max-w-full h-auto character-float"
                         priority
                       />
@@ -255,12 +255,12 @@ export default function DesktopHome() {
                     <ScrollAnimation variant="fadeInUp" delay={0.1} className="flex-1">
                       <div className="what-feature-card rounded-[32px] border-2 border-black bg-[#F44976] p-8 text-white shadow-2xl">
                         <div className="flex flex-col items-center gap-4 mb-6 text-center">
-                          <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black">
+                          <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black md:w-20 md:h-20">
                             <Image
                               src={activeService.icon}
                               alt={`${activeService.title} icon`}
-                              width={40}
-                              height={40}
+                              width={48}
+                              height={48}
                               className="w-full h-full object-contain block icon-pulse"
                               style={{ margin: 0 }}
                             />

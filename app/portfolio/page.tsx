@@ -23,7 +23,7 @@ export default function DesktopPortfolioPage() {
       description: "Vibrant brand identity, website and ordering system for a Caribbean food delivery service.",
       bgColor: "bg-yellow",
       textColor: "text-white",
-      image: "/images/fawaka-main.webp",
+      image: "/images/Portfolio/Portfolio%20Fawaka/fawaka-main.webp",
     },
     {
       id: 3,
@@ -43,6 +43,15 @@ export default function DesktopPortfolioPage() {
       textColor: "text-white",
       image:
         "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/riseconnectmain-Yx9mKGZDUKqLP13SKx8YE46pCailOe.png",
+    },
+    {
+      id: 5,
+      title: "SHE",
+      category: "Website Development & Brand Identity",
+      description: "A safe online platform focused on recovery, protection, and empowerment.",
+      bgColor: "bg-[#0FAE9B]",
+      textColor: "text-white",
+      image: "/images/Portfolio/Portfolio%20SHE/portfolio-she-thumb.webp",
     },
   ]
 
@@ -64,7 +73,7 @@ export default function DesktopPortfolioPage() {
                 <Link
                   key={item.id}
                   href={`/portfolio/${item.id}`}
-                  className={`${item.bgColor} rounded-lg overflow-hidden shadow-lg transform transition-all hover:scale-105 hover:shadow-xl`}
+                  className={`${item.bgColor} rounded-[32px] border-2 border-black overflow-hidden shadow-lg transform transition-all hover:scale-105 hover:shadow-xl`}
                 >
                   {item.image ? (
                     <div className="h-40 md:h-64 bg-black/10 relative overflow-hidden">
