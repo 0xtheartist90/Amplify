@@ -2,6 +2,7 @@
 
 // Add href to the props type definition
 import type React from "react"
+import { useLocale } from "@/lib/i18n"
 
 type CustomButtonProps = {
   children: React.ReactNode
@@ -31,6 +32,8 @@ export function CustomButton({
   target,
   rel,
 }: CustomButtonProps) {
+  const { localizeHref } = useLocale()
+  const localizedHref = href ? localizeHref(href) : undefined
   const buttonImageSrc =
     color === "yellow"
       ? "/images/button-yellow.webp"
@@ -71,12 +74,12 @@ export function CustomButton({
 
   return (
     <ButtonTag
-      href={href}
+      href={localizedHref}
       type={!href ? type : undefined}
       disabled={disabled}
       aria-label={ariaLabel}
-      target={href ? target : undefined}
-      rel={href ? rel : undefined}
+      target={localizedHref ? target : undefined}
+      rel={localizedHref ? rel : undefined}
       className={`relative inline-flex items-center justify-center font-medium text-white ${size === "large" ? "px-8 py-4 text-lg" : "px-6 py-3"} text-center overflow-hidden ${className}`}
       onClick={onClick}
       style={serviceButtonStyle}

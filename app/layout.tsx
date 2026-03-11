@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { AR_One_Sans, Knewave } from "next/font/google"
+import { cookies } from "next/headers"
 import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -10,6 +11,7 @@ import { SearchParamsWrapper } from "@/components/search-params-wrapper"
 import { DeviceDetector } from "@/components/device-detector"
 import Script from "next/script"
 import { Suspense } from "react"
+import { LocaleProvider, type Locale } from "@/lib/i18n"
 
 // AR One Sans font for body text
 const arOneSans = AR_One_Sans({
@@ -38,13 +40,17 @@ export const viewport: Viewport = {
   themeColor: "#ff5a79",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const cookieStore = await cookies()
+  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value
+  const initialLocale: Locale = localeCookie === "nl" ? "nl" : "en"
+
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang={initialLocale} className="overflow-x-hidden">
       <head>
         {/* Load ULTRA font for headings */}
         <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/ultra" />
@@ -123,42 +129,40 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
       </head>
       <body className={`${arOneSans.variable} ${knewave.variable} font-sans overflow-x-hidden w-full`}>
-        <Script id="force-scroll-top" strategy="afterInteractive">
-          {`
-            // Force scroll to top on page load
-            window.addEventListener('load', function() {
-              window.scrollTo(0, 0);
-              document.documentElement.scrollTop = 0;
-              document.body.scrollTop = 0;
-            });
-            
-            // Force scroll to top on navigation
-            if ('scrollRestoration' in history) {
-              history.scrollRestoration = 'manual';
-            }
-            
-            // Handle browser back/forward buttons
-            window.addEventListener('popstate', function() {
-              window.scrollTo(0, 0);
-              document.documentElement.scrollTop = 0;
-              document.body.scrollTop = 0;
-            });
-          `}
-        </Script>
+        <LocaleProvider initialLocale={initialLocale}>
+          <Script id="force-scroll-top" strategy="afterInteractive">
+            {`
+              // Force scroll to top on page load
+              window.addEventListener('load', function() {
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+              });
+              
+              // Force scroll to top on navigation
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+              
+              // Handle browser back/forward buttons
+              window.addEventListener('popstate', function() {
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+              });
+            `}
+          </Script>
 
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-          {/* Loading screen */}
-          <LoadingScreen />
-
-          {/* Force scroll to top */}
-          <ForceScrollTop />
-
-          <Header />
-          <SearchParamsWrapper />
-          <DeviceDetector />
-          <main className="overflow-x-hidden w-full">{children}</main>
-          <Footer />
-        </Suspense>
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <LoadingScreen />
+            <ForceScrollTop />
+            <Header />
+            <SearchParamsWrapper />
+            <DeviceDetector />
+            <main className="overflow-x-hidden w-full">{children}</main>
+            <Footer />
+          </Suspense>
+        </LocaleProvider>
       </body>
     </html>
   )

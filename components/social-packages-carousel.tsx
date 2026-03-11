@@ -15,9 +15,15 @@ interface SocialPackage {
 
 interface SocialPackagesCarouselProps {
   packages: SocialPackage[]
+  labels?: {
+    service: string
+    includesPerMonth: string
+    alsoIncluded: string
+    goToPackage: (name: string) => string
+  }
 }
 
-export default function SocialPackagesCarousel({ packages }: SocialPackagesCarouselProps) {
+export default function SocialPackagesCarousel({ packages, labels }: SocialPackagesCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
@@ -103,7 +109,7 @@ export default function SocialPackagesCarousel({ packages }: SocialPackagesCarou
                 <div className="bg-[#F44976] text-white p-6 flex flex-col flex-1">
                   <div className="relative mb-8 min-h-[3rem]">
                     <div className="absolute left-0 top-0 rounded-2xl px-3 py-2 text-[0.6rem] tracking-[0.3em] bg-white/20 whitespace-nowrap">
-                      SERVICE
+                      {labels?.service || "SERVICE"}
                     </div>
                     <div className="absolute right-0 top-0 w-12 h-12 rounded-2xl flex items-center justify-center bg-white/10">
                       <span className={`text-xl ${packages[currentIndex].starColor}`}>★</span>
@@ -118,7 +124,7 @@ export default function SocialPackagesCarousel({ packages }: SocialPackagesCarou
                   </div>
                   <div className="space-y-4 flex-1">
                     <div>
-                      <h4 className="font-semibold text-white text-base mb-2">Includes per month</h4>
+                      <h4 className="font-semibold text-white text-base mb-2">{labels?.includesPerMonth || "Includes per month"}</h4>
                       <ul className="text-sm space-y-1">
                         {packages[currentIndex].perMonth.map((item) => (
                           <li key={item} className="flex items-start gap-2">
@@ -129,7 +135,7 @@ export default function SocialPackagesCarousel({ packages }: SocialPackagesCarou
                       </ul>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white text-base mb-2">Also included</h4>
+                      <h4 className="font-semibold text-white text-base mb-2">{labels?.alsoIncluded || "Also included"}</h4>
                       <ul className="text-sm space-y-1">
                         {packages[currentIndex].alsoIncluded.map((item) => (
                           <li key={item} className="flex items-start gap-2">
@@ -157,7 +163,7 @@ export default function SocialPackagesCarousel({ packages }: SocialPackagesCarou
                 ? "bg-[#F44976] scale-125 border-2 border-black"
                 : "bg-[#F44976]/40"
             }`}
-            aria-label={`Go to ${pkg.name} package`}
+            aria-label={labels?.goToPackage ? labels.goToPackage(pkg.name) : `Go to ${pkg.name} package`}
             aria-current={currentIndex === idx}
           />
         ))}

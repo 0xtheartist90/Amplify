@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { CustomButton } from "./custom-button"
 import { ScrollTopLink } from "./scroll-top-link"
+import { type Locale, useLocale } from "@/lib/i18n"
 
 const SERVICE_LINKS = [
   { href: "/services/socials", label: "Social Media" },
@@ -19,9 +20,53 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
+  const { locale, switchLocalePath } = useLocale()
 
-  const isActive = (href: string) => pathname === href
-  const isServicesActive = pathname?.startsWith("/services")
+  const copy =
+    locale === "nl"
+      ? {
+          home: "Home",
+          about: "Over",
+          services: "Diensten",
+          portfolio: "Portfolio",
+          contact: "Contact",
+          socialMedia: "Social media",
+          advertising: "Advertising",
+          branding: "Branding",
+          website: "Website",
+          language: "Taal",
+          openMenu: "Menu openen",
+          closeMenu: "Menu sluiten",
+          homeAria: "Amplify Home",
+        }
+      : {
+          home: "Home",
+          about: "About",
+          services: "Services",
+          portfolio: "Portfolio",
+          contact: "Contact Us",
+          socialMedia: "Social Media",
+          advertising: "Advertising",
+          branding: "Branding",
+          website: "Website",
+          language: "Language",
+          openMenu: "Open menu",
+          closeMenu: "Close menu",
+          homeAria: "Amplify Home",
+        }
+
+  const normalizedPath =
+    pathname?.replace(/^\/(en|nl)(?=\/|$)/, "") === ""
+      ? "/"
+      : pathname?.replace(/^\/(en|nl)(?=\/|$)/, "") || "/"
+
+  const isActive = (href: string) => normalizedPath === href
+  const isServicesActive = normalizedPath?.startsWith("/services")
+  const handleLanguageChange = (nextLocale: Locale) => {
+    router.push(switchLocalePath(nextLocale))
+    setIsMenuOpen(false)
+  }
 
   // Debounced resize handler
   const debouncedCheckMobile = useCallback(() => {
@@ -93,14 +138,25 @@ export default function Header() {
     <header className="bg-white sticky top-0 z-[9999] shadow-sm h-[54px] md:h-[72px]">
       <div className="container h-full">
         <div className="relative flex items-center justify-between h-full">
-          {/* Spacer to keep layout stable on desktop */}
-          <div className="hidden md:block w-12" aria-hidden="true"></div>
+          <div className="md:hidden absolute left-4 top-1/2 -translate-y-1/2">
+            <label className="flex items-center text-sm font-medium">
+              <select
+                value={locale}
+                onChange={(event) => handleLanguageChange(event.target.value as Locale)}
+                className="rounded-full border-2 border-black bg-white px-3 py-1 text-sm"
+                aria-label={copy.language}
+              >
+                <option value="en">🇬🇧</option>
+                <option value="nl">🇳🇱</option>
+              </select>
+            </label>
+          </div>
 
           {/* Logo, absolutely centered on mobile */}
           <ScrollTopLink
             href="/"
             className="flex items-center absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0"
-            aria-label="Amplify Home"
+            ariaLabel={copy.homeAria}
           >
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20black%20Amplify-kTsLQ4RAwj0NiiWS8ZonpCci5I9q4c.png"
@@ -118,13 +174,13 @@ export default function Header() {
               href="/"
               className={`font-medium transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
             >
-              Home
+              {copy.home}
             </ScrollTopLink>
             <ScrollTopLink
               href="/about"
               className={`font-medium transition-colors ${isActive("/about") ? "text-pink" : "hover:text-pink"}`}
             >
-              About
+              {copy.about}
             </ScrollTopLink>
             <div
               className="relative"
@@ -139,7 +195,7 @@ export default function Header() {
                 aria-haspopup="true"
                 aria-expanded={isServicesDropdownOpen}
               >
-                Services
+                {copy.services}
                 <span className={`transition-transform duration-200 ${isServicesDropdownOpen ? "rotate-180" : "rotate-0"}`}>
                   ▾
                 </span>
@@ -156,7 +212,13 @@ export default function Header() {
                         }`}
                         onClick={() => setIsServicesDropdownOpen(false)}
                       >
-                        {link.label}
+                        {link.href === "/services/socials"
+                          ? copy.socialMedia
+                          : link.href === "/services/ads"
+                            ? copy.advertising
+                            : link.href === "/services/branding"
+                              ? copy.branding
+                              : copy.website}
                       </ScrollTopLink>
                     ))}
                   </div>
@@ -167,10 +229,21 @@ export default function Header() {
               href="/portfolio"
               className={`font-medium transition-colors ${isActive("/portfolio") ? "text-pink" : "hover:text-pink"}`}
             >
-              Portfolio
+              {copy.portfolio}
             </ScrollTopLink>
+            <label className="flex items-center text-sm font-medium">
+              <select
+                value={locale}
+                onChange={(event) => handleLanguageChange(event.target.value as Locale)}
+                className="rounded-full border-2 border-black bg-white px-3 py-1 text-sm"
+                aria-label={copy.language}
+              >
+                <option value="en">🇬🇧</option>
+                <option value="nl">🇳🇱</option>
+              </select>
+            </label>
             <CustomButton href="/contact" color="orange">
-              Contact Us
+              {copy.contact}
             </CustomButton>
           </nav>
 
@@ -179,7 +252,7 @@ export default function Header() {
             <button
               className="text-black flex items-center justify-center p-2"
               onClick={toggleMenu}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={isMenuOpen ? copy.closeMenu : copy.openMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
             >
@@ -203,14 +276,14 @@ export default function Header() {
               className={`font-medium transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              {copy.home}
             </ScrollTopLink>
             <ScrollTopLink
               href="/about"
               className={`font-medium transition-colors ${isActive("/about") ? "text-pink" : "hover:text-pink"}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              About
+              {copy.about}
             </ScrollTopLink>
             <div className="space-y-2">
               <ScrollTopLink
@@ -218,7 +291,7 @@ export default function Header() {
                 className={`font-medium transition-colors ${isServicesActive ? "text-pink" : "hover:text-pink"}`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Services
+                {copy.services}
               </ScrollTopLink>
               <div className="pl-4 flex flex-col space-y-1 text-sm text-gray-700">
                 {SERVICE_LINKS.map((link) => (
@@ -228,7 +301,13 @@ export default function Header() {
                     className={`transition-colors ${isActive(link.href) ? "text-pink" : "hover:text-pink"}`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {link.label}
+                    {link.href === "/services/socials"
+                      ? copy.socialMedia
+                      : link.href === "/services/ads"
+                        ? copy.advertising
+                        : link.href === "/services/branding"
+                          ? copy.branding
+                          : copy.website}
                   </ScrollTopLink>
                 ))}
               </div>
@@ -238,11 +317,11 @@ export default function Header() {
               className={`font-medium transition-colors ${isActive("/portfolio") ? "text-pink" : "hover:text-pink"}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Portfolio
+              {copy.portfolio}
             </ScrollTopLink>
             <div onClick={() => setIsMenuOpen(false)}>
               <CustomButton href="/contact" color="orange">
-                Contact Us
+                {copy.contact}
               </CustomButton>
             </div>
           </div>

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/i18n"
 
 interface ServiceBannerProps {
   currentService: "website" | "branding" | "socials" | "ads"
@@ -10,10 +11,11 @@ interface ServiceBannerProps {
 
 export default function ServiceBanner({ currentService }: ServiceBannerProps) {
   const pathname = usePathname()
+  const { locale, localizeHref } = useLocale()
 
   const services = [
     {
-      name: "Socials",
+      name: locale === "nl" ? "Socials" : "Socials",
       path: "/services/socials",
       color: "bg-[#f44976]",
       hoverColor: "hover:bg-[#f44976]",
@@ -22,7 +24,7 @@ export default function ServiceBanner({ currentService }: ServiceBannerProps) {
       width: "w-[140px]",
     },
     {
-      name: "Advertising",
+      name: locale === "nl" ? "Advertising" : "Advertising",
       path: "/services/ads",
       color: "bg-yellow",
       hoverColor: "hover:bg-yellow",
@@ -57,7 +59,7 @@ export default function ServiceBanner({ currentService }: ServiceBannerProps) {
           {services.map((service) => (
             <Link
               key={service.path}
-              href={service.path}
+              href={localizeHref(service.path)}
               className={cn(
                 `${service.width} h-[36px] rounded-full font-body text-xs md:text-base transition-all transform hover:scale-105 border-2 whitespace-nowrap flex items-center justify-center`,
                 service.active

@@ -1,11 +1,28 @@
+"use client"
+
 import ContactForm from "@/components/ContactForm"
+import { useLocale } from "@/lib/i18n"
 
 export default function DesktopContactPage() {
+  const { locale } = useLocale()
+  const copy =
+    locale === "nl"
+      ? {
+          heroAlt: "Contact achtergrond",
+          subtext: "We horen graag van je. Vul het formulier hieronder in en we nemen zo snel mogelijk contact met je op.",
+          calendarTitle: "Aura Notion kalender",
+        }
+      : {
+          heroAlt: "Contact Us Background",
+          subtext: "We'd love to hear from you! Fill out the form below and we'll get back to you as soon as possible.",
+          calendarTitle: "Aura Notion Calendar",
+        }
+
   return (
     <div className="min-h-screen flex flex-col bg-black">
       {/* Hero Section - adjusted height to match Portfolio page */}
       <div className="relative hero-background-container">
-        <img src="/images/contact-hero-new.webp" alt="Contact Us Background" className="hero-background-image" />
+        <img src="/images/contact-hero-new.webp" alt={copy.heroAlt} className="hero-background-image" />
       </div>
 
       {/* Contact Form Section with Video Background */}
@@ -25,13 +42,13 @@ export default function DesktopContactPage() {
           <div className="grid gap-6 md:grid-cols-2 items-stretch">
             <ContactForm
               className="h-full max-w-none mx-0"
-              subtext="We'd love to hear from you! Fill out the form below and we'll get back to you as soon as possible."
+              subtext={copy.subtext}
             />
 
             <div className="h-full w-full">
               <iframe
                 src="https://calendar.notion.so/meet/aurareingoud/virtual-coffee"
-                title="Aura Notion Calendar"
+                title={copy.calendarTitle}
                 className="w-full h-full min-h-[32rem] rounded-xl border-2 border-black bg-white/90 backdrop-blur-sm shadow-xl"
                 allowFullScreen
               />

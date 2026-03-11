@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLocale } from "@/lib/i18n"
 
 interface LeaderData {
   name: string
@@ -15,38 +16,67 @@ interface LeaderData {
 }
 
 export default function LeadershipCarousel() {
+  const { locale } = useLocale()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [isSwiping, setIsSwiping] = useState(false)
 
   // Leaders data
-  const leaders: LeaderData[] = [
-    {
-      name: "Aura R",
-      role: "Founder & CEO",
-      imageSrc: "/images/Teampfp_Aura.webp",
-      bgColor: "bg-yellow",
-      description:
-        "With over 5 years of experience in digital marketing, Aura founded Amplify with a vision to help brands find their authentic voice in the digital landscape.",
-    },
-    {
-      name: "Rich P",
-      role: "Creative Director",
-      imageSrc: "/images/Teampfp_rich%20p.webp",
-      bgColor: "bg-pink",
-      description:
-        "Rich brings his extensive background in design and branding to lead our creative team in developing visually stunning and strategically sound brand identities.",
-    },
-    {
-      name: "Ace B",
-      role: "Director of Strategy",
-      imageSrc: "/images/Teampfp_ace%20b.webp",
-      bgColor: "bg-blue",
-      description:
-        "Ace leverages his analytical mindset and marketing expertise to develop data-driven strategies that deliver measurable results for our clients.",
-    },
-  ]
+  const leaders: LeaderData[] =
+    locale === "nl"
+      ? [
+          {
+            name: "Aura R",
+            role: "Oprichter & CEO",
+            imageSrc: "/images/Teampfp_Aura.webp",
+            bgColor: "bg-yellow",
+            description:
+              "Met meer dan 5 jaar ervaring in digitale marketing richtte Aura Amplify op met de visie om merken te helpen hun authentieke stem te vinden in het digitale landschap.",
+          },
+          {
+            name: "Rich P",
+            role: "Creative Director",
+            imageSrc: "/images/Teampfp_rich%20p.webp",
+            bgColor: "bg-pink",
+            description:
+              "Rich gebruikt zijn brede achtergrond in design en branding om ons creatieve team te leiden bij het ontwikkelen van visueel sterke en strategisch onderbouwde merkidentiteiten.",
+          },
+          {
+            name: "Ace B",
+            role: "Director of Strategy",
+            imageSrc: "/images/Teampfp_ace%20b.webp",
+            bgColor: "bg-blue",
+            description:
+              "Ace zet zijn analytische blik en marketingexpertise in om datagedreven strategieen te ontwikkelen die meetbare resultaten opleveren voor onze klanten.",
+          },
+        ]
+      : [
+          {
+            name: "Aura R",
+            role: "Founder & CEO",
+            imageSrc: "/images/Teampfp_Aura.webp",
+            bgColor: "bg-yellow",
+            description:
+              "With over 5 years of experience in digital marketing, Aura founded Amplify with a vision to help brands find their authentic voice in the digital landscape.",
+          },
+          {
+            name: "Rich P",
+            role: "Creative Director",
+            imageSrc: "/images/Teampfp_rich%20p.webp",
+            bgColor: "bg-pink",
+            description:
+              "Rich brings his extensive background in design and branding to lead our creative team in developing visually stunning and strategically sound brand identities.",
+          },
+          {
+            name: "Ace B",
+            role: "Director of Strategy",
+            imageSrc: "/images/Teampfp_ace%20b.webp",
+            bgColor: "bg-blue",
+            description:
+              "Ace leverages his analytical mindset and marketing expertise to develop data-driven strategies that deliver measurable results for our clients.",
+          },
+        ]
 
   // Handle navigation
   const goToNext = () => {

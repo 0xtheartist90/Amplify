@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { useLocale } from "@/lib/i18n"
 import { PageWrapper } from "@/components/page-wrapper"
 import { ScrollAnimation } from "@/components/scroll-animation"
 import VideoCTA from "@/components/video-cta"
@@ -8,129 +11,166 @@ import MobileServicesCarousel from "@/components/mobile-services-carousel"
 import MobileProcessCarousel from "@/components/mobile-process-carousel"
 
 export default function BrandingServicePage() {
+  const { locale } = useLocale()
+  const isNl = locale === "nl"
+
+  const copy = {
+    heroAlt: isNl ? "Branding diensten achtergrond" : "Branding Services Background",
+    iconAlt: isNl ? "Branding icoon" : "Branding Icon",
+    title: "Branding",
+    mobileIntro: isNl
+      ? "Je merk is meer dan alleen een logo, het is de persoonlijkheid van je bedrijf en de emotionele connectie die je creëert met je doelgroep."
+      : "Your brand is more than just a logo-it's the personality of your business and the emotional connection you create with your audience.",
+    desktopIntro1: isNl
+      ? "Je merk is meer dan alleen een logo, het is de persoonlijkheid van je bedrijf en de emotionele connectie die je creëert met je doelgroep. Wij helpen je een onderscheidende merkidentiteit te ontwikkelen die aansluit bij je doelgroep en opvalt in een drukke markt."
+      : "Your brand is more than just a logo-it's the personality of your business and the emotional connection you create with your audience. We help you develop a distinctive brand identity that resonates with your target market and stands out in a crowded marketplace.",
+    desktopIntro2: isNl
+      ? "Onze brandingdiensten helpen je om de stem, visuele identiteit en positionering van je merk zo vorm te geven dat ze herkenning, vertrouwen en loyaliteit opbouwen."
+      : "Our branding services are designed to help you define your brand's voice, visual identity, and positioning in a way that builds recognition, trust, and loyalty.",
+    whyTitle: isNl ? "Waarom branding belangrijk is" : "Why Branding Matters",
+    whyIntro: isNl
+      ? "In de competitieve markt van vandaag is een sterk merk je meest waardevolle bezit. Het helpt je om:"
+      : "In today's competitive marketplace, a strong brand is your most valuable asset. It helps you:",
+    whyBullets: isNl
+      ? ["Je te onderscheiden van concurrenten", "Klantloyaliteit en vertrouwen op te bouwen", "Premium prijzen te kunnen vragen", "Emotionele connecties te creëren"]
+      : ["Stand out from competitors", "Build customer loyalty and trust", "Command premium pricing", "Create emotional connections"],
+    servicesTitle: isNl ? "Onze branding diensten" : "Our Branding Services",
+    processTitle: isNl ? "Ons branding proces" : "Our Branding Process",
+    ctaTitle: isNl ? "Klaar om een krachtig merk te bouwen?" : "Ready to Build a Powerful Brand?",
+    ctaDescription: isNl
+      ? "Laten we bespreken hoe we jouw merk kunnen laten opvallen en verbinden met je doelgroep."
+      : "Let's discuss how we can help your brand stand out and connect with your audience.",
+    ctaPrimary: isNl ? "START NU" : "GET STARTED",
+    ctaSecondary: isNl ? "BEKIJK ONS WERK" : "VIEW OUR WORK",
+  }
+
+  const services = [
+    {
+      title: isNl ? "Merkstrategie" : "Brand Strategy",
+      icon: "strategy",
+      description: isNl
+        ? "We ontwikkelen een complete merkstrategie die het doel, de positionering en persoonlijkheid van je merk vastlegt."
+        : "We develop a comprehensive brand strategy that defines your brand's purpose, positioning, and personality.",
+      desktopDescription: isNl
+        ? "We ontwikkelen een complete merkstrategie die het doel, de positionering en persoonlijkheid van je merk vastlegt. Dit vormt de basis voor al je branding- en marketinginspanningen."
+        : "We develop a comprehensive brand strategy that defines your brand's purpose, positioning, and personality. This serves as the foundation for all your branding and marketing efforts.",
+      features: isNl ? ["Merkpositionering", "Doelgroepanalyse", "Concurrentieanalyse"] : ["Brand positioning", "Target audience analysis", "Competitive analysis"],
+    },
+    {
+      title: isNl ? "Visuele identiteit" : "Visual Identity",
+      icon: "identity",
+      description: isNl
+        ? "We creëren een consistente visuele identiteit die je merk tot leven brengt via logo, kleurenpalet en typografie."
+        : "We create a cohesive visual identity that brings your brand to life through logo design, color palette, and typography.",
+      desktopDescription: isNl
+        ? "We creëren een consistente visuele identiteit die je merk tot leven brengt via logo, kleurenpalet, typografie en andere visuele elementen die je merk direct herkenbaar maken."
+        : "We create a cohesive visual identity that brings your brand to life through logo design, color palette, typography, and other visual elements that make your brand instantly recognizable.",
+      features: isNl ? ["Logo design", "Ontwikkeling kleurenpalet", "Selectie typografie"] : ["Logo design", "Color palette development", "Typography selection"],
+    },
+    {
+      title: isNl ? "Employer branding" : "Employer Branding",
+      icon: "employer",
+      description: isNl
+        ? "We positioneren jouw bedrijf als de plek waar toptalent wil werken met een sterk werkgeversverhaal."
+        : "We position your company as the place top talent wants to work through a compelling employer narrative.",
+      desktopDescription: isNl
+        ? "We formuleren jouw employer value proposition en recruitment messaging zodat kandidaten direct begrijpen waarom ze voor jouw team moeten kiezen."
+        : "We craft your employer value proposition and recruitment messaging so candidates instantly understand why they should join your team.",
+      features: isNl ? ["Employee value proposition", "Cultuur- & carrièremessaging", "Talent storytelling campagnes"] : ["Employee value proposition", "Culture & career messaging", "Talent storytelling campaigns"],
+    },
+  ]
+
+  const processSteps = [
+    {
+      number: 1,
+      title: isNl ? "Discovery" : "Discovery",
+      description: isNl
+        ? "We starten met het begrijpen van je bedrijf, doelen, doelgroep en concurrenten om een strategische basis voor je merk te ontwikkelen."
+        : "We start by understanding your business, goals, target audience, and competitors to develop a strategic foundation for your brand.",
+    },
+    {
+      number: 2,
+      title: isNl ? "Strategie" : "Strategy",
+      description: isNl
+        ? "We ontwikkelen een merkstrategie die de positionering, persoonlijkheid en kernboodschappen van je merk vastlegt."
+        : "We develop a brand strategy that defines your brand's positioning, personality, and key messages.",
+    },
+    {
+      number: 3,
+      title: isNl ? "Creatie" : "Creation",
+      description: isNl
+        ? "Ons creatieve team brengt je merk tot leven met visuele identiteit, messaging en andere merkelementen."
+        : "Our creative team brings your brand to life through visual identity, messaging, and other brand elements.",
+    },
+    {
+      number: 4,
+      title: isNl ? "Implementatie" : "Implementation",
+      description: isNl
+        ? "We helpen je merk door te vertalen naar alle contactpunten en leveren richtlijnen voor consistente toepassing."
+        : "We help you implement your brand across all touchpoints and provide guidelines for consistent application.",
+    },
+  ]
+
   return (
     <PageWrapper>
       <div className="flex flex-col">
-        {/* Hero Section with Background Image */}
         <section className="relative">
           <div className="hero-background-container">
-            <img
-              src="/images/ServicesBranding-HERO.webp"
-              alt="Branding Services Background"
-              className="hero-background-image"
-            />
+            <img src="/images/ServicesBranding-HERO.webp" alt={copy.heroAlt} className="hero-background-image" />
           </div>
         </section>
 
-        {/* Service Banner */}
         <ServiceBanner currentService="branding" />
 
-        {/* Service Details - Mobile First Layout */}
         <section className="py-16 bg-white">
           <div className="container">
-            {/* Mobile Layout */}
             <div className="md:hidden">
               <ScrollAnimation variant="fadeInUp">
                 <div className="text-center mb-8">
                   <div className="flex items-center justify-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-blue rounded-full shadow-lg">
-                      <Image
-                        src="/images/branding.webp"
-                        alt="Branding Icon"
-                        width={50}
-                        height={50}
-                        className="icon-pulse"
-                        style={{ margin: "0 auto" }}
-                      />
+                      <Image src="/images/branding.webp" alt={copy.iconAlt} width={50} height={50} className="icon-pulse" style={{ margin: "0 auto" }} />
                     </div>
-                    <h2 className="text-3xl font-ultra">Branding</h2>
+                    <h2 className="text-3xl font-ultra">{copy.title}</h2>
                   </div>
-                  <p className="mb-6">
-                    Your brand is more than just a logo—it's the personality of your business and the emotional
-                    connection you create with your audience.
-                  </p>
+                  <p className="mb-6">{copy.mobileIntro}</p>
                 </div>
               </ScrollAnimation>
 
               <ScrollAnimation variant="fadeInUp" delay={0.2}>
                 <div className="bg-blue rounded-[32px] p-6 text-white mb-8">
-                  <h3 className="text-xl font-ultra mb-4 text-center">Why Branding Matters</h3>
-                  <p className="mb-4 text-sm">
-                    In today's competitive marketplace, a strong brand is your most valuable asset. It helps you:
-                  </p>
+                  <h3 className="text-xl font-ultra mb-4 text-center">{copy.whyTitle}</h3>
+                  <p className="mb-4 text-sm">{copy.whyIntro}</p>
                   <ul className="mb-4 space-y-2 text-sm">
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Stand out from competitors</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Build customer loyalty and trust</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Command premium pricing</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Create emotional connections</span>
-                    </li>
+                    {copy.whyBullets.map((item) => (
+                      <li key={item} className="flex items-start"><span className="font-bold mr-2">•</span><span>{item}</span></li>
+                    ))}
                   </ul>
                 </div>
               </ScrollAnimation>
             </div>
 
-            {/* Desktop Layout */}
             <div className="hidden md:grid md:grid-cols-2 gap-12 items-center">
               <ScrollAnimation variant="fadeInRight">
                 <div>
                   <div className="flex items-center mb-6">
                     <div className="w-20 h-20 flex items-center justify-center mr-4 bg-blue rounded-full shadow-lg">
-                      <Image
-                        src="/images/branding.webp"
-                        alt="Branding Icon"
-                        width={50}
-                        height={50}
-                        className="icon-pulse"
-                        style={{ margin: "0 auto" }}
-                      />
+                      <Image src="/images/branding.webp" alt={copy.iconAlt} width={50} height={50} className="icon-pulse" style={{ margin: "0 auto" }} />
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-ultra">Branding</h2>
+                    <h2 className="text-3xl md:text-5xl font-ultra">{copy.title}</h2>
                   </div>
-                  <p className="mb-6">
-                    Your brand is more than just a logo—it's the personality of your business and the emotional
-                    connection you create with your audience. We help you develop a distinctive brand identity that
-                    resonates with your target market and stands out in a crowded marketplace.
-                  </p>
-                  <p className="mb-6">
-                    Our branding services are designed to help you define your brand's voice, visual identity, and
-                    positioning in a way that builds recognition, trust, and loyalty.
-                  </p>
+                  <p className="mb-6">{copy.desktopIntro1}</p>
+                  <p className="mb-6">{copy.desktopIntro2}</p>
                 </div>
               </ScrollAnimation>
               <ScrollAnimation variant="fadeInLeft">
                 <div className="bg-blue rounded-[32px] p-8">
-                  <h3 className="text-2xl font-ultra mb-4">Why Branding Matters</h3>
-                  <p className="mb-4">
-                    In today's competitive marketplace, a strong brand is your most valuable asset. It helps you:
-                  </p>
+                  <h3 className="text-2xl font-ultra mb-4">{copy.whyTitle}</h3>
+                  <p className="mb-4">{copy.whyIntro}</p>
                   <ul className="mb-6 space-y-2">
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Stand out from competitors</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Build customer loyalty and trust</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Command premium pricing</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Create emotional connections</span>
-                    </li>
+                    {copy.whyBullets.map((item) => (
+                      <li key={item} className="flex items-start"><span className="font-bold mr-2">•</span><span>{item}</span></li>
+                    ))}
                   </ul>
                 </div>
               </ScrollAnimation>
@@ -138,249 +178,69 @@ export default function BrandingServicePage() {
           </div>
         </section>
 
-        {/* Services List */}
         <section className="py-16" style={{ backgroundColor: "#7DD3F7" }}>
           <div className="container">
             <ScrollAnimation variant="fadeInUp">
-              <h2 className="text-3xl md:text-4xl font-ultra mb-8 text-center text-white">Our Branding Services</h2>
+              <h2 className="text-3xl md:text-4xl font-ultra mb-8 text-center text-white">{copy.servicesTitle}</h2>
             </ScrollAnimation>
 
-            {/* Mobile Services Carousel */}
             <div className="md:hidden">
-              <MobileServicesCarousel
-                services={[
-                  {
-                    title: "Brand Strategy",
-                    icon: "strategy",
-                    iconBg: "bg-blue",
-                    description:
-                      "We develop a comprehensive brand strategy that defines your brand's purpose, positioning, and personality.",
-                    features: ["Brand positioning", "Target audience analysis", "Competitive analysis"],
-                  },
-                  {
-                    title: "Visual Identity",
-                    icon: "identity",
-                    iconBg: "bg-blue",
-                    description:
-                      "We create a cohesive visual identity that brings your brand to life through logo design, color palette, and typography.",
-                    features: ["Logo design", "Color palette development", "Typography selection"],
-                  },
-                  {
-                    title: "Employer Branding",
-                    icon: "employer",
-                    iconBg: "bg-blue",
-                    description:
-                      "We position your company as the place top talent wants to work through a compelling employer narrative.",
-                    features: ["Employee value proposition", "Career site messaging", "Talent storytelling"],
-                  },
-                ]}
-              />
+              <MobileServicesCarousel services={services.map((service) => ({ title: service.title, icon: service.icon, iconBg: "bg-blue", description: service.description, features: service.features }))} />
             </div>
 
-            {/* Desktop Services Grid */}
             <div className="hidden md:grid md:grid-cols-3 gap-8">
-              {/* Service 1 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.1}>
-                <div className="bg-white rounded-[32px] p-6 shadow-lg border-2 border-black h-full">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 flex items-center justify-center mr-3 bg-blue rounded-full flex-shrink-0">
-                      <ServiceIcon name="strategy" size={30} color="#fff" />
+              {services.map((service, index) => (
+                <ScrollAnimation key={service.title} variant="fadeInUp" delay={0.1 * (index + 1)}>
+                  <div className="bg-white rounded-[32px] p-6 shadow-lg border-2 border-black h-full">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 flex items-center justify-center mr-3 bg-blue rounded-full flex-shrink-0">
+                        <ServiceIcon name={service.icon} size={30} color="#fff" />
+                      </div>
+                      <h3 className="text-xl font-ultra">{service.title}</h3>
                     </div>
-                    <h3 className="text-xl font-ultra">Brand Strategy</h3>
+                    <p className="text-sm mb-4">{service.desktopDescription}</p>
+                    <ul className="text-sm space-y-2">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex items-start"><span className="font-bold mr-2">•</span><span>{feature}</span></li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-sm mb-4">
-                    We develop a comprehensive brand strategy that defines your brand's purpose, positioning, and
-                    personality. This serves as the foundation for all your branding and marketing efforts.
-                  </p>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Brand positioning</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Target audience analysis</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Competitive analysis</span>
-                    </li>
-                  </ul>
-                </div>
-              </ScrollAnimation>
-
-              {/* Service 2 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.2}>
-                <div className="bg-white rounded-[32px] p-6 shadow-lg border-2 border-black h-full">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 flex items-center justify-center mr-3 bg-blue rounded-full flex-shrink-0">
-                      <ServiceIcon name="identity" size={30} color="#fff" />
-                    </div>
-                    <h3 className="text-xl font-ultra">Visual Identity</h3>
-                  </div>
-                  <p className="text-sm mb-4">
-                    We create a cohesive visual identity that brings your brand to life through logo design, color
-                    palette, typography, and other visual elements that make your brand instantly recognizable.
-                  </p>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Logo design</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Color palette development</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Typography selection</span>
-                    </li>
-                  </ul>
-                </div>
-              </ScrollAnimation>
-
-              {/* Service 3 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.3}>
-                <div className="bg-white rounded-[32px] p-6 shadow-lg border-2 border-black h-full">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 flex items-center justify-center mr-3 bg-blue rounded-full flex-shrink-0">
-                      <ServiceIcon name="employer" size={30} color="#fff" />
-                    </div>
-                    <h3 className="text-xl font-ultra">Employer Branding</h3>
-                  </div>
-                  <p className="text-sm mb-4">
-                    We craft your employer value proposition and recruitment messaging so candidates instantly understand why they should join your team.
-                  </p>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Employee value proposition</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Culture & career messaging</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-2">•</span>
-                      <span>Talent storytelling campaigns</span>
-                    </li>
-                  </ul>
-                </div>
-              </ScrollAnimation>
+                </ScrollAnimation>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Process Section */}
         <section className="py-16">
           <div className="container">
             <ScrollAnimation variant="fadeInUp">
-              <h2 className="text-3xl md:text-4xl font-ultra mb-8 text-center">Our Branding Process</h2>
+              <h2 className="text-3xl md:text-4xl font-ultra mb-8 text-center">{copy.processTitle}</h2>
             </ScrollAnimation>
 
-            {/* Mobile Process Carousel */}
             <div className="md:hidden">
-              <MobileProcessCarousel
-                steps={[
-                  {
-                    number: 1,
-                    title: "Discovery",
-                    description:
-                      "We start by understanding your business, goals, target audience, and competitors to develop a strategic foundation for your brand.",
-                    bgColor: "bg-blue",
-                  },
-                  {
-                    number: 2,
-                    title: "Strategy",
-                    description:
-                      "We develop a brand strategy that defines your brand's positioning, personality, and key messages.",
-                    bgColor: "bg-blue",
-                  },
-                  {
-                    number: 3,
-                    title: "Creation",
-                    description:
-                      "Our creative team brings your brand to life through visual identity, messaging, and other brand elements.",
-                    bgColor: "bg-blue",
-                  },
-                  {
-                    number: 4,
-                    title: "Implementation",
-                    description:
-                      "We help you implement your brand across all touchpoints and provide guidelines for consistent application.",
-                    bgColor: "bg-blue",
-                  },
-                ]}
-              />
+              <MobileProcessCarousel steps={processSteps.map((step) => ({ ...step, bgColor: "bg-blue" }))} />
             </div>
 
-            {/* Desktop Process Grid */}
             <div className="hidden md:grid md:grid-cols-4 gap-6">
-              {/* Step 1 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.1}>
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
-                    1
+              {processSteps.map((step, index) => (
+                <ScrollAnimation key={step.number} variant="fadeInUp" delay={0.1 * (index + 1)}>
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">{step.number}</div>
+                    <h3 className="text-xl font-ultra mb-2">{step.title}</h3>
+                    <p className="text-sm">{step.description}</p>
                   </div>
-                  <h3 className="text-xl font-ultra mb-2">Discovery</h3>
-                  <p className="text-sm">
-                    We start by understanding your business, goals, target audience, and competitors to develop a
-                    strategic foundation for your brand.
-                  </p>
-                </div>
-              </ScrollAnimation>
-
-              {/* Step 2 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.2}>
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
-                    2
-                  </div>
-                  <h3 className="text-xl font-ultra mb-2">Strategy</h3>
-                  <p className="text-sm">
-                    We develop a brand strategy that defines your brand's positioning, personality, and key messages.
-                  </p>
-                </div>
-              </ScrollAnimation>
-
-              {/* Step 3 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.3}>
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
-                    3
-                  </div>
-                  <h3 className="text-xl font-ultra mb-2">Creation</h3>
-                  <p className="text-sm">
-                    Our creative team brings your brand to life through visual identity, messaging, and other brand
-                    elements.
-                  </p>
-                </div>
-              </ScrollAnimation>
-
-              {/* Step 4 */}
-              <ScrollAnimation variant="fadeInUp" delay={0.4}>
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl font-ultra">
-                    4
-                  </div>
-                  <h3 className="text-xl font-ultra mb-2">Implementation</h3>
-                  <p className="text-sm">
-                    We help you implement your brand across all touchpoints and provide guidelines for consistent
-                    application.
-                  </p>
-                </div>
-              </ScrollAnimation>
+                </ScrollAnimation>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
         <VideoCTA
-          title="Ready to Build a Powerful Brand?"
-          description="Let's discuss how we can help your brand stand out and connect with your audience."
-          primaryButtonText="GET STARTED"
+          title={copy.ctaTitle}
+          description={copy.ctaDescription}
+          primaryButtonText={copy.ctaPrimary}
           primaryButtonLink="/contact"
-          secondaryButtonText="VIEW OUR WORK"
+          secondaryButtonText={copy.ctaSecondary}
           secondaryButtonLink="/portfolio"
           videoSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5084245-uhd_3840_2160_30fps-8s7yFArT5t48cFKRZIG3dvktVjc4Vd.mp4"
         />

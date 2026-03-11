@@ -7,7 +7,8 @@ import { PageWrapper } from "@/components/page-wrapper"
 import { ScrollAnimation } from "@/components/scroll-animation"
 import { FloatingAnimation } from "@/components/floating-animation"
 import MobileValuesCarousel from "@/components/mobile-values-carousel"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLocale } from "@/lib/i18n"
 
 type ServiceCard = {
   id: string
@@ -17,39 +18,131 @@ type ServiceCard = {
   link: string
 }
 
-const SERVICE_CARDS: ServiceCard[] = [
-  {
-    id: "socials",
-    title: "Socials",
-    description: "Strategic management of your social media presence to build engagement and drive conversions.",
-    icon: "/images/socials.webp",
-    link: "/services/socials",
-  },
-  {
-    id: "ads",
-    title: "Ads",
-    description: "Targeted campaigns that maximize ROI and put your brand in front of the right audience.",
-    icon: "/images/ads.webp",
-    link: "/services/ads",
-  },
-  {
-    id: "branding",
-    title: "Branding",
-    description: "Distinctive brand identity systems that resonate across every touchpoint.",
-    icon: "/images/branding.webp",
-    link: "/services/branding",
-  },
-  {
-    id: "website",
-    title: "Website",
-    description: "Custom web experiences built to convert visitors into loyal customers.",
-    icon: "/images/website.webp",
-    link: "/services/website",
-  },
-]
-
 export default function DesktopHome() {
-  const [activeService, setActiveService] = useState<ServiceCard>(SERVICE_CARDS[0])
+  const { locale } = useLocale()
+  const serviceCards: ServiceCard[] =
+    locale === "nl"
+      ? [
+          {
+            id: "socials",
+            title: "Socials",
+            description: "Strategisch beheer van je socialmediapresentie om betrokkenheid en conversies te vergroten.",
+            icon: "/images/socials.webp",
+            link: "/services/socials",
+          },
+          {
+            id: "ads",
+            title: "Ads",
+            description: "Gerichte campagnes die je ROI maximaliseren en je merk bij de juiste doelgroep brengen.",
+            icon: "/images/ads.webp",
+            link: "/services/ads",
+          },
+          {
+            id: "branding",
+            title: "Branding",
+            description: "Onderscheidende merkidentiteiten die op elk contactmoment herkenbaar blijven.",
+            icon: "/images/branding.webp",
+            link: "/services/branding",
+          },
+          {
+            id: "website",
+            title: "Website",
+            description: "Maatwerk webervaringen die bezoekers omzetten in loyale klanten.",
+            icon: "/images/website.webp",
+            link: "/services/website",
+          },
+        ]
+      : [
+          {
+            id: "socials",
+            title: "Socials",
+            description: "Strategic management of your social media presence to build engagement and drive conversions.",
+            icon: "/images/socials.webp",
+            link: "/services/socials",
+          },
+          {
+            id: "ads",
+            title: "Ads",
+            description: "Targeted campaigns that maximize ROI and put your brand in front of the right audience.",
+            icon: "/images/ads.webp",
+            link: "/services/ads",
+          },
+          {
+            id: "branding",
+            title: "Branding",
+            description: "Distinctive brand identity systems that resonate across every touchpoint.",
+            icon: "/images/branding.webp",
+            link: "/services/branding",
+          },
+          {
+            id: "website",
+            title: "Website",
+            description: "Custom web experiences built to convert visitors into loyal customers.",
+            icon: "/images/website.webp",
+            link: "/services/website",
+          },
+        ]
+  const [activeService, setActiveService] = useState<ServiceCard>(serviceCards[0])
+
+  const copy =
+    locale === "nl"
+      ? {
+          heroTitle: "Vergroot je bereik",
+          heroDescription:
+            "Wij helpen bedrijven opvallen in het digitale landschap met strategische marketingoplossingen die resultaat opleveren.",
+          explore: "ONTDEK",
+          schedule: "PLAN IN",
+          what: "WAT?",
+          why: "WAAROM?",
+          service: "Dienst",
+          tapDetails: "Tik voor details",
+          clickDetails: "Klik voor details",
+          innovation: "Innovatie",
+          innovationDescription:
+            "Wij lopen voorop in trends en technologie om vernieuwende oplossingen voor onze klanten te leveren.",
+          authenticity: "Authenticiteit",
+          authenticityDescription:
+            "Wij geloven in het opbouwen van echte connecties tussen merken en hun doelgroep.",
+          results: "Resultaat",
+          resultsDescription: "Wij leveren meetbare resultaten die je bedrijf laten groeien.",
+          ctaTitle: "Klaar om je merk te versterken?",
+          ctaDescription:
+            "Laten we samen een marketingstrategie ontwikkelen die jouw bedrijf laat groeien in het competitieve landschap van vandaag.",
+          getStarted: "START NU",
+          viewWork: "BEKIJK WERK",
+        }
+      : {
+          heroTitle: "Your Reach",
+          heroDescription:
+            "We help businesses stand out in the digital landscape with strategic marketing solutions that drive results.",
+          explore: "EXPLORE",
+          schedule: "SCHEDULE",
+          what: "WHAT?",
+          why: "WHY?",
+          service: "Service",
+          tapDetails: "Tap to view details",
+          clickDetails: "Click to view details",
+          innovation: "Innovation",
+          innovationDescription:
+            "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients.",
+          authenticity: "Authenticity",
+          authenticityDescription: "We believe in creating genuine connections between brands and their audiences.",
+          results: "Results",
+          resultsDescription: "We're committed to delivering measurable outcomes that grow your business.",
+          ctaTitle: "Ready to Amplify Your Brand?",
+          ctaDescription:
+            "Let's work together to create a marketing strategy that helps your business thrive in today's competitive landscape.",
+          getStarted: "GET STARTED",
+          viewWork: "VIEW WORK",
+        }
+
+  const activeServiceCard = serviceCards.find((service) => service.id === activeService.id) || serviceCards[0]
+
+  useEffect(() => {
+    if (activeService.id !== activeServiceCard.id) {
+      setActiveService(activeServiceCard)
+    }
+  }, [activeService.id, activeServiceCard])
 
   return (
     <PageWrapper>
@@ -87,23 +180,22 @@ export default function DesktopHome() {
                         className="text-3xl md:text-4xl lg:text-5xl font-ultra block -mt-2 md:mt-0"
                         style={{ color: "#F44976" }}
                       >
-                        Your Reach
+                        {copy.heroTitle}
                       </span>
                     </h1>
                   </ScrollAnimation>
                   <ScrollAnimation variant="fadeInUp" delay={0.4}>
                     <p className="text-lg md:text-xl mb-8 max-w-lg text-white mx-auto md:mx-0 text-center md:text-left">
-                      We help businesses stand out in the digital landscape with strategic marketing solutions that
-                      drive results.
+                      {copy.heroDescription}
                     </p>
                   </ScrollAnimation>
                   <ScrollAnimation variant="fadeInUp" delay={0.6}>
                     <div className="flex justify-center md:justify-start flex-wrap gap-4">
                       <CustomButton href="/services" color="pink" className="min-w-[150px]">
-                        EXPLORE
+                        {copy.explore}
                       </CustomButton>
                       <CustomButton href="/contact" color="black" className="min-w-[150px]">
-                        SCHEDULE
+                        {copy.schedule}
                       </CustomButton>
                     </div>
                   </ScrollAnimation>
@@ -153,7 +245,7 @@ export default function DesktopHome() {
                 {/* Title for mobile */}
                 <ScrollAnimation variant="fadeInUp">
                   <div className="text-center -mt-8 mb-0">
-                    <h2 className="what-title font-ultra text-white md:text-[8rem] text-[4rem] leading-[0.9]">WHAT?</h2>
+                    <h2 className="what-title font-ultra text-white md:text-[8rem] text-[4rem] leading-[0.9]">{copy.what}</h2>
                   </div>
                 </ScrollAnimation>
 
@@ -163,8 +255,8 @@ export default function DesktopHome() {
                       <div className="flex flex-col items-center gap-3 mb-4 text-center">
                         <div className="w-[100px] h-[100px] flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black">
                           <Image
-                            src={activeService.icon}
-                            alt={`${activeService.title} icon`}
+                            src={activeServiceCard.icon}
+                            alt={`${activeServiceCard.title} icon`}
                             width={36}
                             height={36}
                             className="w-full h-full object-contain block icon-pulse"
@@ -172,22 +264,22 @@ export default function DesktopHome() {
                           />
                         </div>
                         <div>
-                          <p className="text-sm uppercase tracking-widest text-center">Service</p>
+                          <p className="text-sm uppercase tracking-widest text-center">{copy.service}</p>
                           <h3 className="text-3xl font-ultra text-center" style={{ color: "var(--yellow)" }}>
-                            {activeService.title}
+                            {activeServiceCard.title}
                           </h3>
                         </div>
                       </div>
-                      <p className="what-card-description mb-6 text-base flex-1 text-center">{activeService.description}</p>
-                      <CustomButton href={activeService.link} color="black" className="min-w-[150px] mt-auto">
-                        EXPLORE
+                      <p className="what-card-description mb-6 text-base flex-1 text-center">{activeServiceCard.description}</p>
+                      <CustomButton href={activeServiceCard.link} color="black" className="min-w-[150px] mt-auto">
+                        {copy.explore}
                       </CustomButton>
                     </div>
                   </ScrollAnimation>
 
                   <ScrollAnimation variant="fadeInUp" delay={0.2}>
                     <div className="grid grid-cols-3 gap-3">
-                      {SERVICE_CARDS.filter((service) => service.id !== activeService.id).map((service) => (
+                      {serviceCards.filter((service) => service.id !== activeServiceCard.id).map((service) => (
                         <button
                           key={service.id}
                           type="button"
@@ -215,7 +307,7 @@ export default function DesktopHome() {
                             </div>
                             <h4 className="text-sm font-ultra leading-tight w-full mt-2">{service.title}</h4>
                           </div>
-                          <p className="text-xs opacity-80 tracking-wide mt-1">Tap to view details</p>
+                          <p className="text-xs opacity-80 tracking-wide mt-1">{copy.tapDetails}</p>
                         </button>
                       ))}
                     </div>
@@ -246,7 +338,7 @@ export default function DesktopHome() {
                   <ScrollAnimation variant="fadeInRight">
                     <div className="text-center md:text-left mt-6" style={{ marginBottom: "-20px" }}>
                       <h2 className="what-title font-ultra text-white">
-                        WHAT?
+                        {copy.what}
                       </h2>
                     </div>
                   </ScrollAnimation>
@@ -257,8 +349,8 @@ export default function DesktopHome() {
                         <div className="flex flex-col items-center gap-4 mb-6 text-center">
                           <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-white/20 border-2 border-black md:w-20 md:h-20">
                             <Image
-                              src={activeService.icon}
-                              alt={`${activeService.title} icon`}
+                              src={activeServiceCard.icon}
+                              alt={`${activeServiceCard.title} icon`}
                               width={48}
                               height={48}
                               className="w-full h-full object-contain block icon-pulse"
@@ -266,22 +358,22 @@ export default function DesktopHome() {
                             />
                           </div>
                           <div>
-                            <p className="text-sm uppercase tracking-[0.35em] text-center">Service</p>
+                            <p className="text-sm uppercase tracking-[0.35em] text-center">{copy.service}</p>
                             <h3 className="text-4xl font-ultra text-center" style={{ color: "var(--yellow)" }}>
-                              {activeService.title}
+                              {activeServiceCard.title}
                             </h3>
                           </div>
                         </div>
-                        <p className="what-card-description text-lg mb-8 flex-1 text-center">{activeService.description}</p>
-                        <CustomButton href={activeService.link} color="black" className="min-w-[150px]">
-                          EXPLORE
+                        <p className="what-card-description text-lg mb-8 flex-1 text-center">{activeServiceCard.description}</p>
+                        <CustomButton href={activeServiceCard.link} color="black" className="min-w-[150px]">
+                          {copy.explore}
                         </CustomButton>
                       </div>
                     </ScrollAnimation>
 
                     <ScrollAnimation variant="fadeInUp" delay={0.2} className="w-full lg:max-w-xs">
                       <div className="flex flex-row lg:flex-col gap-4 h-full">
-                        {SERVICE_CARDS.filter((service) => service.id !== activeService.id).map((service) => (
+                        {serviceCards.filter((service) => service.id !== activeServiceCard.id).map((service) => (
                           <button
                             key={service.id}
                             type="button"
@@ -309,7 +401,7 @@ export default function DesktopHome() {
                               </div>
                               <h4 className="text-2xl font-ultra leading-tight w-full mt-3">{service.title}</h4>
                             </div>
-                            <p className="text-sm opacity-80 tracking-wide mt-1">Click to view details</p>
+                            <p className="text-sm opacity-80 tracking-wide mt-1">{copy.clickDetails}</p>
                           </button>
                         ))}
                       </div>
@@ -350,7 +442,7 @@ export default function DesktopHome() {
                 {/* Title for mobile */}
                 <ScrollAnimation variant="fadeInUp">
                   <div className="text-center -mt-7 mb-0">
-                    <h2 className="what-title font-ultra text-white text-5xl md:text-4xl">WHY?</h2>
+                    <h2 className="what-title font-ultra text-white text-5xl md:text-4xl">{copy.why}</h2>
                   </div>
                 </ScrollAnimation>
 
@@ -367,7 +459,7 @@ export default function DesktopHome() {
                       className="text-center md:text-left"
                       style={{ marginBottom: "-20px", transform: "translateY(-10px)" }}
                     >
-                      <h2 className="what-title font-ultra text-white">WHY?</h2>
+                      <h2 className="what-title font-ultra text-white">{copy.why}</h2>
                     </div>
                   </ScrollAnimation>
 
@@ -389,12 +481,9 @@ export default function DesktopHome() {
                           />
                           <div>
                             <h3 className="text-2xl font-ultra mb-2" style={{ color: "#000" }}>
-                              Innovation
+                              {copy.innovation}
                             </h3>
-                            <p>
-                              We stay ahead of trends and technologies to deliver cutting-edge solutions for our
-                              clients.
-                            </p>
+                            <p>{copy.innovationDescription}</p>
                           </div>
                         </div>
                       </div>
@@ -417,9 +506,9 @@ export default function DesktopHome() {
                           />
                           <div>
                             <h3 className="text-2xl font-ultra mb-2" style={{ color: "#000" }}>
-                              Authenticity
+                              {copy.authenticity}
                             </h3>
-                            <p>We believe in creating genuine connections between brands and their audiences.</p>
+                            <p>{copy.authenticityDescription}</p>
                           </div>
                         </div>
                       </div>
@@ -442,9 +531,9 @@ export default function DesktopHome() {
                           />
                           <div>
                             <h3 className="text-2xl font-ultra mb-2" style={{ color: "#000" }}>
-                              Results
+                              {copy.results}
                             </h3>
-                            <p>We're committed to delivering measurable outcomes that grow your business.</p>
+                            <p>{copy.resultsDescription}</p>
                           </div>
                         </div>
                       </div>
@@ -495,11 +584,11 @@ export default function DesktopHome() {
                 <div className="w-full -mt-6 md:mt-0">
                   <ScrollAnimation variant="fadeInLeft">
                     <VideoCTA
-                      title="Ready to Amplify Your Brand?"
-                      description="Let's work together to create a marketing strategy that helps your business thrive in today's competitive landscape."
-                      primaryButtonText="GET STARTED"
+                      title={copy.ctaTitle}
+                      description={copy.ctaDescription}
+                      primaryButtonText={copy.getStarted}
                       primaryButtonLink="/contact"
-                      secondaryButtonText="VIEW WORK"
+                      secondaryButtonText={copy.viewWork}
                       secondaryButtonLink="/portfolio"
                       videoSrc="/videos/amplify-background.mp4"
                       showOverlay={false}

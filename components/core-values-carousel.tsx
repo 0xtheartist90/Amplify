@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLocale } from "@/lib/i18n"
 
 interface ValueData {
   title: string
@@ -13,32 +14,55 @@ interface ValueData {
 }
 
 export default function CoreValuesCarousel() {
+  const { locale } = useLocale()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [isSwiping, setIsSwiping] = useState(false)
 
   // Values data
-  const values: ValueData[] = [
-    {
-      title: "Innovation",
-      description:
-        "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients. In the fast-paced world of digital marketing, standing still means falling behind.",
-      icon: "/images/custom-solution.webp",
-    },
-    {
-      title: "Authenticity",
-      description:
-        "We believe in creating genuine connections between brands and their audiences. In a world of increasing skepticism, authenticity is the foundation of trust and loyalty.",
-      icon: "/images/onboarding.webp",
-    },
-    {
-      title: "Results",
-      description:
-        "We're committed to delivering measurable outcomes that grow your business. Beautiful creative work is important, but we never lose sight of the bottom line: driving real business results.",
-      icon: "/images/retention.webp",
-    },
-  ]
+  const values: ValueData[] =
+    locale === "nl"
+      ? [
+          {
+            title: "Innovatie",
+            description:
+              "Wij lopen voorop in trends en technologie om vernieuwende oplossingen voor onze klanten te leveren. In de snelle wereld van digitale marketing betekent stilstand achteruitgang.",
+            icon: "/images/custom-solution.webp",
+          },
+          {
+            title: "Authenticiteit",
+            description:
+              "Wij geloven in het opbouwen van echte connecties tussen merken en hun doelgroep. In een wereld vol scepsis is authenticiteit de basis van vertrouwen en loyaliteit.",
+            icon: "/images/onboarding.webp",
+          },
+          {
+            title: "Resultaat",
+            description:
+              "Wij leveren meetbare resultaten die je bedrijf laten groeien. Mooi creatief werk is belangrijk, maar we verliezen het einddoel nooit uit het oog: echte bedrijfsresultaten.",
+            icon: "/images/retention.webp",
+          },
+        ]
+      : [
+          {
+            title: "Innovation",
+            description:
+              "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients. In the fast-paced world of digital marketing, standing still means falling behind.",
+            icon: "/images/custom-solution.webp",
+          },
+          {
+            title: "Authenticity",
+            description:
+              "We believe in creating genuine connections between brands and their audiences. In a world of increasing skepticism, authenticity is the foundation of trust and loyalty.",
+            icon: "/images/onboarding.webp",
+          },
+          {
+            title: "Results",
+            description:
+              "We're committed to delivering measurable outcomes that grow your business. Beautiful creative work is important, but we never lose sight of the bottom line: driving real business results.",
+            icon: "/images/retention.webp",
+          },
+        ]
 
   // Handle navigation
   const goToNext = () => {

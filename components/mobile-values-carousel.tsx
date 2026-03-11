@@ -5,31 +5,52 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLocale } from "@/lib/i18n"
 
 export default function MobileValuesCarousel() {
+  const { locale } = useLocale()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [isSwiping, setIsSwiping] = useState(false)
 
   // Values data
-  const values = [
-    {
-      title: "Innovation",
-      description: "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients.",
-      icon: "/images/custom-solution.webp",
-    },
-    {
-      title: "Authenticity",
-      description: "We believe in creating genuine connections between brands and their audiences.",
-      icon: "/images/onboarding.webp",
-    },
-    {
-      title: "Results",
-      description: "We're committed to delivering measurable outcomes that grow your business.",
-      icon: "/images/retention.webp",
-    },
-  ]
+  const values =
+    locale === "nl"
+      ? [
+          {
+            title: "Innovatie",
+            description: "Wij lopen voorop in trends en technologie om vernieuwende oplossingen voor onze klanten te leveren.",
+            icon: "/images/custom-solution.webp",
+          },
+          {
+            title: "Authenticiteit",
+            description: "Wij geloven in het opbouwen van echte connecties tussen merken en hun doelgroep.",
+            icon: "/images/onboarding.webp",
+          },
+          {
+            title: "Resultaat",
+            description: "Wij leveren meetbare resultaten die je bedrijf laten groeien.",
+            icon: "/images/retention.webp",
+          },
+        ]
+      : [
+          {
+            title: "Innovation",
+            description: "We stay ahead of trends and technologies to deliver cutting-edge solutions for our clients.",
+            icon: "/images/custom-solution.webp",
+          },
+          {
+            title: "Authenticity",
+            description: "We believe in creating genuine connections between brands and their audiences.",
+            icon: "/images/onboarding.webp",
+          },
+          {
+            title: "Results",
+            description: "We're committed to delivering measurable outcomes that grow your business.",
+            icon: "/images/retention.webp",
+          },
+        ]
 
   // Handle navigation
   const goToNext = () => {

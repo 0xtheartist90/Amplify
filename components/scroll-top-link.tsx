@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import type { ReactNode } from "react"
 import { memo, useCallback } from "react"
+import { useLocale } from "@/lib/i18n"
 
 interface ScrollTopLinkProps {
   href: string
   children: ReactNode
   className?: string
   onClick?: () => void
+  ariaLabel?: string
 }
 
 export const ScrollTopLink = memo(function ScrollTopLink({
@@ -18,13 +20,16 @@ export const ScrollTopLink = memo(function ScrollTopLink({
   children,
   className = "",
   onClick,
+  ariaLabel,
 }: ScrollTopLinkProps) {
   const router = useRouter()
+  const { localizeHref } = useLocale()
+  const localizedHref = localizeHref(href)
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
       // If it's an anchor link on the same page, let the browser handle it
-      if (href.startsWith("#")) {
+      if (localizedHref.startsWith("#")) {
         return
       }
 
@@ -34,7 +39,7 @@ export const ScrollTopLink = memo(function ScrollTopLink({
       }
 
       // For internal links, handle navigation with aggressive scroll to top
-      if (href.startsWith("/")) {
+      if (localizedHref.startsWith("/")) {
         e.preventDefault()
 
         // Force scroll to top before navigation
@@ -43,7 +48,7 @@ export const ScrollTopLink = memo(function ScrollTopLink({
         document.body.scrollTop = 0
 
         // Use router.push
-        router.push(href)
+        router.push(localizedHref)
 
         // Force scroll to top again after navigation
         setTimeout(() => {
@@ -53,11 +58,11 @@ export const ScrollTopLink = memo(function ScrollTopLink({
         }, 10)
       }
     },
-    [href, onClick, router],
+    [localizedHref, onClick, router],
   )
 
   return (
-    <Link href={href} className={className} onClick={handleClick} scroll={true}>
+    <Link href={localizedHref} className={className} onClick={handleClick} scroll={true} aria-label={ariaLabel}>
       {children}
     </Link>
   )
