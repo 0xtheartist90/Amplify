@@ -14,6 +14,8 @@ interface VideoCTAProps {
   isMobile?: boolean
   showOverlay?: boolean
   compact?: boolean
+  disableTextShadow?: boolean
+  forceSingleRowButtons?: boolean
 }
 
 const VideoCTA = memo(function VideoCTA({
@@ -27,6 +29,8 @@ const VideoCTA = memo(function VideoCTA({
   isMobile = false,
   showOverlay = true,
   compact = false,
+  disableTextShadow = false,
+  forceSingleRowButtons = false,
 }: VideoCTAProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -64,10 +68,15 @@ const VideoCTA = memo(function VideoCTA({
   const buttonGap = compact ? "gap-1" : "gap-4"
   const contentPadding = compact ? "p-0" : "pt-4 pb-0"
   const contentOffset = compact ? "-mt-10" : ""
-  const buttonOffset = compact ? "mt-6" : "mt-4"
+  const buttonOffset = compact ? "mt-4" : "mt-4"
   const mobileButtonLayout = compact || isMobile
   const buttonWidthClass = mobileButtonLayout ? "w-[210px] md:w-auto" : "min-w-[180px]"
   const buttonTextClass = mobileButtonLayout ? "uppercase tracking-wide" : ""
+  const textShadowClass = disableTextShadow ? "" : "text-shadow"
+  const buttonLayoutClass = forceSingleRowButtons
+    ? "flex-nowrap gap-2 md:flex-wrap"
+    : `flex-wrap ${buttonGap}`
+  const compactSingleRowButtonClass = forceSingleRowButtons ? "w-auto min-w-0 px-5" : buttonWidthClass
 
   return (
     <section
@@ -99,18 +108,18 @@ const VideoCTA = memo(function VideoCTA({
         <div className="max-w-3xl mx-auto text-center text-white">
           <h2
             id="cta-title"
-            className={`${isMobile ? "text-3xl" : "text-4xl md:text-5xl"} font-ultra ${titleMargin} text-shadow`}
+            className={`${isMobile ? "text-3xl" : "text-4xl md:text-5xl"} font-ultra ${titleMargin} ${textShadowClass}`}
           >
             {title}
           </h2>
-          <p className={`${isMobile ? "text-base" : "text-xl"} ${descriptionMargin} text-shadow`}>{description}</p>
-          <div className={`flex justify-center ${buttonGap} flex-wrap ${buttonOffset}`}>
+          <p className={`${isMobile ? "text-base" : "text-xl"} ${descriptionMargin} ${textShadowClass}`}>{description}</p>
+          <div className={`flex justify-center ${buttonLayoutClass} ${buttonOffset}`}>
             <CustomButton
               href={primaryButtonLink}
               color="yellow"
               size={isMobile ? "default" : "large"}
               ariaLabel={primaryButtonText}
-              className={`${buttonWidthClass} whitespace-nowrap ${buttonTextClass}`}
+              className={`${compactSingleRowButtonClass} whitespace-nowrap ${buttonTextClass}`}
             >
               {primaryButtonText}
             </CustomButton>
@@ -120,7 +129,7 @@ const VideoCTA = memo(function VideoCTA({
                 color="black"
                 size={isMobile ? "default" : "large"}
                 ariaLabel={secondaryButtonText}
-                className={`${buttonWidthClass} whitespace-nowrap ${buttonTextClass}`}
+                className={`${compactSingleRowButtonClass} whitespace-nowrap ${buttonTextClass}`}
               >
                 {secondaryButtonText}
               </CustomButton>
@@ -130,7 +139,7 @@ const VideoCTA = memo(function VideoCTA({
                 color="black"
                 size={isMobile ? "default" : "large"}
                 ariaLabel="EXPLORE SERVICES"
-                className={`${buttonWidthClass} whitespace-nowrap ${buttonTextClass}`}
+                className={`${compactSingleRowButtonClass} whitespace-nowrap ${buttonTextClass}`}
               >
                 EXPLORE SERVICES
               </CustomButton>

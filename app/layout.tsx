@@ -31,7 +31,12 @@ const knewave = Knewave({
 export const metadata: Metadata = {
   title: "Amplify | Your Brand's Voice",
   description: "Amplify your brand with our social media, advertising, branding, and website services.",
-  generator: 'Next.js'
+  generator: "Next.js",
+  icons: {
+    icon: "/images/favicon.png",
+    shortcut: "/images/favicon.png",
+    apple: "/images/favicon.png",
+  },
 }
 
 export const viewport: Viewport = {

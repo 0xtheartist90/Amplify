@@ -2,6 +2,9 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import type React from "react"
+import { useEffect, useRef, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import VideoCTA from "@/components/video-cta"
 import { ScrollAnimation } from "@/components/scroll-animation"
 import { PageWrapper } from "@/components/page-wrapper"
@@ -9,6 +12,11 @@ import { useLocale } from "@/lib/i18n"
 
 export default function DesktopPortfolioPage() {
   const { locale } = useLocale()
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [direction, setDirection] = useState(0)
+  const autoAdvanceRef = useRef<NodeJS.Timeout | null>(null)
   // Sample portfolio items
   const portfolioItems = [
     {
@@ -94,6 +102,8 @@ export default function DesktopPortfolioPage() {
           ctaDescription: "Laten we bespreken hoe we jouw merk kunnen helpen zijn marketingdoelen te bereiken.",
           primary: "START JE PROJECT",
           secondary: "ONTDEK DIENSTEN",
+          goToProject: (title: string) => `Ga naar project ${title}`,
+          goToSlide: (index: number) => `Ga naar slide ${index}`,
         }
       : {
           heroAlt: "Portfolio Background",
@@ -101,7 +111,68 @@ export default function DesktopPortfolioPage() {
           ctaDescription: "Let's discuss how we can help your brand achieve its marketing goals.",
           primary: "START YOUR PROJECT",
           secondary: "EXPLORE SERVICES",
+          goToProject: (title: string) => `Go to project ${title}`,
+          goToSlide: (index: number) => `Go to slide ${index}`,
         }
+
+  const goToNext = () => {
+    setDirection(1)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % portfolioItems.length)
+  }
+
+  const goToPrev = () => {
+    setDirection(-1)
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + portfolioItems.length) % portfolioItems.length)
+  }
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1)
+    setCurrentIndex(index)
+  }
+
+  const startAutoAdvance = () => {
+    autoAdvanceRef.current = setTimeout(() => {
+      goToNext()
+    }, 5000)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current)
+    }
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStart !== null) {
+      setTouchEnd(e.targetTouches[0].clientX)
+    }
+  }
+
+  const handleTouchEnd = () => {
+    if (touchStart === null || touchEnd === null) return
+
+    const distance = touchStart - touchEnd
+    if (distance > 30) {
+      goToNext()
+    } else if (distance < -30) {
+      goToPrev()
+    }
+
+    setTouchStart(null)
+    setTouchEnd(null)
+    startAutoAdvance()
+  }
+
+  useEffect(() => {
+    startAutoAdvance()
+
+    return () => {
+      if (autoAdvanceRef.current) {
+        clearTimeout(autoAdvanceRef.current)
+      }
+    }
+  }, [currentIndex])
 
   return (
     <PageWrapper>
@@ -116,7 +187,87 @@ export default function DesktopPortfolioPage() {
         {/* Portfolio Grid */}
         <section className="py-16">
           <div className="container">
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            <div
+              className="md:hidden relative px-4 pb-0"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="relative overflow-hidden rounded-lg touch-pan-x">
+                <div className="relative min-h-[420px]">
+                  <AnimatePresence initial={false} custom={direction} mode="wait">
+                    <motion.div
+                      key={portfolioItems[currentIndex].id}
+                      custom={direction}
+                      variants={{
+                        enter: (currentDirection) => ({
+                          x: currentDirection > 0 ? "100%" : "-100%",
+                          opacity: 0,
+                        }),
+                        center: {
+                          x: 0,
+                          opacity: 1,
+                        },
+                        exit: (currentDirection) => ({
+                          x: currentDirection < 0 ? "100%" : "-100%",
+                          opacity: 0,
+                        }),
+                      }}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      className="absolute w-full"
+                    >
+                      <Link
+                        href={`/portfolio/${portfolioItems[currentIndex].id}`}
+                        aria-label={copy.goToProject(portfolioItems[currentIndex].title)}
+                        className={`${portfolioItems[currentIndex].bgColor} block rounded-[32px] border-2 border-black overflow-hidden shadow-lg`}
+                      >
+                        {portfolioItems[currentIndex].image ? (
+                          <div className="h-56 bg-black/10 relative overflow-hidden">
+                            <Image
+                              src={portfolioItems[currentIndex].image || "/placeholder.svg"}
+                              alt={portfolioItems[currentIndex].title}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="h-56 bg-black/10"></div>
+                        )}
+                        <div className={`p-5 ${portfolioItems[currentIndex].textColor || "text-white"}`}>
+                          <div className="text-sm font-medium mb-2">{portfolioItems[currentIndex].category}</div>
+                          <h3 className="text-2xl font-ultra mb-2">{portfolioItems[currentIndex].title}</h3>
+                          <p className="text-sm">{portfolioItems[currentIndex].description}</p>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              <div className="flex justify-center mt-1 space-x-3">
+                {portfolioItems.map((item, idx) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      if (autoAdvanceRef.current) {
+                        clearTimeout(autoAdvanceRef.current)
+                      }
+                      goToSlide(idx)
+                    }}
+                    className={`w-4 h-4 rounded-full transition-all ${
+                      currentIndex === idx ? "bg-black scale-125 border-2 border-black" : "bg-black/25"
+                    }`}
+                    aria-label={copy.goToSlide(idx + 1)}
+                    aria-current={currentIndex === idx}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {portfolioItems.map((item) => (
                 <Link
                   key={item.id}

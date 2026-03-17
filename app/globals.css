@@ -1322,6 +1322,79 @@ header .md\:hidden.absolute {
   height: auto;
 }
 
+@media (max-width: 767px) {
+  .mobile-home-hero {
+    min-height: calc(100svh - 54px) !important;
+    height: calc(100svh - 54px) !important;
+  }
+
+  .mobile-home-hero .mobile-hero-character {
+    position: relative !important;
+    top: 3rem !important;
+    width: 250px !important;
+    height: auto !important;
+    transform: scale(1.2) !important;
+    transform-origin: top center !important;
+  }
+
+  .mobile-home-hero .section-content {
+    justify-content: center !important;
+  }
+
+  .mobile-home-hero .container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .mobile-home-cta {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .mobile-home-cta .section-content {
+    justify-content: flex-start !important;
+  }
+
+  .mobile-what-character,
+  .mobile-why-character {
+    transform: scale(0.8) !important;
+    transform-origin: center center !important;
+  }
+
+}
+
+@media (max-width: 767px) and (max-height: 760px) {
+  .mobile-home-hero .mobile-hero-character {
+    top: 0 !important;
+    width: 190px !important;
+    transform: scale(1) !important;
+  }
+
+  .mobile-home-hero .mobile-hero-copy {
+    margin-top: -1.5rem !important;
+  }
+
+  .mobile-home-hero .container {
+    margin-top: -2.75rem !important;
+  }
+
+  .mobile-home-hero h1 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .mobile-home-hero h1 > span:first-child {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .mobile-home-hero p {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .mobile-home-hero .mobile-hero-copy > div:last-child > div {
+    gap: 0.5rem !important;
+  }
+}
+
 /* Add additional CSS rules to fix layout inconsistencies */
 
 /* Service navigation responsive fixes */

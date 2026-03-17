@@ -148,7 +148,7 @@ export default function DesktopHome() {
     <PageWrapper>
       <div className="flex flex-col">
         {/* Hero Section */}
-        <div className="section-wrapper min-h-screen flex items-start">
+        <div className="section-wrapper mobile-home-hero flex items-start">
           <div className="section-background hero-bg"></div>
           {/* Video Overlay */}
           <div className="absolute inset-0 w-full h-full overflow-hidden z-10">
@@ -165,9 +165,9 @@ export default function DesktopHome() {
           </div>
           <div className="section-content">
             <div className="container pt-0 pb-0 md:pt-2 md:pb-4 -mt-16 md:-mt-28">
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-2 md:gap-8">
                 {/* Update the Hero Section content */}
-                <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
+                <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0 mt-24 md:mt-0 mobile-hero-copy">
                   <ScrollAnimation variant="fadeInUp" delay={0.2}>
                     <h1 className="mb-4 text-center md:text-left">
                       <span
@@ -202,7 +202,7 @@ export default function DesktopHome() {
                 </div>
                 <div className="flex justify-center md:justify-end relative z-20">
                   <FloatingAnimation amplitude={15} duration={4}>
-                    <div className="character-container xl:scale-90 transform-gpu origin-center mt-8">
+                    <div className="character-container mobile-hero-character md:w-auto xl:scale-90 transform-gpu origin-center md:mt-8">
                       <Image
                         src="/images/aurahero.webp"
                         alt="Amplify Mascot"
@@ -229,7 +229,7 @@ export default function DesktopHome() {
                 {/* Character on top for mobile */}
                 <div className="flex justify-center items-center -translate-y-6 relative z-20">
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
-                    <div className="character-container transform-gpu origin-center">
+                    <div className="character-container mobile-what-character transform-gpu origin-center">
                       <Image
                         src="/images/richiewhat.webp"
                         alt="Amplify Mascot"
@@ -426,7 +426,7 @@ export default function DesktopHome() {
                 {/* Character on top for mobile */}
                 <div className="flex justify-center items-center mb-1 relative z-20">
                   <FloatingAnimation amplitude={15} duration={4} rotate={true}>
-                    <div className="character-container transform-gpu origin-center">
+                    <div className="character-container mobile-why-character transform-gpu origin-center">
                       <Image
                         src="/images/acewhy.webp"
                         alt="Amplify Mascot"
@@ -562,20 +562,20 @@ export default function DesktopHome() {
         </div>
 
         {/* CTA Section with Video */}
-        <div className="section-wrapper flex items-center md:min-h-screen">
+        <div className="section-wrapper mobile-home-cta flex items-start md:items-center md:min-h-screen">
           <div className="section-background cta-bg"></div>
           <div className="section-content">
-            <div className="container pt-0 pb-1 md:py-20">
+            <div className="container pt-0 pb-0 md:py-20">
               <div className="flex flex-col md:grid md:grid-cols-2 items-center gap-0 md:gap-12">
                 <div className="flex justify-center items-center relative z-20 -mt-4 md:mt-0 mb-[24px] md:mb-0">
                   <FloatingAnimation amplitude={15} duration={4}>
-                    <div className="character-container xl:scale-95 transform-gpu origin-center">
+                    <div className="character-container xl:scale-95 transform-gpu origin-center !w-[307px] md:!w-auto">
                       <Image
                         src="/images/auraready.webp"
                         alt="Amplify Mascot"
                         width={320}
                         height={320}
-                        className="max-w-full h-auto character-float"
+                        className="character-float !w-[307px] !max-w-[307px] h-auto md:!w-full md:!max-w-full"
                         priority
                       />
                     </div>
@@ -593,6 +593,8 @@ export default function DesktopHome() {
                       videoSrc="/videos/amplify-background.mp4"
                       showOverlay={false}
                       compact
+                      disableTextShadow
+                      forceSingleRowButtons
                     />
                   </ScrollAnimation>
                 </div>

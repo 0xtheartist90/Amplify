@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { memo } from "react"
+import { Mail, Phone } from "lucide-react"
 import { useLocale } from "@/lib/i18n"
 import { ScrollTopLink } from "./scroll-top-link"
 
@@ -126,13 +127,15 @@ const Footer = memo(function Footer() {
             <address className="not-italic">
               <ul className="space-y-2">
                 <li>
-                  <a href="mailto:hello@amplify.com" className="hover:text-pink transition-colors">
-                    hello@amplify.com
+                  <a href="mailto:hello@amplify.com" className="inline-flex items-center gap-2 hover:text-pink transition-colors">
+                    <Mail className="h-4 w-4" aria-hidden="true" />
+                    <span>hello@amplify.com</span>
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+31 6 29239092" className="hover:text-pink transition-colors">
-                    +31 6 29239092
+                  <a href="tel:+31629239092" className="inline-flex items-center gap-2 hover:text-pink transition-colors">
+                    <Phone className="h-4 w-4" aria-hidden="true" />
+                    <span>+31 6 29239092</span>
                   </a>
                 </li>
               </ul>
@@ -151,6 +154,27 @@ const Footer = memo(function Footer() {
                 className="h-8 w-auto"
               />
             </ScrollTopLink>
+          </div>
+
+          <div className="text-center mb-6">
+            <address className="not-italic">
+              <div className="grid grid-cols-2 items-center justify-items-center gap-3 text-sm leading-none max-w-[380px] mx-auto sm:text-base">
+                <a
+                  href="mailto:hello@amplify.com"
+                  className="inline-flex items-center gap-1.5 hover:text-pink transition-colors whitespace-nowrap"
+                >
+                  <Mail className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+                  <span>hello@amplify.com</span>
+                </a>
+                <a
+                  href="tel:+31629239092"
+                  className="inline-flex items-center gap-1.5 hover:text-pink transition-colors whitespace-nowrap"
+                >
+                  <Phone className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+                  <span>+31 6 29239092</span>
+                </a>
+              </div>
+            </address>
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-6 text-center">
@@ -207,19 +231,6 @@ const Footer = memo(function Footer() {
             </div>
           </div>
 
-          <div className="text-xs text-center">
-            <address className="not-italic">
-              <p className="mb-1">
-                <a href="mailto:hello@amplify.com" className="hover:text-pink transition-colors">
-                  hello@amplify.com
-                </a>{" "}
-                |{" "}
-                <a href="tel:+31 6 29239092" className="hover:text-pink transition-colors">
-                  +31 6 29239092
-                </a>
-              </p>
-            </address>
-          </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-400">
