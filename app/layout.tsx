@@ -29,7 +29,7 @@ const knewave = Knewave({
 })
 
 export const metadata: Metadata = {
-  title: "Amplify | Your Brand's Voice",
+  title: "Amplify Your Brand",
   description: "Amplify your brand with our social media, advertising, branding, and website services.",
   generator: "Next.js",
   icons: {
