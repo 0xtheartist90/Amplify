@@ -11,7 +11,7 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ name, role, imag
   return (
     <div className="text-center">
       <div
-        className={`mx-auto mb-4 ${bgColor} rounded-full border-2 border-black overflow-hidden`}
+        className={`team-member-photo mx-auto mb-4 ${bgColor} rounded-full border-2 border-black overflow-hidden`}
         style={{ width: "180px", height: "180px" }}
       >
         <img src={imageSrc || "/placeholder.svg"} alt={name} className="w-full h-full object-cover" />

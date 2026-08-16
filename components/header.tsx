@@ -8,6 +8,39 @@ import { CustomButton } from "./custom-button"
 import { ScrollTopLink } from "./scroll-top-link"
 import { type Locale, useLocale } from "@/lib/i18n"
 
+// Segmented EN/NL toggle — active language is pressed into the ink pill.
+function LanguageToggle({
+  locale,
+  onChange,
+  ariaLabel,
+}: {
+  locale: Locale
+  onChange: (next: Locale) => void
+  ariaLabel: string
+}) {
+  return (
+    <div
+      className="inline-flex items-center overflow-hidden rounded-[8px] border-2 border-black bg-white shadow-[2px_2px_0_0_var(--ink)]"
+      role="group"
+      aria-label={ariaLabel}
+    >
+      {(["en", "nl"] as const).map((lang) => (
+        <button
+          key={lang}
+          type="button"
+          onClick={() => onChange(lang)}
+          aria-pressed={locale === lang}
+          className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-colors ${
+            locale === lang ? "bg-black text-white" : "bg-white text-black hover:bg-[#FFC1DA]"
+          }`}
+        >
+          {lang}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 const SERVICE_LINKS = [
   { href: "/services/socials", label: "Social Media" },
   { href: "/services/ads", label: "Advertising" },
@@ -135,21 +168,11 @@ export default function Header() {
   }, [isMenuOpen])
 
   return (
-    <header className="bg-white sticky top-0 z-[9999] shadow-sm h-[54px] md:h-[72px]">
-      <div className="container h-full">
+    <header className="bg-white sticky top-0 z-[9999] border-b-2 border-black h-[54px] md:h-[72px]">
+      <div className="container container-bleed h-full">
         <div className="relative flex items-center justify-between h-full">
           <div className="md:hidden absolute left-4 top-1/2 -translate-y-1/2">
-            <label className="flex items-center text-sm font-medium">
-              <select
-                value={locale}
-                onChange={(event) => handleLanguageChange(event.target.value as Locale)}
-                className="rounded-full border-2 border-black bg-white px-3 py-1 text-sm"
-                aria-label={copy.language}
-              >
-                <option value="en">🇬🇧</option>
-                <option value="nl">🇳🇱</option>
-              </select>
-            </label>
+            <LanguageToggle locale={locale} onChange={handleLanguageChange} ariaLabel={copy.language} />
           </div>
 
           {/* Logo, absolutely centered on mobile */}
@@ -172,13 +195,13 @@ export default function Header() {
           <nav className="hidden md:flex space-x-8 items-center ml-auto" aria-label="Main Navigation">
             <ScrollTopLink
               href="/"
-              className={`font-medium transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
+              className={`relative text-sm font-bold uppercase tracking-wide transition-colors ${isActive("/") ? "text-pink" : "hover:text-pink"}`}
             >
               {copy.home}
             </ScrollTopLink>
             <ScrollTopLink
               href="/about"
-              className={`font-medium transition-colors ${isActive("/about") ? "text-pink" : "hover:text-pink"}`}
+              className={`relative text-sm font-bold uppercase tracking-wide transition-colors ${isActive("/about") ? "text-pink" : "hover:text-pink"}`}
             >
               {copy.about}
             </ScrollTopLink>
@@ -189,7 +212,7 @@ export default function Header() {
             >
               <ScrollTopLink
                 href="/services/socials"
-                className={`font-medium transition-colors flex items-center gap-1 ${
+                className={`relative text-sm font-bold uppercase tracking-wide transition-colors flex items-center gap-1 ${
                   isServicesActive ? "text-pink" : "hover:text-pink"
                 }`}
                 aria-haspopup="true"
@@ -202,13 +225,13 @@ export default function Header() {
               </ScrollTopLink>
               {isServicesDropdownOpen && (
                 <div className="absolute left-0 top-full pt-3">
-                  <div className="w-52 rounded-2xl border-2 border-black bg-white shadow-xl p-3 flex flex-col gap-1">
+                  <div className="frame-hand w-56 bg-white p-3 flex flex-col gap-1">
                     {SERVICE_LINKS.map((link) => (
                       <ScrollTopLink
                         key={link.href}
                         href={link.href}
-                        className={`px-3 py-2 rounded-xl transition-colors ${
-                          isActive(link.href) ? "bg-pink-100 text-pink" : "hover:bg-pink-100"
+                        className={`px-3 py-2 rounded-xl text-sm font-bold transition-colors ${
+                          isActive(link.href) ? "bg-black text-white" : "hover:bg-[#FFC1DA]"
                         }`}
                         onClick={() => setIsServicesDropdownOpen(false)}
                       >
@@ -227,24 +250,15 @@ export default function Header() {
             </div>
             <ScrollTopLink
               href="/portfolio"
-              className={`font-medium transition-colors ${isActive("/portfolio") ? "text-pink" : "hover:text-pink"}`}
+              className={`relative text-sm font-bold uppercase tracking-wide transition-colors ${isActive("/portfolio") ? "text-pink" : "hover:text-pink"}`}
             >
               {copy.portfolio}
             </ScrollTopLink>
-            <label className="flex items-center text-sm font-medium">
-              <select
-                value={locale}
-                onChange={(event) => handleLanguageChange(event.target.value as Locale)}
-                className="rounded-full border-2 border-black bg-white px-3 py-1 text-sm"
-                aria-label={copy.language}
-              >
-                <option value="en">🇬🇧</option>
-                <option value="nl">🇳🇱</option>
-              </select>
-            </label>
-            <CustomButton href="/contact" color="orange">
+            <CustomButton href="/contact" color="orange" className="!px-4 !py-2 !text-xs">
               {copy.contact}
             </CustomButton>
+            <span aria-hidden className="h-8 w-0.5 bg-black" />
+            <LanguageToggle locale={locale} onChange={handleLanguageChange} ariaLabel={copy.language} />
           </nav>
 
           {/* Mobile hamburger */}

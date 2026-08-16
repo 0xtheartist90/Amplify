@@ -1,6 +1,5 @@
 "use client"
 
-// Add href to the props type definition
 import type React from "react"
 import { useLocale } from "@/lib/i18n"
 
@@ -18,7 +17,17 @@ type CustomButtonProps = {
   rel?: string
 }
 
-// Update the component to handle href
+// Sticker-style buttons: ink outline + hard offset shadow; hovering presses
+// the button INTO its shadow. Replaces the old brush-image buttons.
+const COLOR_STYLES: Record<NonNullable<CustomButtonProps["color"]>, { backgroundColor: string; color: string }> = {
+  black: { backgroundColor: "#1b1b1b", color: "#ffffff" },
+  pink: { backgroundColor: "#f44976", color: "#ffffff" },
+  yellow: { backgroundColor: "#fec530", color: "#1b1b1b" },
+  orange: { backgroundColor: "#ff8a2b", color: "#1b1b1b" },
+  blue: { backgroundColor: "#7dd3f7", color: "#1b1b1b" },
+  purple: { backgroundColor: "#c27ae6", color: "#ffffff" },
+}
+
 export function CustomButton({
   children,
   color = "black",
@@ -34,43 +43,8 @@ export function CustomButton({
 }: CustomButtonProps) {
   const { localizeHref } = useLocale()
   const localizedHref = href ? localizeHref(href) : undefined
-  const buttonImageSrc =
-    color === "yellow"
-      ? "/images/button-yellow.webp"
-      : color === "pink"
-        ? "/images/button-pink.webp"
-        : color === "orange"
-          ? "/images/Button-orange.webp"
-          : color === "black"
-            ? "/images/button-black.webp"
-            : color === "blue"
-              ? "/images/button-yellow.webp" // Using yellow button shape for blue
-              : color === "purple"
-                ? "/images/button-pink.webp" // Using pink button shape for purple
-                : "/images/button-black.webp"
 
   const ButtonTag = href ? "a" : "button"
-
-  // Determine if this is a service explore button based on className and children
-  const isServiceButton = className?.includes("w-auto") && children === "Explore"
-
-  // Apply specific styling for service buttons
-  const serviceButtonStyle = isServiceButton
-    ? {
-        display: "inline-block",
-        width: "auto",
-        minWidth: "100px", // Set minimum width for explore buttons
-        maxWidth: "150px", // Limit maximum width
-      }
-    : {}
-
-  // Apply color filters only for blue and purple buttons
-  let filterValue = "none"
-  if (color === "blue") {
-    filterValue = "hue-rotate(140deg) saturate(2)" // Blue filter for yellow button
-  } else if (color === "purple") {
-    filterValue = "hue-rotate(230deg)" // Purple filter for pink button
-  }
 
   return (
     <ButtonTag
@@ -80,18 +54,13 @@ export function CustomButton({
       aria-label={ariaLabel}
       target={localizedHref ? target : undefined}
       rel={localizedHref ? rel : undefined}
-      className={`relative inline-flex items-center justify-center font-medium text-white ${size === "large" ? "px-8 py-4 text-lg" : "px-6 py-3"} text-center overflow-hidden ${className}`}
+      className={`inline-flex items-center justify-center rounded-[10px] border-2 border-black font-bold uppercase tracking-wider text-center shadow-[3px_3px_0_0_var(--ink)] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_var(--ink)] focus:outline-none focus-visible:ring-4 focus-visible:ring-black/30 ${
+        size === "large" ? "px-8 py-4 text-base" : "px-6 py-3 text-sm"
+      } ${disabled ? "opacity-50 pointer-events-none" : ""} ${className}`}
       onClick={onClick}
-      style={serviceButtonStyle}
+      style={COLOR_STYLES[color] ?? COLOR_STYLES.black}
     >
-      <img
-        src={buttonImageSrc}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-        style={{ filter: filterValue }}
-      />
-      <span className="relative z-10">{children}</span>
+      {children}
     </ButtonTag>
   )
 }

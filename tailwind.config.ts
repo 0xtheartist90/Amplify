@@ -73,7 +73,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-ar-one-sans)"],
-        ultra: ["ULTRA", "serif"],
+        // "ultra" is the historical class name — titles now use the Knewave brand font
+        ultra: ["var(--font-knewave)", "cursive"],
       },
       keyframes: {
         "accordion-down": {

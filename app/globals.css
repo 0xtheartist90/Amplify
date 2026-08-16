@@ -9,7 +9,121 @@
   --purple: #c27ae6;
   --black: #000000;
   --white: #ffffff;
+  --ink: #1b1b1b;
 }
+
+/* ==== Print-studio design system =================================== */
+/* Slab boxes: near-square corners, 2px ink rule, hard offset shadow —
+   the riso/print-catalog look (see the Trade Zines reference). */
+.card-hand {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.15s ease;
+}
+.card-hand:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+/* kept for compatibility; same slab geometry */
+.card-hand-alt {
+  border-radius: 10px;
+}
+
+/* static frame (no hover motion) — for large showcase blocks */
+.frame-hand {
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 0 var(--ink);
+}
+
+/* small inner tile (icon holders, chips) */
+.chip-hand {
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+}
+
+/* full-width editorial container — desktop uses the whole viewport */
+.container-bleed {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* ==== Print-studio helpers (riso/silkscreen look) ================== */
+/* Staccato display headlines get a hard offset "misregistered ink" shadow */
+.display-shadow-pink {
+  text-shadow: 6px 6px 0 #f44976;
+}
+.display-shadow-ink {
+  text-shadow: 4px 4px 0 var(--ink);
+}
+.display-shadow-white {
+  text-shadow: 4px 4px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Subtle paper-grain overlay; add .paper-grain to a positioned section */
+.paper-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Label-caps chip used above section titles */
+.label-chip {
+  display: inline-block;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 0.2rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+/* ================================================================== */
+
+/* full-bleed marquee strip (duplicate children for a seamless loop) */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* clickable slab: pressing pushes it INTO its shadow */
+.press-hand {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+.press-hand:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--ink);
+}
+/* ================================================================== */
 
 /* Force disable smooth scrolling */
 html,
@@ -32,7 +146,7 @@ html {
 
 @layer base {
   body {
-    @apply bg-white text-black m-0 p-0 overflow-x-hidden;
+    @apply bg-white text-black m-0 p-0;
   }
 
   h1,
@@ -41,7 +155,7 @@ html {
   h4,
   h5,
   h6 {
-    font-family: "ULTRA", serif;
+    font-family: var(--font-knewave), cursive;
   }
 
   p,
@@ -67,12 +181,17 @@ html {
   box-sizing: border-box;
 }
 
-/* Fix for any potential overflow issues */
+/* Fix for any potential overflow issues.
+   NOTE: no fixed height here — a 100% height turns <body> into its own
+   scroll container, which breaks Lenis (it smooths the window scroll). */
+html {
+  overflow-x: hidden;
+}
+
 html,
 body {
-  overflow-x: hidden;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 /* Ensure no gaps between divs */
@@ -103,11 +222,11 @@ div {
   display: block;
 }
 
-/* Section wrapper for background images */
+/* Section wrapper for background images — natural height; the hero
+   sets its own min-height so sections stay in proportion to content */
 .section-wrapper {
   position: relative;
   width: 100%;
-  min-height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -126,31 +245,33 @@ div {
   z-index: 0;
 }
 
-/* Specific background images */
+/* Section backgrounds — solid colors sampled from the old images.
+   The giant "Amplify" wordmarks that were baked into those images are
+   now real text rendered by <SeamWordmark /> so they can be animated. */
 .hero-bg {
-  background-image: url("/images/home-hero-bg.webp");
+  background-color: #fec530;
 }
 
 .services-bg {
-  background-image: url("/images/section-bg-pink.webp");
+  background-color: #fb97b2;
 }
 
 .values-bg {
-  background-image: url("/images/section-bg-blue.webp");
+  background-color: #94d8f8;
 }
 
 .cta-bg {
-  background-image: url("/images/section-bg-purple.webp");
+  background-color: #c180ca;
 }
 
 .what-title {
-  font-size: 120px;
+  font-size: 76px;
   line-height: 1;
 }
 
 @media (max-width: 1024px) {
   .what-title {
-    font-size: 90px;
+    font-size: 60px;
   }
 }
 
@@ -161,26 +282,21 @@ div {
   }
 }
 
-/* WHAT Section invariant card sizing */
+/* WHAT Section card sizing — natural height, capped width */
 .what-feature-card {
   width: 390px;
   max-width: 100%;
-  height: 520px;
+  min-height: 360px;
+  height: auto;
   flex: 0 0 auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-@media (max-width: 1024px) {
-  .what-feature-card {
-    height: 420px;
-  }
-}
-
 @media (max-width: 768px) {
   .what-feature-card {
-    height: 360px;
+    min-height: 300px;
   }
 }
 
@@ -257,21 +373,6 @@ div {
     min-height: auto;
   }
 
-  .hero-bg {
-    background-image: url("/images/HomeHeroBackgroundtablet.webp");
-  }
-
-  .services-bg {
-    background-image: url("/images/BGWhatSectionTablet.webp");
-  }
-
-  .values-bg {
-    background-image: url("/images/BGWhySectionTablet.webp");
-  }
-
-  .cta-bg {
-    background-image: url("/images/BGReadySectionTablet.webp");
-  }
 }
 
 @media (max-width: 768px) {
@@ -281,26 +382,9 @@ div {
 
   .section-wrapper {
     min-height: auto;
-    /* Make all sections the same height on mobile */
-    height: 100vh;
+    height: auto;
   }
 
-  /* Mobile-specific background images */
-  .hero-bg {
-    background-image: url("/images/HomeHeroBackgroundMobile.webp");
-  }
-
-  .services-bg {
-    background-image: url("/images/BGWhatSectionMobile.webp");
-  }
-
-  .values-bg {
-    background-image: url("/images/BGWhySectionMobile.webp");
-  }
-
-  .cta-bg {
-    background-image: url("/images/BGReadySectionMobile.webp");
-  }
 }
 
 @media (max-width: 480px) {
@@ -347,12 +431,13 @@ div {
   transform: scale(1.1);
 }
 
-/* Team member image styling */
-.rounded-full {
+/* Team member image styling — scoped so it doesn't hijack every
+   .rounded-full element on the site (buttons, badges, toggles) */
+.team-member-photo {
   position: relative;
 }
 
-.rounded-full img {
+.team-member-photo img {
   position: absolute;
   top: 0;
   left: 0;
@@ -1322,10 +1407,17 @@ header .md\:hidden.absolute {
   height: auto;
 }
 
+/* Hero stops short of the fold so the marquee strip peeks into view */
+@media (min-width: 768px) {
+  .mobile-home-hero.section-wrapper {
+    min-height: calc(100svh - 140px);
+  }
+}
+
 @media (max-width: 767px) {
   .mobile-home-hero {
-    min-height: calc(100svh - 54px) !important;
-    height: calc(100svh - 54px) !important;
+    min-height: calc(100svh - 108px) !important;
+    height: calc(100svh - 108px) !important;
   }
 
   .mobile-home-hero .mobile-hero-character {
@@ -1770,7 +1862,6 @@ body,
 html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   background-color: white;
 }
 
