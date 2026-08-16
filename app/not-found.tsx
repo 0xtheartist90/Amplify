@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="text-center px-4">
         <div className="mb-8">
           <OptimizedImage
-            src="/images/character-hero.webp"
+            src="/images/aurahero.webp"
             alt="404 Character"
             width={300}
             height={300}
